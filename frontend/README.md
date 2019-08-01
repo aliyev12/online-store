@@ -2,4 +2,4 @@
 
 frontend
 
-stopped at video 7 Global Styling and Typography with Styled Components 06:20
+`stopped at video 11 Getting Setup with Prisma 8:53`
