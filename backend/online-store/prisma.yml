@@ -1,0 +1,6 @@
+endpoint: https://us1.prisma.sh/aaa7c4/online-store/dev
+datamodel: datamodel.prisma
+
+generate:
+  - generator: typescript-client
+    output: ./generated/prisma-client/
