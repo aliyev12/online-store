@@ -1494,7 +1494,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "/Users/abdulaliyev/web-projects/wes-bos/online-store/frontend/pages/_document.js";
+var _jsxFileName = "/Users/abdulaliyev/tut/nextjs-graphql/online-store/frontend/pages/_document.js";
 
 
 
