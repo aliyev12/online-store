@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import handleError from '../lib/handleError';
 import styled from 'styled-components';
 import Item from './Item';
+import Pagination from './Pagination';
 
 export const ALL_ITEMS_QUERY = gql`
   query ALL_ITEMS_QUERY {
@@ -19,34 +20,37 @@ export const ALL_ITEMS_QUERY = gql`
 `;
 
 const Center = styled.div`
-    text-align: center;
+  text-align: center;
 `;
 
 const ItemsList = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 60px;
-    max-width: ${props => props.theme.maxWidth};
-    margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 60px;
+  max-width: ${props => props.theme.maxWidth};
+  margin: 0 auto;
 `;
 
-const Items = () => {
+const Items = ({ page }) => {
   return (
     <Center>
       <p>Items!</p>
+      <Pagination page={page} />
       <Query query={ALL_ITEMS_QUERY}>
         {({ data, error, loading }) => {
-          console.log('data = ', data);
           if (loading) return <p>Loading...</p>;
           if (error) return <p>handleError(error)</p>;
 
-          return <ItemsList>
+          return (
+            <ItemsList>
               {data.items.map(item => (
-                  <Item key={item.id} item={item} />
+                <Item key={item.id} item={item} />
               ))}
-          </ItemsList>;
+            </ItemsList>
+          );
         }}
       </Query>
+      <Pagination page={page} />
     </Center>
   );
 };

@@ -1,7 +1,7 @@
 import Items from '../components/Items';
 
-export default () => (
+export default ({ query }) => (
   <>
-    <Items />
+    <Items page={parseFloat(query.page) || 1}/>
   </>
 );

@@ -334,6 +334,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! styled-components */ "styled-components");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _Item__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Item */ "./components/Item.js");
+/* harmony import */ var _Pagination__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Pagination */ "./components/Pagination.js");
 
 var _jsxFileName = "/Users/abdulaliyev/tut/nextjs-graphql/online-store/frontend/components/Items.js";
 
@@ -353,6 +354,7 @@ function _templateObject() {
 
 
 
+
 var ALL_ITEMS_QUERY = graphql_tag__WEBPACK_IMPORTED_MODULE_3___default()(_templateObject());
 var Center = styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.div.withConfig({
   displayName: "Items__Center",
@@ -365,49 +367,56 @@ var ItemsList = styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.div.wit
   return props.theme.maxWidth;
 });
 
-var Items = function Items() {
+var Items = function Items(_ref) {
+  var page = _ref.page;
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Center, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 35
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 36
     },
     __self: this
-  }, "Items!"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_apollo__WEBPACK_IMPORTED_MODULE_2__["Query"], {
-    query: ALL_ITEMS_QUERY,
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 37
     },
     __self: this
-  }, function (_ref) {
-    var data = _ref.data,
-        error = _ref.error,
-        loading = _ref.loading;
-    console.log('data = ', data);
+  }, "Items!"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Pagination__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    page: page,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 38
+    },
+    __self: this
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_apollo__WEBPACK_IMPORTED_MODULE_2__["Query"], {
+    query: ALL_ITEMS_QUERY,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: this
+  }, function (_ref2) {
+    var data = _ref2.data,
+        error = _ref2.error,
+        loading = _ref2.loading;
     if (loading) return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 40
+        lineNumber: 41
       },
       __self: this
     }, "Loading...");
     if (error) return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 41
+        lineNumber: 42
       },
       __self: this
     }, "handleError(error)");
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(ItemsList, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 43
+        lineNumber: 45
       },
       __self: this
     }, data.items.map(function (item) {
@@ -416,15 +425,169 @@ var Items = function Items() {
         item: item,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 45
+          lineNumber: 47
         },
         __self: this
       });
     }));
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Pagination__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    page: page,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 53
+    },
+    __self: this
   }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Items);
+
+/***/ }),
+
+/***/ "./components/Pagination.js":
+/*!**********************************!*\
+  !*** ./components/Pagination.js ***!
+  \**********************************/
+/*! exports provided: PAGINATION_QUERY, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PAGINATION_QUERY", function() { return PAGINATION_QUERY; });
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! graphql-tag */ "graphql-tag");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/head */ "next/head");
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-apollo */ "react-apollo");
+/* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_apollo__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _styles_PaginationStyles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./styles/PaginationStyles */ "./components/styles/PaginationStyles.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../config */ "./config.js");
+
+var _jsxFileName = "/Users/abdulaliyev/tut/nextjs-graphql/online-store/frontend/components/Pagination.js";
+
+function _templateObject() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  query PAGINATION_QUERY {\n    itemsConnection {\n      aggregate {\n        count\n      }\n    }\n  }\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+
+
+
+
+
+
+
+var PAGINATION_QUERY = graphql_tag__WEBPACK_IMPORTED_MODULE_2___default()(_templateObject());
+
+var Pagination = function Pagination(_ref) {
+  var page = _ref.page;
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_apollo__WEBPACK_IMPORTED_MODULE_5__["Query"], {
+    query: PAGINATION_QUERY,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 21
+    },
+    __self: this
+  }, function (_ref2) {
+    var data = _ref2.data,
+        loading = _ref2.loading,
+        error = _ref2.error;
+    if (loading) return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 23
+      },
+      __self: this
+    }, "Loading...");
+    var count = data.itemsConnection.aggregate.count;
+    var pages = Math.ceil(count / _config__WEBPACK_IMPORTED_MODULE_7__["perPage"]);
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles_PaginationStyles__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 27
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_3___default.a, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 28
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("title", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 29
+      },
+      __self: this
+    }, "Great Fits! Page ", page, " of ", pages)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_4___default.a, {
+      prefetch: true,
+      href: {
+        pathname: 'items',
+        query: {
+          page: page - 1
+        }
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 33
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+      className: "prev",
+      "aria-disabled": page <= 1,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 40
+      },
+      __self: this
+    }, "\u2190 Prev")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 42
+      },
+      __self: this
+    }, "Page ", page, " of ", pages), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 45
+      },
+      __self: this
+    }, count, " Items Total"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_4___default.a, {
+      prefetch: true,
+      href: {
+        pathname: 'items',
+        query: {
+          page: page + 1
+        }
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 46
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+      className: "next",
+      "aria-disabled": page >= pages,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 53
+      },
+      __self: this
+    }, "Next \u2192")));
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Pagination);
 
 /***/ }),
 
@@ -453,6 +616,30 @@ var Item = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.div.withConf
   return props.theme.lightgrey;
 });
 /* harmony default export */ __webpack_exports__["default"] = (Item);
+
+/***/ }),
+
+/***/ "./components/styles/PaginationStyles.js":
+/*!***********************************************!*\
+  !*** ./components/styles/PaginationStyles.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_0__);
+
+var PaginationStyles = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.div.withConfig({
+  displayName: "PaginationStyles",
+  componentId: "aduuar-0"
+})(["text-align:center;display:inline-grid;grid-template-columns:repeat(4,auto);align-items:stretch;justify-content:center;align-content:center;margin:2rem 0;border:1px solid ", ";border-radius:10px;& > *{margin:0;padding:15px 30px;border-right:1px solid ", ";&:last-child{border-right:0;}}a[aria-disabled='true']{color:grey;pointer-events:none;}"], function (props) {
+  return props.theme.lightgrey;
+}, function (props) {
+  return props.theme.lightgrey;
+});
+/* harmony default export */ __webpack_exports__["default"] = (PaginationStyles);
 
 /***/ }),
 
@@ -497,6 +684,23 @@ var Title = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.h3.withConf
   return props.theme.red;
 });
 /* harmony default export */ __webpack_exports__["default"] = (Title);
+
+/***/ }),
+
+/***/ "./config.js":
+/*!*******************!*\
+  !*** ./config.js ***!
+  \*******************/
+/*! exports provided: endpoint, perPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "endpoint", function() { return endpoint; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "perPage", function() { return perPage; });
+// This is client side config only - don't put anything in here that shouldn't be public!
+var endpoint = "http://localhost:4444";
+var perPage = 4;
 
 /***/ }),
 
@@ -636,6 +840,17 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/get-prototype
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! core-js/library/fn/object/set-prototype-of */ "core-js/library/fn/object/set-prototype-of");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/parse-float.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/parse-float.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/parse-float */ "core-js/library/fn/parse-float");
 
 /***/ }),
 
@@ -1650,14 +1865,19 @@ module.exports = __webpack_require__(/*! ./dist/client/link */ "./node_modules/n
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_Items__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Items */ "./components/Items.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_parse_float__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/parse-float */ "./node_modules/@babel/runtime-corejs2/core-js/parse-float.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_parse_float__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_parse_float__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_Items__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Items */ "./components/Items.js");
+
 var _jsxFileName = "/Users/abdulaliyev/tut/nextjs-graphql/online-store/frontend/pages/index.js";
 
 
-/* harmony default export */ __webpack_exports__["default"] = (function () {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Items__WEBPACK_IMPORTED_MODULE_1__["default"], {
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+  var query = _ref.query;
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Items__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    page: _babel_runtime_corejs2_core_js_parse_float__WEBPACK_IMPORTED_MODULE_0___default()(query.page) || 1,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 5
@@ -1779,6 +1999,17 @@ module.exports = require("core-js/library/fn/object/set-prototype-of");
 
 /***/ }),
 
+/***/ "core-js/library/fn/parse-float":
+/*!*************************************************!*\
+  !*** external "core-js/library/fn/parse-float" ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/parse-float");
+
+/***/ }),
+
 /***/ "core-js/library/fn/reflect/construct":
 /*!*******************************************************!*\
   !*** external "core-js/library/fn/reflect/construct" ***!
@@ -1875,6 +2106,17 @@ module.exports = require("next-server/dist/lib/router/router");
 /***/ (function(module, exports) {
 
 module.exports = require("next-server/dist/lib/utils");
+
+/***/ }),
+
+/***/ "next/head":
+/*!****************************!*\
+  !*** external "next/head" ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("next/head");
 
 /***/ }),
 

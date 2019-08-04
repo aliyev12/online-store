@@ -30,8 +30,8 @@ export const CREATE_ITEM_MUTATION = gql`
 const CreateItem = () => {
   const [title, setTitle] = useState('Item Title');
   const [description, setDescription] = useState('Item Description');
-  const [image, setImage] = useState('./temp.img');
-  const [largeImage, setLargeImage] = useState('./temp.img');
+  const [image, setImage] = useState('');
+  const [largeImage, setLargeImage] = useState('');
   const [price, setPrice] = useState(9998);
 
   const uploadFile = async e => {
@@ -45,7 +45,6 @@ const CreateItem = () => {
       body: data
     });
     const file = await res.json();
-    console.log('file = ', file);
     setImage(file.secure_url);
     setLargeImage(file.eager[0].secure_url);
   }
@@ -69,7 +68,6 @@ const CreateItem = () => {
             // Call the mutation
             const res = await createItem();
             // Change them to the single item page
-            console.log('res = ', res);
             Router.push({
                 pathname: '/item',
                 query: { id: res.data.createItem.id }
@@ -89,7 +87,7 @@ const CreateItem = () => {
                 required
                 onChange={uploadFile}
               />
-              {}image && <img src={image} alt="Upload Preview" width="200"/>
+              {image && <img src={image} alt="Upload Preview" width="200"/>}
             </label>
             <label htmlFor="title">
               Title
