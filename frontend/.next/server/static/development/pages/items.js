@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -335,11 +335,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _Item__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Item */ "./components/Item.js");
 /* harmony import */ var _Pagination__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Pagination */ "./components/Pagination.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../config */ "./config.js");
 
 var _jsxFileName = "/Users/abdulaliyev/tut/nextjs-graphql/online-store/frontend/components/Items.js";
 
 function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  query ALL_ITEMS_QUERY {\n    items {\n      id\n      title\n      price\n      description\n      image\n      largeImage\n    }\n  }\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = ", ") {\n    items(first: $first, skip: $skip, orderBy: createAt_DESC) {\n      id\n      title\n      price\n      description\n      image\n      largeImage\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -355,7 +356,9 @@ function _templateObject() {
 
 
 
-var ALL_ITEMS_QUERY = graphql_tag__WEBPACK_IMPORTED_MODULE_3___default()(_templateObject());
+ //, orderBy: createdAt_DESC
+
+var ALL_ITEMS_QUERY = graphql_tag__WEBPACK_IMPORTED_MODULE_3___default()(_templateObject(), _config__WEBPACK_IMPORTED_MODULE_8__["perPage"]);
 var Center = styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.div.withConfig({
   displayName: "Items__Center",
   componentId: "tikday-0"
@@ -369,30 +372,36 @@ var ItemsList = styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.div.wit
 
 var Items = function Items(_ref) {
   var page = _ref.page;
+  console.log('page = ', page);
+  console.log('perPage = ', _config__WEBPACK_IMPORTED_MODULE_8__["perPage"]);
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Center, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 39
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37
+      lineNumber: 40
     },
     __self: this
   }, "Items!"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Pagination__WEBPACK_IMPORTED_MODULE_7__["default"], {
     page: page,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 41
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_apollo__WEBPACK_IMPORTED_MODULE_2__["Query"], {
     query: ALL_ITEMS_QUERY,
+    variables: {
+      skip: page * _config__WEBPACK_IMPORTED_MODULE_8__["perPage"] - _config__WEBPACK_IMPORTED_MODULE_8__["perPage"],
+      first: _config__WEBPACK_IMPORTED_MODULE_8__["perPage"]
+    },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 42
     },
     __self: this
   }, function (_ref2) {
@@ -402,21 +411,21 @@ var Items = function Items(_ref) {
     if (loading) return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 41
+        lineNumber: 50
       },
       __self: this
     }, "Loading...");
     if (error) return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 42
+        lineNumber: 51
       },
       __self: this
-    }, "handleError(error)");
+    }, Object(_lib_handleError__WEBPACK_IMPORTED_MODULE_4__["default"])(error));
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(ItemsList, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 45
+        lineNumber: 54
       },
       __self: this
     }, data.items.map(function (item) {
@@ -425,7 +434,7 @@ var Items = function Items(_ref) {
         item: item,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 47
+          lineNumber: 56
         },
         __self: this
       });
@@ -434,7 +443,7 @@ var Items = function Items(_ref) {
     page: page,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 62
     },
     __self: this
   }));
@@ -1903,7 +1912,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 6:
+/***/ 4:
 /*!******************************!*\
   !*** multi ./pages/items.js ***!
   \******************************/

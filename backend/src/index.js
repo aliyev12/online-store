@@ -1,10 +1,12 @@
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const createServer = require('./createServer');
 const db = require('./db');
 
 const yogaServer = createServer();
 
-// TODO use express middleware to handle cookies
+// Use express middleware to handle cookies (JWT)
+yogaServer.express.use(cookieParser());
 // TODO use express middleware to populate current user
 
 yogaServer.start({
