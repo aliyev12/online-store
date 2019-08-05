@@ -91,10 +91,18 @@ const Mutations = {
     ctx.response.cookie('token', token, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365 // 1 year
-    })
+    });
 
     // 5. Return the user
     return user;
+  },
+
+  /*===============*/
+  /*=== SIGN OUT ===*/
+  /*===============*/
+  async signout(parent, args, ctx, info) {
+    ctx.response.clearCookie('token');
+    return { message: 'Goodbye!' };
   }
 };
 
