@@ -33,8 +33,6 @@ const ItemsList = styled.div`
 `;
 
 const Items = ({ page }) => {
-  console.log('page = ', page);
-  console.log('perPage = ', perPage);
   return (
     <Center>
       <p>Items!</p>
