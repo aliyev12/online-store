@@ -23,6 +23,14 @@ type Mutation {
   signin(email: String!, password: String!): User!
   #=== SIGN OUT ===#
   signout: SuccessMessage
+  #=== REQUEST RESET ===#
+  requestReset(email: String!): SuccessMessage
+  #=== RESET PASSWORD ===#
+  resetPassword(
+    resetToken: String!
+    password: String!
+    confirmPassword: String!
+  ): User!
 }
 
 type Query {
@@ -39,4 +47,11 @@ type Query {
   itemsConnection(where: ItemWhereInput): ItemConnection!
   #=== CURRENT USER ===#
   me: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  permissions: [Permission!]!
 }
