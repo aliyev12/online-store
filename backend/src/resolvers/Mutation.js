@@ -151,6 +151,7 @@ const Mutations = {
     // 4. Return the message
     return { message: 'Thanks' };
   },
+
   /*======================*/
   /*=== RESET PASSWORD ===*/
   /*======================*/
@@ -193,6 +194,36 @@ const Mutations = {
     })
     // 8. Return the new user
     return updatedUser;
+  },
+
+  /*==========================*/
+  /*=== UPDATE PERMISSIONS ===*/
+  /*==========================*/
+  updatePermissions(parent, args, ctx, info) {
+    // 1. Check if they are logged in
+    if (!ctx.request.userId) throw new Error('You must be logged in!');
+
+    // 2. Query the current user
+    const currentUser = await ctx.db.query.user({
+      where: {
+        id: ctx.request.userId,
+      }
+    }, info);
+
+    // 3. Check if they have permissions to do that
+    hasPermission(currentUser, ['ADMIN', 'PERMISSIONUPDATE'])
+
+    // 4. Update the permissions
+    return ctx.db.mutation.updateUser({
+      data: {
+        permissions: {
+          set: args.permissions,
+        }
+      },
+      where: {
+        id: args.userId
+      },
+    }, info);
   }
 };
 

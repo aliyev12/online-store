@@ -390,6 +390,7 @@ var UserPermissions = function UserPermissions(_ref2) {
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
+      id: "".concat(user.id, "-permission-").concat(permission),
       type: "checkbox",
       checked: permissions.includes(permission),
       value: permission,
@@ -403,13 +404,13 @@ var UserPermissions = function UserPermissions(_ref2) {
   }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("td", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 97
+      lineNumber: 98
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_styles_SickButton__WEBPACK_IMPORTED_MODULE_9__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 98
+      lineNumber: 99
     },
     __self: this
   }, "Update")));
@@ -808,7 +809,7 @@ __webpack_require__.r(__webpack_exports__);
 var Table = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.table.withConfig({
   displayName: "Table",
   componentId: "sc-1jvbtk5-0"
-})(["border-spacing:0;width:100%;border:1px solid ", ";thead{font-size:10px;}td,th{border-bottom:1px solid ", ";border-right:1px solid ", ";padding:10px 5px;position:relative;&:last-child{border-right:none;width:150px;button{width:100%;}}}tr{&:hover{background:", ";}}"], function (props) {
+})(["border-spacing:0;width:100%;border:1px solid ", ";thead{font-size:10px;}td,th{border-bottom:1px solid ", ";border-right:1px solid ", ";padding:5px;position:relative;&:last-child{border-right:none;width:150px;button{width:100%;}}},label{padding:10px 5px;display:block;},tr{&:hover{background:", ";}}"], function (props) {
   return props.theme.offWhite;
 }, function (props) {
   return props.theme.offWhite;
