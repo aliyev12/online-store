@@ -27,7 +27,6 @@ const RESET_MUTATION = gql`
 const Reset = ({ resetToken }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
   return (
     <Mutation
       mutation={RESET_MUTATION}
@@ -38,18 +37,20 @@ const Reset = ({ resetToken }) => {
       }}
       refetchQueries={[{ query: CURRENT_USER_QUERY }]}
     >
-      {(reset, { error, loading, called }) => {
+      {(resetPassword, { loading, error, called }) => {
         return (
           <Form
             method="post"
             onSubmit={async e => {
               e.preventDefault();
-              await reset();
+              resetPassword();
               setPassword('');
               setConfirmPassword('');
+              console.log('====== here....');
             }}
           >
-            <fieldset disabled={loading} aria-busy={loading}>
+            {/* <fieldset disabled={loading} aria-busy={loading}> */}
+            <fieldset >
               <h2>Reset Your Password</h2>
               <Error error={error} />
               <label htmlFor="password">
