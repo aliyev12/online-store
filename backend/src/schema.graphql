@@ -47,6 +47,8 @@ type Query {
   itemsConnection(where: ItemWhereInput): ItemConnection!
   #=== CURRENT USER ===#
   me: User
+  #=== USERS ===#
+  users: [User]!
 }
 
 type User {
