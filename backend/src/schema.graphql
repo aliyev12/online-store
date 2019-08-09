@@ -33,6 +33,8 @@ type Mutation {
   ): User!
   #=== UPDATE PERMISSIONS ===#
   updatePermissions(permissions: [Permission], userId: ID!): User
+  #=== ADD TO CART ===#
+  addToCart(id: ID!): CartItem
 }
 
 type Query {
@@ -58,4 +60,5 @@ type User {
   name: String!
   email: String!
   permissions: [Permission!]!
+  cart: [CartItem!]!
 }

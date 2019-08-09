@@ -54,17 +54,18 @@ const Mutations = {
   /*=== DELETE ITEM ===*/
   /*===================*/
   async deleteItem(parent, args, ctx, info) {
-    
     const where = { id: args.id };
     const item = await ctx.db.query.item({ where }, `{ id title user { id }}`);
     // 1. Find the item
     // 2. Check if they own that item or have permissions
     const ownsItem = item.user.id === ctx.request.userId;
-    const hasPermissions = ctx.request.user.permissions.some(permission => ['ADMIN', 'ITEMDELETE'].includes(permission));
-    
+    const hasPermissions = ctx.request.user.permissions.some(permission =>
+      ['ADMIN', 'ITEMDELETE'].includes(permission)
+    );
+
     if (!ownsItem || !hasPermissions) {
       throw new Error('You are not allowed to delete this item.');
-    } 
+    }
 
     // 2. Delete it
     return ctx.db.mutation.deleteItem({ where }, info);
@@ -235,6 +236,47 @@ const Mutations = {
         },
         where: {
           id: args.userId
+        }
+      },
+      info
+    );
+  },
+
+  /*===================*/
+  /*=== ADD TO CART ===*/
+  /*===================*/
+  async addToCart(parent, args, ctx, info) {
+    // 1. Make sure user is signed in
+    const { userId } = ctx.request;
+    if (!userId) throw new Error('You must be signed in.');
+
+    // 2. Query the users current cart
+    const [existingCartItem] = await ctx.db.query.cartItems({
+      where: {
+        user: { id: userId },
+        item: { id: args.id }
+      }
+    });
+
+    // 3. Check if that item is already in users cart
+    // Increment by 1 if it is
+    if (existingCartItem) {
+      console.log('This item is already in their cart');
+      return ctx.db.mutation.updateCartItem(
+        {
+          where: { id: existingCartItem.id },
+          data: { quantity: existingCartItem.quantity + 1 }
+        },
+        info
+      );
+    }
+
+    // If it is not, then create a fresh item for that user
+    return ctx.db.mutation.createCartItem(
+      {
+        data: {
+          user: { connect: { id: userId } },
+          item: { connect: { id: args.id } }
         }
       },
       info
