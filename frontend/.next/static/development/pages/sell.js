@@ -29047,7 +29047,7 @@ var _jsxFileName = "/Users/abdulaliyev/tut/nextjs-graphql/online-store/frontend/
 
 /***/ }),
 
-/***/ 0:
+/***/ 2:
 /*!**************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fsell&absolutePagePath=%2FUsers%2Fabdulaliyev%2Ftut%2Fnextjs-graphql%2Fonline-store%2Ffrontend%2Fpages%2Fsell.js ***!
   \**************************************************************************************************************************************************************/
@@ -29070,5 +29070,5 @@ module.exports = dll_829b10deddf10e1653a8;
 
 /***/ })
 
-},[[0,"static/runtime/webpack.js"]]]);
+},[[2,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=sell.js.map

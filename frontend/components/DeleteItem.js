@@ -32,7 +32,9 @@ const DeleteItem = ({ children, id }) => {
         <button
           onClick={() => {
             if (confirm('Are you sure you wanted to delete this?')) {
-              deleteItem();
+              deleteItem().catch(err => {
+                alert(err.message);
+              });
             }
           }}
         >
