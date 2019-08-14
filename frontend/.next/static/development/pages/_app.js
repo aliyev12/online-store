@@ -930,22 +930,24 @@ RemoveFromCart.propTypes = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
-/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var downshift__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! downshift */ "./node_modules/downshift/dist/downshift.esm.js");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-apollo */ "./node_modules/react-apollo/lib/react-apollo.esm.js");
-/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @apollo/react-hooks */ "./node_modules/@apollo/react-hooks/lib/react-hooks.esm.js");
-/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! apollo-boost */ "./node_modules/apollo-boost/lib/bundle.esm.js");
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lodash.debounce */ "./node_modules/lodash.debounce/index.js");
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _styles_DropDown__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./styles/DropDown */ "./components/styles/DropDown.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var downshift__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! downshift */ "./node_modules/downshift/dist/downshift.esm.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-apollo */ "./node_modules/react-apollo/lib/react-apollo.esm.js");
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @apollo/react-hooks */ "./node_modules/@apollo/react-hooks/lib/react-hooks.esm.js");
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! apollo-boost */ "./node_modules/apollo-boost/lib/bundle.esm.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lodash.debounce */ "./node_modules/lodash.debounce/index.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _styles_DropDown__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./styles/DropDown */ "./components/styles/DropDown.js");
+
 
 
 
@@ -953,7 +955,7 @@ __webpack_require__.r(__webpack_exports__);
 var _jsxFileName = "/Users/abdulaliyev/tut/nextjs-graphql/online-store/frontend/components/Search.js";
 
 function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_3__["default"])(["\n  query SEARCH_ITEMS_QUERY($searchTerm: String!) {\n    items(\n      where: {\n        OR: [\n          { title_contains: $searchTerm }\n          { description_contains: $searchTerm }\n        ]\n      }\n    ) {\n      id\n      image\n      title\n    }\n  }\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_4__["default"])(["\n  query SEARCH_ITEMS_QUERY($searchTerm: String!) {\n    items(\n      where: {\n        OR: [\n          { title_contains: $searchTerm }\n          { description_contains: $searchTerm }\n        ]\n      }\n    ) {\n      id\n      image\n      title\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -970,37 +972,36 @@ function _templateObject() {
 
 
 
-var SEARCH_ITEMS_QUERY = Object(apollo_boost__WEBPACK_IMPORTED_MODULE_9__["gql"])(_templateObject());
+var SEARCH_ITEMS_QUERY = Object(apollo_boost__WEBPACK_IMPORTED_MODULE_10__["gql"])(_templateObject());
 
 var AutoComplete = function AutoComplete() {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_4__["useState"])([]),
-      _useState2 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState, 2),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_5__["useState"])([]),
+      _useState2 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_3__["default"])(_useState, 2),
       items = _useState2[0],
       setItems = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_4__["useState"])(false),
-      _useState4 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState3, 2),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_5__["useState"])(false),
+      _useState4 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_3__["default"])(_useState3, 2),
       loading = _useState4[0],
       setLoading = _useState4[1];
 
-  var client = Object(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_8__["useApolloClient"])();
+  var client = Object(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_9__["useApolloClient"])();
 
-  var _onChange = lodash_debounce__WEBPACK_IMPORTED_MODULE_10___default()(
+  var _onChange = lodash_debounce__WEBPACK_IMPORTED_MODULE_11___default()(
   /*#__PURE__*/
   function () {
-    var _ref = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+    var _ref = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
     /*#__PURE__*/
-    _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e, client) {
+    _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee(e, client) {
       var res;
-      return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              console.log('searachhhh'); // Turn loading on
-
+              // Turn loading on
               setLoading(true); // Manually query apollo client
 
-              _context.next = 4;
+              _context.next = 3;
               return client.query({
                 query: SEARCH_ITEMS_QUERY,
                 variables: {
@@ -1008,12 +1009,12 @@ var AutoComplete = function AutoComplete() {
                 }
               });
 
-            case 4:
+            case 3:
               res = _context.sent;
               setItems(res.data.items);
               setLoading(false);
 
-            case 7:
+            case 6:
             case "end":
               return _context.stop();
           }
@@ -1026,55 +1027,98 @@ var AutoComplete = function AutoComplete() {
     };
   }(), 350);
 
-  return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_styles_DropDown__WEBPACK_IMPORTED_MODULE_11__["SearchStyles"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 47
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 48
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("input", {
-    type: "search",
-    onChange: function onChange(e) {
-      e.persist();
+  var routeToItem = function routeToItem(item) {
+    next_router__WEBPACK_IMPORTED_MODULE_7___default.a.push({
+      pathname: '/item',
+      query: {
+        id: item.id
+      }
+    });
+  }; // To get rid of the aria-label warning in console:
 
-      _onChange(e, client);
+
+  Object(downshift__WEBPACK_IMPORTED_MODULE_6__["resetIdCounter"])();
+  return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_styles_DropDown__WEBPACK_IMPORTED_MODULE_12__["SearchStyles"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 57
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(downshift__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    onChange: routeToItem,
+    itemToString: function itemToString(item) {
+      return item === null ? '' : item.title;
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 58
     },
     __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_styles_DropDown__WEBPACK_IMPORTED_MODULE_11__["DropDown"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 56
-    },
-    __self: this
-  }, items.map(function (item) {
-    return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_styles_DropDown__WEBPACK_IMPORTED_MODULE_11__["DropDownItem"], {
-      key: item.id,
+  }, function (_ref2) {
+    var getInputProps = _ref2.getInputProps,
+        getItemProps = _ref2.getItemProps,
+        isOpen = _ref2.isOpen,
+        inputValue = _ref2.inputValue,
+        highlightedIndex = _ref2.highlightedIndex;
+    return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 58
+        lineNumber: 69
       },
       __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("img", {
-      width: "50",
-      src: item.image,
-      alt: item.title,
+    }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("input", Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+      type: "search"
+    }, getInputProps({
+      type: 'search',
+      placeholder: 'Search For An Item',
+      id: 'search',
+      className: loading ? 'loading' : '',
+      onChange: function onChange(e) {
+        e.persist();
+
+        _onChange(e, client);
+      }
+    }), {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 59
+        lineNumber: 70
       },
       __self: this
-    }), item.title);
-  }))));
+    })), isOpen && react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_styles_DropDown__WEBPACK_IMPORTED_MODULE_12__["DropDown"], {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 84
+      },
+      __self: this
+    }, items.map(function (item, index) {
+      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_styles_DropDown__WEBPACK_IMPORTED_MODULE_12__["DropDownItem"], Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, getItemProps({
+        item: item
+      }), {
+        key: item.id,
+        highlighted: index === highlightedIndex,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 86
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("img", {
+        width: "50",
+        src: item.image,
+        alt: item.title,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 91
+        },
+        __self: this
+      }), item.title);
+    }), !items.length && !loading && react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_styles_DropDown__WEBPACK_IMPORTED_MODULE_12__["DropDownItem"], {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 96
+      },
+      __self: this
+    }, "Nothing Found For ", inputValue)));
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (AutoComplete);
@@ -1574,7 +1618,7 @@ function createClient(_ref) {
         }
       },
       defaults: {
-        cartOpen: true
+        cartOpen: false
       }
     }
   });
