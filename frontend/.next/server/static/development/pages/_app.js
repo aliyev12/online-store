@@ -168,19 +168,19 @@ const Cart = () => {
       open: data.cartOpen,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 40
+        lineNumber: 38
       },
       __self: undefined
     }, loading && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 41
+        lineNumber: 39
       },
       __self: undefined
     }, "Loading..."), error && Object(_lib_handleError__WEBPACK_IMPORTED_MODULE_4__["default"])(error), !loading && !error && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 45
+        lineNumber: 43
       },
       __self: undefined
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles_CloseButton__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -188,19 +188,19 @@ const Cart = () => {
       title: "close",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 46
+        lineNumber: 44
       },
       __self: undefined
     }, "\xD7"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles_Supreme__WEBPACK_IMPORTED_MODULE_6__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 49
+        lineNumber: 47
       },
       __self: undefined
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 59
+        lineNumber: 57
       },
       __self: undefined
     }, me.cart.map(cartItem => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CartItem__WEBPACK_IMPORTED_MODULE_11__["default"], {
@@ -208,19 +208,19 @@ const Cart = () => {
       cartItem: cartItem,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 61
+        lineNumber: 59
       },
       __self: undefined
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 64
+        lineNumber: 62
       },
       __self: undefined
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles_SickButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 66
+        lineNumber: 64
       },
       __self: undefined
     }))));
@@ -283,6 +283,77 @@ const Cart = () => {
 
 /***/ }),
 
+/***/ "./components/CartCount.js":
+/*!*********************************!*\
+  !*** ./components/CartCount.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_transition_group__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-transition-group */ "react-transition-group");
+/* harmony import */ var react_transition_group__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_transition_group__WEBPACK_IMPORTED_MODULE_3__);
+var _jsxFileName = "/Users/abdulaliyev/tut/nextjs-graphql/online-store/frontend/components/CartCount.js";
+
+
+
+
+const AnimationStyles = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.span.withConfig({
+  displayName: "CartCount__AnimationStyles",
+  componentId: "xxvp4g-0"
+})(["position:relative;.count{display:block;position:relative;transition:all 0.4s;backface-visibility:hidden;}.count-enter{transform:rotateX(180deg);}.count-enter-active{transform:rotateX(0deg);}.count-exit{top:0;position:absolute;transform:rotateX(0deg);}.count-exit-active{transform:rotateX(180deg);}"]);
+const Dot = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.withConfig({
+  displayName: "CartCount__Dot",
+  componentId: "xxvp4g-1"
+})(["background:", ";color:white;border-radius:50%;padding:0.5rem;line-height:2rem;min-width:3rem;margin-left:1rem;font-weight:100;font-feature-settings:'tnum';font-variant-numeric:tabular-nums;"], props => props.theme.black);
+
+const CartCount = ({
+  count
+}) => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AnimationStyles, {
+  __source: {
+    fileName: _jsxFileName,
+    lineNumber: 47
+  },
+  __self: undefined
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_3__["TransitionGroup"], {
+  __source: {
+    fileName: _jsxFileName,
+    lineNumber: 48
+  },
+  __self: undefined
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_3__["CSSTransition"], {
+  unmountOnExit: true,
+  className: "count",
+  classNames: "count",
+  key: count,
+  timeout: {
+    enter: 400,
+    exit: 400
+  },
+  __source: {
+    fileName: _jsxFileName,
+    lineNumber: 49
+  },
+  __self: undefined
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Dot, {
+  __source: {
+    fileName: _jsxFileName,
+    lineNumber: 56
+  },
+  __self: undefined
+}, count))));
+
+/* harmony default export */ __webpack_exports__["default"] = (CartCount);
+
+/***/ }),
+
 /***/ "./components/CartItem.js":
 /*!********************************!*\
   !*** ./components/CartItem.js ***!
@@ -313,54 +384,77 @@ const CartItemStyles = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.
 
 const CartItem = ({
   cartItem
-}) => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CartItemStyles, {
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 23
-  },
-  __self: undefined
-}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-  width: "100",
-  src: cartItem.item.image,
-  alt: cartItem.item.title,
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 24
-  },
-  __self: undefined
-}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-  className: "cart-item-details",
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 25
-  },
-  __self: undefined
-}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 26
-  },
-  __self: undefined
-}, cartItem.item.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 27
-  },
-  __self: undefined
-}, Object(_lib_formatMoney__WEBPACK_IMPORTED_MODULE_3__["default"])(cartItem.item.price * cartItem.quantity), ' - ', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("em", {
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 30
-  },
-  __self: undefined
-}, cartItem.quantity, " \xD7 ", Object(_lib_formatMoney__WEBPACK_IMPORTED_MODULE_3__["default"])(cartItem.item.price), " each"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RemoveFromCart__WEBPACK_IMPORTED_MODULE_4__["default"], {
-  id: cartItem.id,
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 35
-  },
-  __self: undefined
-}));
+}) => {
+  // Check if that item exists
+  if (!cartItem.item) return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CartItemStyles, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 26
+    },
+    __self: undefined
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 27
+    },
+    __self: undefined
+  }, "This item has been removed"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RemoveFromCart__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: cartItem.id,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 28
+    },
+    __self: undefined
+  }));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CartItemStyles, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 32
+    },
+    __self: undefined
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    width: "100",
+    src: cartItem.item.image,
+    alt: cartItem.item.title,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 33
+    },
+    __self: undefined
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "cart-item-details",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 34
+    },
+    __self: undefined
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 35
+    },
+    __self: undefined
+  }, cartItem.item.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 36
+    },
+    __self: undefined
+  }, Object(_lib_formatMoney__WEBPACK_IMPORTED_MODULE_3__["default"])(cartItem.item.price * cartItem.quantity), ' - ', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("em", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: undefined
+  }, cartItem.quantity, " \xD7 ", Object(_lib_formatMoney__WEBPACK_IMPORTED_MODULE_3__["default"])(cartItem.item.price), " each"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RemoveFromCart__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: cartItem.id,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 44
+    },
+    __self: undefined
+  }));
+};
 
 CartItem.propTypes = {
   cartItem: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object.isRequired
@@ -390,7 +484,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! nprogress */ "nprogress");
 /* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _Cart__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Cart */ "./components/Cart.js");
+/* harmony import */ var _Search__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Search */ "./components/Search.js");
 var _jsxFileName = "/Users/abdulaliyev/tut/nextjs-graphql/online-store/frontend/components/Header.js";
+
 
 
 
@@ -418,58 +514,58 @@ const StyledHeader = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.he
 /* harmony default export */ __webpack_exports__["default"] = (() => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(StyledHeader, {
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 60
+    lineNumber: 61
   },
   __self: undefined
 }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
   className: "bar",
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 61
+    lineNumber: 62
   },
   __self: undefined
 }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Logo, {
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 62
+    lineNumber: 63
   },
   __self: undefined
 }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
   href: "/",
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 63
+    lineNumber: 64
   },
   __self: undefined
 }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 64
+    lineNumber: 65
   },
   __self: undefined
 }, "site_name"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Nav__WEBPACK_IMPORTED_MODULE_3__["default"], {
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 67
+    lineNumber: 68
   },
   __self: undefined
 })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
   className: "sub-bar",
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 69
-  },
-  __self: undefined
-}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-  __source: {
-    fileName: _jsxFileName,
     lineNumber: 70
   },
   __self: undefined
-}, "Search")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Cart__WEBPACK_IMPORTED_MODULE_6__["default"], {
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Search__WEBPACK_IMPORTED_MODULE_7__["default"], {
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 72
+    lineNumber: 71
+  },
+  __self: undefined
+})), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Cart__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  __source: {
+    fileName: _jsxFileName,
+    lineNumber: 73
   },
   __self: undefined
 })));
@@ -556,10 +652,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @apollo/react-hooks */ "@apollo/react-hooks");
 /* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _styles_NavStyles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles/NavStyles */ "./components/styles/NavStyles.js");
-/* harmony import */ var _User__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./User */ "./components/User.js");
-/* harmony import */ var _Signout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Signout */ "./components/Signout.js");
+/* harmony import */ var _Signout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Signout */ "./components/Signout.js");
+/* harmony import */ var _CartCount__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./CartCount */ "./components/CartCount.js");
 /* harmony import */ var _Cart__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Cart */ "./components/Cart.js");
+/* harmony import */ var _hooks_useUser__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../hooks/useUser */ "./hooks/useUser.js");
 var _jsxFileName = "/Users/abdulaliyev/tut/nextjs-graphql/online-store/frontend/components/Nav.js";
+
 
 
 
@@ -569,33 +667,28 @@ var _jsxFileName = "/Users/abdulaliyev/tut/nextjs-graphql/online-store/frontend/
 
 /* harmony default export */ __webpack_exports__["default"] = (() => {
   const [toggleCart] = Object(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_2__["useMutation"])(_Cart__WEBPACK_IMPORTED_MODULE_6__["TOGGLE_CART_MUTATION"]);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_User__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 11
-    },
-    __self: undefined
-  }, ({
+  const {
     data: {
       me
     }
-  }) => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles_NavStyles__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  } = Object(_hooks_useUser__WEBPACK_IMPORTED_MODULE_7__["default"])();
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles_NavStyles__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 13
+      lineNumber: 14
     },
     __self: undefined
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/items",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 14
+      lineNumber: 15
     },
     __self: undefined
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15
+      lineNumber: 16
     },
     __self: undefined
   }, "Shop")), me && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
@@ -644,7 +737,7 @@ var _jsxFileName = "/Users/abdulaliyev/tut/nextjs-graphql/online-store/frontend/
       lineNumber: 29
     },
     __self: undefined
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Signout__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Signout__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 30
@@ -657,62 +750,28 @@ var _jsxFileName = "/Users/abdulaliyev/tut/nextjs-graphql/online-store/frontend/
       lineNumber: 32
     },
     __self: undefined
-  }, "My Cart")), !me && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+  }, "My Cart", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CartCount__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    count: me.cart.reduce((acc, cartItem) => acc + cartItem.quantity, 0),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 34
+    },
+    __self: undefined
+  }))), !me && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/signup",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 39
     },
     __self: undefined
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37
+      lineNumber: 40
     },
     __self: undefined
-  }, "Sign In"))));
-}); // import Link from 'next/link';
-// import { Mutation } from 'react-apollo';
-// import NavStyles from './styles/NavStyles';
-// import User from './User';
-// import Signout from './Signout';
-// import { TOGGLE_CART_MUTATION } from './Cart';
-// export default () => (
-//   <User>
-//     {({ data: { me } }) => (
-//       <NavStyles>
-//         <Link href="/items">
-//           <a>Shop</a>
-//         </Link>
-//         {console.log(me ? me : 'nothing')}
-//         {me && (
-//           <>
-//             <Link href="/sell">
-//               <a>Sell</a>
-//             </Link>
-//             <Link href="/orders">
-//               <a>Orders</a>
-//             </Link>{' '}
-//             <Link href="/me">
-//               <a>Account</a>
-//             </Link>
-//             <Link href="/signout">
-//               <Signout />
-//             </Link>
-//             <Mutation mutation={TOGGLE_CART_MUTATION}>
-//               {toggleCart => <button onClick={toggleCart}>My Cart</button>}
-//             </Mutation>
-//           </>
-//         )}
-//         {!me && (
-//           <Link href="/signup">
-//             <a>Sign In</a>
-//           </Link>
-//         )}
-//       </NavStyles>
-//     )}
-//   </User>
-// );
+  }, "Sign In")));
+});
 
 /***/ }),
 
@@ -753,7 +812,7 @@ const Inner = styled_components__WEBPACK_IMPORTED_MODULE_3___default.a.div.withC
   displayName: "Page__Inner",
   componentId: "sc-4u7a64-1"
 })(["max-width:", ";margin:0 auto;padding:2rem;"], props => props.theme.maxWidth);
-styled_components__WEBPACK_IMPORTED_MODULE_3__["injectGlobal"]`
+const GlobalStyle = styled_components__WEBPACK_IMPORTED_MODULE_3__["createGlobalStyle"]`
   @font-face {
     font-family: 'radnika_next';
     src: url('../static/radnikanext-medium-webfont.woff2') format('woff2');
@@ -792,22 +851,28 @@ styled_components__WEBPACK_IMPORTED_MODULE_3__["injectGlobal"]`
     lineNumber: 56
   },
   __self: undefined
-}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Meta__WEBPACK_IMPORTED_MODULE_2__["default"], {
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(GlobalStyle, {
   __source: {
     fileName: _jsxFileName,
     lineNumber: 57
   },
   __self: undefined
-}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
+}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Meta__WEBPACK_IMPORTED_MODULE_2__["default"], {
   __source: {
     fileName: _jsxFileName,
     lineNumber: 58
   },
   __self: undefined
-}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Inner, {
+}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
   __source: {
     fileName: _jsxFileName,
     lineNumber: 59
+  },
+  __self: undefined
+}), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Inner, {
+  __source: {
+    fileName: _jsxFileName,
+    lineNumber: 60
   },
   __self: undefined
 }, props.children))));
@@ -907,6 +972,126 @@ RemoveFromCart.propTypes = {
   id: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (RemoveFromCart);
+
+/***/ }),
+
+/***/ "./components/Search.js":
+/*!******************************!*\
+  !*** ./components/Search.js ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var downshift__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! downshift */ "downshift");
+/* harmony import */ var downshift__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(downshift__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-apollo */ "react-apollo");
+/* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_apollo__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @apollo/react-hooks */ "@apollo/react-hooks");
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! apollo-boost */ "apollo-boost");
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(apollo_boost__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lodash.debounce */ "lodash.debounce");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _styles_DropDown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./styles/DropDown */ "./components/styles/DropDown.js");
+var _jsxFileName = "/Users/abdulaliyev/tut/nextjs-graphql/online-store/frontend/components/Search.js";
+
+
+
+
+
+
+
+
+const SEARCH_ITEMS_QUERY = apollo_boost__WEBPACK_IMPORTED_MODULE_5__["gql"]`
+  query SEARCH_ITEMS_QUERY($searchTerm: String!) {
+    items(
+      where: {
+        OR: [
+          { title_contains: $searchTerm }
+          { description_contains: $searchTerm }
+        ]
+      }
+    ) {
+      id
+      image
+      title
+    }
+  }
+`;
+
+const AutoComplete = () => {
+  const [items, setItems] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  const [loading, setLoading] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const client = Object(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_4__["useApolloClient"])();
+  const onChange = lodash_debounce__WEBPACK_IMPORTED_MODULE_6___default()(async (e, client) => {
+    console.log('searachhhh'); // Turn loading on
+
+    setLoading(true); // Manually query apollo client
+
+    const res = await client.query({
+      query: SEARCH_ITEMS_QUERY,
+      variables: {
+        searchTerm: e.target.value
+      }
+    });
+    setItems(res.data.items);
+    setLoading(false);
+  }, 350);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles_DropDown__WEBPACK_IMPORTED_MODULE_7__["SearchStyles"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 47
+    },
+    __self: undefined
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 48
+    },
+    __self: undefined
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "search",
+    onChange: e => {
+      e.persist();
+      onChange(e, client);
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 49
+    },
+    __self: undefined
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles_DropDown__WEBPACK_IMPORTED_MODULE_7__["DropDown"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 56
+    },
+    __self: undefined
+  }, items.map(item => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles_DropDown__WEBPACK_IMPORTED_MODULE_7__["DropDownItem"], {
+    key: item.id,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 58
+    },
+    __self: undefined
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    width: "50",
+    src: item.image,
+    alt: item.title,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 59
+    },
+    __self: undefined
+  }), item.title)))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AutoComplete);
 
 /***/ }),
 
@@ -1093,6 +1278,38 @@ const CloseButton = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.but
   componentId: "sc-1seb878-0"
 })(["background:black;color:white;font-size:3rem;border:0;position:absolute;z-index:2;right:0;"]);
 /* harmony default export */ __webpack_exports__["default"] = (CloseButton);
+
+/***/ }),
+
+/***/ "./components/styles/DropDown.js":
+/*!***************************************!*\
+  !*** ./components/styles/DropDown.js ***!
+  \***************************************/
+/*! exports provided: DropDown, DropDownItem, SearchStyles */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DropDown", function() { return DropDown; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DropDownItem", function() { return DropDownItem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SearchStyles", function() { return SearchStyles; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_0__);
+
+const DropDown = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.div.withConfig({
+  displayName: "DropDown",
+  componentId: "n5d97g-0"
+})(["position:absolute;width:100%;z-index:2;border:1px solid ", ";"], props => props.theme.lightgrey);
+const DropDownItem = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.div.withConfig({
+  displayName: "DropDown__DropDownItem",
+  componentId: "n5d97g-1"
+})(["border-bottom:1px solid ", ";background:", ";padding:1rem;transition:all 0.2s;", ";display:flex;align-items:center;border-left:10px solid ", ";img{margin-right:10px;}"], props => props.theme.lightgrey, props => props.highlighted ? '#f7f7f7' : 'white', props => props.highlighted ? 'padding-left: 2rem;' : null, props => props.highlighted ? props.theme.lightgrey : 'white');
+const glow = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["keyframes"])(["from{box-shadow:0 0 0px yellow;}to{box-shadow:0 0 10px 1px yellow;}"]);
+const SearchStyles = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.div.withConfig({
+  displayName: "DropDown__SearchStyles",
+  componentId: "n5d97g-2"
+})(["position:relative;input{width:100%;padding:10px;border:0;font-size:2rem;&.loading{animation:", " 0.5s ease-in-out infinite alternate;}}"], glow);
+
 
 /***/ }),
 
@@ -2457,6 +2674,28 @@ module.exports = require("core-js/library/fn/promise");
 
 /***/ }),
 
+/***/ "downshift":
+/*!****************************!*\
+  !*** external "downshift" ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("downshift");
+
+/***/ }),
+
+/***/ "lodash.debounce":
+/*!**********************************!*\
+  !*** external "lodash.debounce" ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("lodash.debounce");
+
+/***/ }),
+
 /***/ "next-server/dist/lib/router-context":
 /*!******************************************************!*\
   !*** external "next-server/dist/lib/router-context" ***!
@@ -2586,6 +2825,17 @@ module.exports = require("react");
 /***/ (function(module, exports) {
 
 module.exports = require("react-apollo");
+
+/***/ }),
+
+/***/ "react-transition-group":
+/*!*****************************************!*\
+  !*** external "react-transition-group" ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-transition-group");
 
 /***/ }),
 
