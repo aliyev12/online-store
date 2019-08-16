@@ -59,6 +59,8 @@ type Query {
   users: [User]!
   #=== ORDER ===#
   order(id: ID!): Order
+  #=== ORDERS ===#
+  orders(orderBy: OrderOrderByInput): [Order]!
 }
 
 type User {
