@@ -122,7 +122,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CartItem__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./CartItem */ "./components/CartItem.js");
 /* harmony import */ var _lib_calcTotalPrice__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../lib/calcTotalPrice */ "./lib/calcTotalPrice.js");
 /* harmony import */ var _lib_formatMoney__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../lib/formatMoney */ "./lib/formatMoney.js");
+/* harmony import */ var _TakeMyMoney__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./TakeMyMoney */ "./components/TakeMyMoney.js");
 var _jsxFileName = "/Users/abdulaliyev/tut/nextjs-graphql/online-store/frontend/components/Cart.js";
+
 
 
 
@@ -168,19 +170,19 @@ const Cart = () => {
       open: data.cartOpen,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 38
+        lineNumber: 41
       },
       __self: undefined
     }, loading && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 39
+        lineNumber: 42
       },
       __self: undefined
     }, "Loading..."), error && Object(_lib_handleError__WEBPACK_IMPORTED_MODULE_4__["default"])(error), !loading && !error && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 43
+        lineNumber: 46
       },
       __self: undefined
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles_CloseButton__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -188,19 +190,19 @@ const Cart = () => {
       title: "close",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 44
+        lineNumber: 47
       },
       __self: undefined
     }, "\xD7"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles_Supreme__WEBPACK_IMPORTED_MODULE_6__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 47
+        lineNumber: 50
       },
       __self: undefined
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 57
+        lineNumber: 60
       },
       __self: undefined
     }, me.cart.map(cartItem => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CartItem__WEBPACK_IMPORTED_MODULE_11__["default"], {
@@ -208,22 +210,34 @@ const Cart = () => {
       cartItem: cartItem,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 59
+        lineNumber: 62
       },
       __self: undefined
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 62
+        lineNumber: 65
+      },
+      __self: undefined
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 66
+      },
+      __self: undefined
+    }, Object(_lib_formatMoney__WEBPACK_IMPORTED_MODULE_13__["default"])(Object(_lib_calcTotalPrice__WEBPACK_IMPORTED_MODULE_12__["default"])(me.cart))), me.cart.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TakeMyMoney__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 68
       },
       __self: undefined
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles_SickButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 64
+        lineNumber: 69
       },
       __self: undefined
-    }))));
+    }, "Checkout")))));
   }
 };
 
@@ -460,6 +474,91 @@ CartItem.propTypes = {
   cartItem: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (CartItem);
+
+/***/ }),
+
+/***/ "./components/ErrorMessage.js":
+/*!************************************!*\
+  !*** ./components/ErrorMessage.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+var _jsxFileName = "/Users/abdulaliyev/tut/nextjs-graphql/online-store/frontend/components/ErrorMessage.js";
+
+
+
+const ErrorStyles = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.div.withConfig({
+  displayName: "ErrorMessage__ErrorStyles",
+  componentId: "sc-11u5fgj-0"
+})(["padding:2rem;background:white;margin:2rem 0;border:1px solid rgba(0,0,0,0.05);border-left:5px solid red;p{margin:0;font-weight:100;}strong{margin-right:1rem;}"]);
+
+const DisplayError = ({
+  error
+}) => {
+  if (!error || !error.message) return null;
+
+  if (error.networkError && error.networkError.result && error.networkError.result.errors.length) {
+    return error.networkError.result.errors.map((error, i) => react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(ErrorStyles, {
+      key: i,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 25
+      },
+      __self: undefined
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+      "data-test": "graphql-error",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 26
+      },
+      __self: undefined
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("strong", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 27
+      },
+      __self: undefined
+    }, "Shoot!"), error.message.replace('GraphQL error: ', ''))));
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(ErrorStyles, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 34
+    },
+    __self: undefined
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+    "data-test": "graphql-error",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 35
+    },
+    __self: undefined
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("strong", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 36
+    },
+    __self: undefined
+  }, "Shoot!"), error.message.replace('GraphQL error: ', '')));
+};
+
+DisplayError.defaultProps = {
+  error: {}
+};
+DisplayError.propTypes = {
+  error: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object
+};
+/* harmony default export */ __webpack_exports__["default"] = (DisplayError);
 
 /***/ }),
 
@@ -1208,6 +1307,114 @@ const Signout = Object(react__WEBPACK_IMPORTED_MODULE_0__["forwardRef"])((props,
 
 /***/ }),
 
+/***/ "./components/TakeMyMoney.js":
+/*!***********************************!*\
+  !*** ./components/TakeMyMoney.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_stripe_checkout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-stripe-checkout */ "react-stripe-checkout");
+/* harmony import */ var react_stripe_checkout__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_stripe_checkout__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @apollo/react-hooks */ "@apollo/react-hooks");
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! nprogress */ "nprogress");
+/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! apollo-boost */ "apollo-boost");
+/* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(apollo_boost__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _lib_calcTotalPrice__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/calcTotalPrice */ "./lib/calcTotalPrice.js");
+/* harmony import */ var _ErrorMessage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ErrorMessage */ "./components/ErrorMessage.js");
+/* harmony import */ var _lib_queries__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../lib/queries */ "./lib/queries.js");
+/* harmony import */ var _hooks_useUser__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../hooks/useUser */ "./hooks/useUser.js");
+/* harmony import */ var _lib_helpers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../lib/helpers */ "./lib/helpers.js");
+var _jsxFileName = "/Users/abdulaliyev/tut/nextjs-graphql/online-store/frontend/components/TakeMyMoney.js";
+
+
+
+
+
+
+
+
+
+
+
+const CREATE_ORDER_MUTATION = apollo_boost__WEBPACK_IMPORTED_MODULE_5__["gql"]`
+  mutation createOrder($token: String!) {
+    createOrder(token: $token) {
+      id
+      charge
+      total
+      items {
+        id
+        title
+      }
+    }
+  }
+`;
+
+const TakeMyMoney = ({
+  children
+}) => {
+  const [createOrder] = Object(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_2__["useMutation"])(CREATE_ORDER_MUTATION, {
+    refetchQueries: [{
+      query: _lib_queries__WEBPACK_IMPORTED_MODULE_8__["CURRENT_USER_QUERY"]
+    }]
+  });
+  const {
+    data: {
+      me
+    }
+  } = Object(_hooks_useUser__WEBPACK_IMPORTED_MODULE_9__["default"])();
+
+  const totalItems = cart => cart.reduce((acc, cartItem) => acc + cartItem.quantity, 0);
+
+  const onToken = async (res, create) => {
+    nprogress__WEBPACK_IMPORTED_MODULE_4___default.a.start(); // Manually call the mutation once we have the stripe token
+
+    const order = await create({
+      variables: {
+        token: res.id
+      }
+    }).catch(err => {
+      alert(err.message);
+    });
+    next_router__WEBPACK_IMPORTED_MODULE_3___default.a.push({
+      pathname: '/order',
+      query: {
+        id: order.data.createOrder.id
+      }
+    });
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_stripe_checkout__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    amount: Object(_lib_calcTotalPrice__WEBPACK_IMPORTED_MODULE_6__["default"])(me.cart),
+    name: "Great Fits",
+    description: `Order of ${totalItems(me.cart)} item${totalItems(me.cart) === 1 ? '' : 's'}`,
+    image: Object(_lib_helpers__WEBPACK_IMPORTED_MODULE_10__["idx"])(['cart', '0', 'item', 'image'], me) // image={me.cart && me.cart.length && me.cart[0].item && me.cart[0].item.image ? me.cart[0].item.image : ''}
+    ,
+    stripeKey: "pk_test_hhz29HQbQz30mWS5QF59kLKN00Nv74hEX0",
+    currency: "USD",
+    email: me.email,
+    token: res => onToken(res, createOrder),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 55
+    },
+    __self: undefined
+  }, children);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (TakeMyMoney);
+
+/***/ }),
+
 /***/ "./components/User.js":
 /*!****************************!*\
   !*** ./components/User.js ***!
@@ -1512,6 +1719,31 @@ __webpack_require__.r(__webpack_exports__);
 
   return `Error: ${error && error.message ? error.message : 'No error message'}`;
 });
+
+/***/ }),
+
+/***/ "./lib/helpers.js":
+/*!************************!*\
+  !*** ./lib/helpers.js ***!
+  \************************/
+/*! exports provided: idx */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "idx", function() { return idx; });
+// Check deeply nested props
+
+/* Example:
+const user = {
+  posts: [
+    {title: 'Title', comment: 'Comment'}
+  ]
+}
+idx(['posts', '0', 'title'], user) // returns 'Title'
+idx(['posts', '2', 'title'], user) // returns 'null' because there is no index 2 in posts
+*/
+const idx = (p, o) => p.reduce((xs, x) => xs && xs[x] ? xs[x] : null, o);
 
 /***/ }),
 
@@ -2867,6 +3099,17 @@ module.exports = require("react");
 /***/ (function(module, exports) {
 
 module.exports = require("react-apollo");
+
+/***/ }),
+
+/***/ "react-stripe-checkout":
+/*!****************************************!*\
+  !*** external "react-stripe-checkout" ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-stripe-checkout");
 
 /***/ }),
 

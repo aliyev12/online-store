@@ -13,6 +13,7 @@ import useUser from '../hooks/useUser';
 import CartItem from './CartItem';
 import calcTotalPrice from '../lib/calcTotalPrice';
 import formatMoney from '../lib/formatMoney';
+import TakeMyMoney from './TakeMyMoney';
 
 export const LOCAL_STATE_QUERY = gql`
   query {
@@ -29,7 +30,9 @@ export const TOGGLE_CART_MUTATION = gql`
 const Cart = () => {
   const { loading, error, data } = useQuery(LOCAL_STATE_QUERY);
   const [toggleCart] = useMutation(TOGGLE_CART_MUTATION);
-  const { data: { me }} = useUser();
+  const {
+    data: { me }
+  } = useUser();
 
   if (!me) {
     return null;
@@ -60,8 +63,12 @@ const Cart = () => {
               ))}
             </ul>
             <footer>
-              {/* <p>{formatMoney(calcTotalPrice(me.cart))}</p> */}
-              <SickButton />
+              <p>{formatMoney(calcTotalPrice(me.cart))}</p>
+              {me.cart.length && (
+                <TakeMyMoney>
+                  <SickButton>Checkout</SickButton>
+                </TakeMyMoney>
+              )}
             </footer>
           </>
         )}
