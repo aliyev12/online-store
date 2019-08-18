@@ -10,27 +10,31 @@ import AddToCart from './AddToCart';
 
 const Item = ({ item }) => (
   <ItemStyles>
-      {item.image && <img src={item.image} alt={item.title}/> }
+    {item.image && <img src={item.image} alt={item.title} />}
     <Title>
-      <Link href={{
+      <Link
+        href={{
           pathname: '/item',
           query: { id: item.id }
-      }}>
+        }}
+      >
         <a>{item.title}</a>
       </Link>
-      <PriceTag>{formatMoney(item.price)}</PriceTag>
-      <p>{item.description}</p>
-      <div className="buttonList">
-        <Link href={{
-            pathname: "update",
-            query: { id: item.id }
-        }}>
-            <a>Edit ✏️</a>
-        </Link>
-        <AddToCart id={item.id}/>
-        <DeleteItem id={item.id}>Delete This Item</DeleteItem>
-      </div>
     </Title>
+    <PriceTag>{formatMoney(item.price)}</PriceTag>
+    <p>{item.description}</p>
+    <div className="buttonList">
+      <Link
+        href={{
+          pathname: 'update',
+          query: { id: item.id }
+        }}
+      >
+        <a>Edit ✏️</a>
+      </Link>
+      <AddToCart id={item.id} />
+      <DeleteItem id={item.id}>Delete This Item</DeleteItem>
+    </div>
   </ItemStyles>
 );
 

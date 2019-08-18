@@ -22,7 +22,6 @@ const AnimationStyles = styled.span`
     top: 0;
     position: absolute;
     transform: rotateX(0deg);
-
   }
   .count-exit-active {
     transform: rotateX(180deg);

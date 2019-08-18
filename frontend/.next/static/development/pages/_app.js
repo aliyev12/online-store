@@ -257,13 +257,13 @@ var CartCount = function CartCount(_ref) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AnimationStyles, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 47
+      lineNumber: 46
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_3__["TransitionGroup"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 47
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_3__["CSSTransition"], {
@@ -277,13 +277,13 @@ var CartCount = function CartCount(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 48
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Dot, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 55
     },
     __self: this
   }, count))));
@@ -2826,7 +2826,10 @@ var QueryData = (function (_super) {
                 _this.resubscribeToQuery();
                 if (!error.hasOwnProperty('graphQLErrors'))
                     throw error;
-                _this.forceUpdate();
+                if (!Object(_wry_equality__WEBPACK_IMPORTED_MODULE_4__["equal"])(error, _this.previousData.error)) {
+                    _this.previousData.error = error;
+                    _this.forceUpdate();
+                }
             }
         });
     };
@@ -15981,25 +15984,23 @@ module.exports = gql;
 /*!*****************************************************!*\
   !*** ./node_modules/graphql/error/GraphQLError.mjs ***!
   \*****************************************************/
-/*! exports provided: GraphQLError, printError */
+/*! exports provided: GraphQLError */
 /***/ (function(__webpack_module__, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GraphQLError", function() { return GraphQLError; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "printError", function() { return printError; });
-/* harmony import */ var _jsutils_isObjectLike__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../jsutils/isObjectLike */ "./node_modules/graphql/jsutils/isObjectLike.mjs");
+/* harmony import */ var _printError__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./printError */ "./node_modules/graphql/error/printError.mjs");
 /* harmony import */ var _language_location__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../language/location */ "./node_modules/graphql/language/location.mjs");
-/* harmony import */ var _language_printLocation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../language/printLocation */ "./node_modules/graphql/language/printLocation.mjs");
-
-
-
 /**
- * A GraphQLError describes an Error found during the parse, validate, or
- * execute phases of performing a GraphQL operation. In addition to a message
- * and stack trace, it also includes information about the locations in a
- * GraphQL document and/or execution result that correspond to the Error.
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
  */
+
 
 function GraphQLError( // eslint-disable-line no-redeclare
 message, nodes, source, positions, path, originalError, extensions) {
@@ -16046,15 +16047,7 @@ message, nodes, source, positions, path, originalError, extensions) {
     }, []);
   }
 
-  var _extensions = extensions;
-
-  if (_extensions == null && originalError != null) {
-    var originalExtensions = originalError.extensions;
-
-    if (Object(_jsutils_isObjectLike__WEBPACK_IMPORTED_MODULE_0__["default"])(originalExtensions)) {
-      _extensions = originalExtensions;
-    }
-  }
+  var _extensions = extensions || originalError && originalError.extensions;
 
   Object.defineProperties(this, {
     message: {
@@ -16131,17 +16124,163 @@ GraphQLError.prototype = Object.create(Error.prototype, {
   },
   toString: {
     value: function toString() {
-      return printError(this);
+      return Object(_printError__WEBPACK_IMPORTED_MODULE_0__["printError"])(this);
     }
   }
 });
+
+/***/ }),
+
+/***/ "./node_modules/graphql/error/formatError.mjs":
+/*!****************************************************!*\
+  !*** ./node_modules/graphql/error/formatError.mjs ***!
+  \****************************************************/
+/*! exports provided: formatError */
+/***/ (function(__webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatError", function() { return formatError; });
+/* harmony import */ var _jsutils_invariant__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../jsutils/invariant */ "./node_modules/graphql/jsutils/invariant.mjs");
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
+
+
+/**
+ * Given a GraphQLError, format it according to the rules described by the
+ * Response Format, Errors section of the GraphQL Specification.
+ */
+function formatError(error) {
+  !error ? Object(_jsutils_invariant__WEBPACK_IMPORTED_MODULE_0__["default"])(0, 'Received null or undefined error.') : void 0;
+  var message = error.message || 'An unknown error occurred.';
+  var locations = error.locations;
+  var path = error.path;
+  var extensions = error.extensions;
+  return extensions ? {
+    message: message,
+    locations: locations,
+    path: path,
+    extensions: extensions
+  } : {
+    message: message,
+    locations: locations,
+    path: path
+  };
+}
+
+/***/ }),
+
+/***/ "./node_modules/graphql/error/index.mjs":
+/*!**********************************************!*\
+  !*** ./node_modules/graphql/error/index.mjs ***!
+  \**********************************************/
+/*! exports provided: GraphQLError, syntaxError, locatedError, printError, formatError */
+/***/ (function(__webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _GraphQLError__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GraphQLError */ "./node_modules/graphql/error/GraphQLError.mjs");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GraphQLError", function() { return _GraphQLError__WEBPACK_IMPORTED_MODULE_0__["GraphQLError"]; });
+
+/* harmony import */ var _syntaxError__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./syntaxError */ "./node_modules/graphql/error/syntaxError.mjs");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "syntaxError", function() { return _syntaxError__WEBPACK_IMPORTED_MODULE_1__["syntaxError"]; });
+
+/* harmony import */ var _locatedError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./locatedError */ "./node_modules/graphql/error/locatedError.mjs");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "locatedError", function() { return _locatedError__WEBPACK_IMPORTED_MODULE_2__["locatedError"]; });
+
+/* harmony import */ var _printError__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./printError */ "./node_modules/graphql/error/printError.mjs");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "printError", function() { return _printError__WEBPACK_IMPORTED_MODULE_3__["printError"]; });
+
+/* harmony import */ var _formatError__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./formatError */ "./node_modules/graphql/error/formatError.mjs");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "formatError", function() { return _formatError__WEBPACK_IMPORTED_MODULE_4__["formatError"]; });
+
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/graphql/error/locatedError.mjs":
+/*!*****************************************************!*\
+  !*** ./node_modules/graphql/error/locatedError.mjs ***!
+  \*****************************************************/
+/*! exports provided: locatedError */
+/***/ (function(__webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "locatedError", function() { return locatedError; });
+/* harmony import */ var _GraphQLError__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GraphQLError */ "./node_modules/graphql/error/GraphQLError.mjs");
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
+
+
+/**
+ * Given an arbitrary Error, presumably thrown while attempting to execute a
+ * GraphQL operation, produce a new GraphQLError aware of the location in the
+ * document responsible for the original Error.
+ */
+function locatedError(originalError, nodes, path) {
+  // Note: this uses a brand-check to support GraphQL errors originating from
+  // other contexts.
+  if (originalError && Array.isArray(originalError.path)) {
+    return originalError;
+  }
+
+  return new _GraphQLError__WEBPACK_IMPORTED_MODULE_0__["GraphQLError"](originalError && originalError.message, originalError && originalError.nodes || nodes, originalError && originalError.source, originalError && originalError.positions, path, originalError);
+}
+
+/***/ }),
+
+/***/ "./node_modules/graphql/error/printError.mjs":
+/*!***************************************************!*\
+  !*** ./node_modules/graphql/error/printError.mjs ***!
+  \***************************************************/
+/*! exports provided: printError */
+/***/ (function(__webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "printError", function() { return printError; });
+/* harmony import */ var _language_location__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../language/location */ "./node_modules/graphql/language/location.mjs");
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
+
+
 /**
  * Prints a GraphQLError to a string, representing useful location information
  * about the error's position in the source.
  */
-
 function printError(error) {
-  var output = error.message;
+  var printedLocations = [];
 
   if (error.nodes) {
     var _iteratorNormalCompletion = true;
@@ -16153,7 +16292,7 @@ function printError(error) {
         var node = _step.value;
 
         if (node.loc) {
-          output += '\n\n' + Object(_language_printLocation__WEBPACK_IMPORTED_MODULE_2__["printLocation"])(node.loc);
+          printedLocations.push(highlightSourceAtLocation(node.loc.source, Object(_language_location__WEBPACK_IMPORTED_MODULE_0__["getLocation"])(node.loc.source, node.loc.start)));
         }
       }
     } catch (err) {
@@ -16171,6 +16310,7 @@ function printError(error) {
       }
     }
   } else if (error.source && error.locations) {
+    var source = error.source;
     var _iteratorNormalCompletion2 = true;
     var _didIteratorError2 = false;
     var _iteratorError2 = undefined;
@@ -16178,7 +16318,7 @@ function printError(error) {
     try {
       for (var _iterator2 = error.locations[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
         var location = _step2.value;
-        output += '\n\n' + Object(_language_printLocation__WEBPACK_IMPORTED_MODULE_2__["printSourceLocation"])(error.source, location);
+        printedLocations.push(highlightSourceAtLocation(source, location));
       }
     } catch (err) {
       _didIteratorError2 = true;
@@ -16196,9 +16336,72 @@ function printError(error) {
     }
   }
 
-  return output;
+  return printedLocations.length === 0 ? error.message : [error.message].concat(printedLocations).join('\n\n') + '\n';
+}
+/**
+ * Render a helpful description of the location of the error in the GraphQL
+ * Source document.
+ */
+
+function highlightSourceAtLocation(source, location) {
+  var firstLineColumnOffset = source.locationOffset.column - 1;
+  var body = whitespace(firstLineColumnOffset) + source.body;
+  var lineIndex = location.line - 1;
+  var lineOffset = source.locationOffset.line - 1;
+  var lineNum = location.line + lineOffset;
+  var columnOffset = location.line === 1 ? firstLineColumnOffset : 0;
+  var columnNum = location.column + columnOffset;
+  var lines = body.split(/\r\n|[\n\r]/g);
+  return "".concat(source.name, " (").concat(lineNum, ":").concat(columnNum, ")\n") + printPrefixedLines([// Lines specified like this: ["prefix", "string"],
+  ["".concat(lineNum - 1, ": "), lines[lineIndex - 1]], ["".concat(lineNum, ": "), lines[lineIndex]], ['', whitespace(columnNum - 1) + '^'], ["".concat(lineNum + 1, ": "), lines[lineIndex + 1]]]);
 }
 
+function printPrefixedLines(lines) {
+  var existingLines = lines.filter(function (_ref) {
+    var _ = _ref[0],
+        line = _ref[1];
+    return line !== undefined;
+  });
+  var padLen = 0;
+  var _iteratorNormalCompletion3 = true;
+  var _didIteratorError3 = false;
+  var _iteratorError3 = undefined;
+
+  try {
+    for (var _iterator3 = existingLines[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+      var _ref4 = _step3.value;
+      var prefix = _ref4[0];
+      padLen = Math.max(padLen, prefix.length);
+    }
+  } catch (err) {
+    _didIteratorError3 = true;
+    _iteratorError3 = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
+        _iterator3.return();
+      }
+    } finally {
+      if (_didIteratorError3) {
+        throw _iteratorError3;
+      }
+    }
+  }
+
+  return existingLines.map(function (_ref3) {
+    var prefix = _ref3[0],
+        line = _ref3[1];
+    return lpad(padLen, prefix) + line;
+  }).join('\n');
+}
+
+function whitespace(len) {
+  return Array(len + 1).join(' ');
+}
+
+function lpad(len, str) {
+  return whitespace(len - str.length) + str;
+}
 
 /***/ }),
 
@@ -16213,6 +16416,14 @@ function printError(error) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "syntaxError", function() { return syntaxError; });
 /* harmony import */ var _GraphQLError__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GraphQLError */ "./node_modules/graphql/error/GraphQLError.mjs");
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
 
 /**
  * Produces a GraphQLError representing a syntax error, containing useful
@@ -16222,37 +16433,6 @@ __webpack_require__.r(__webpack_exports__);
 function syntaxError(source, position, description) {
   return new _GraphQLError__WEBPACK_IMPORTED_MODULE_0__["GraphQLError"]("Syntax Error: ".concat(description), undefined, source, [position]);
 }
-
-
-/***/ }),
-
-/***/ "./node_modules/graphql/jsutils/defineToJSON.mjs":
-/*!*******************************************************!*\
-  !*** ./node_modules/graphql/jsutils/defineToJSON.mjs ***!
-  \*******************************************************/
-/*! exports provided: default */
-/***/ (function(__webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return defineToJSON; });
-/* harmony import */ var _nodejsCustomInspectSymbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./nodejsCustomInspectSymbol */ "./node_modules/graphql/jsutils/nodejsCustomInspectSymbol.mjs");
-
-/**
- * The `defineToJSON()` function defines toJSON() and inspect() prototype
- * methods, if no function provided they become aliases for toString().
- */
-
-function defineToJSON(classObject) {
-  var fn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : classObject.prototype.toString;
-  classObject.prototype.toJSON = fn;
-  classObject.prototype.inspect = fn;
-
-  if (_nodejsCustomInspectSymbol__WEBPACK_IMPORTED_MODULE_0__["default"]) {
-    classObject.prototype[_nodejsCustomInspectSymbol__WEBPACK_IMPORTED_MODULE_0__["default"]] = fn;
-  }
-}
-
 
 /***/ }),
 
@@ -16265,21 +16445,30 @@ function defineToJSON(classObject) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return defineToStringTag; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return applyToStringTag; });
 /**
- * The `defineToStringTag()` function checks first to see if the runtime
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
+
+/**
+ * The `applyToStringTag()` function checks first to see if the runtime
  * supports the `Symbol` class and then if the `Symbol.toStringTag` constant
  * is defined as a `Symbol` instance. If both conditions are met, the
  * Symbol.toStringTag property is defined as a getter that returns the
  * supplied class constructor's name.
  *
- * @method defineToStringTag
+ * @method applyToStringTag
  *
  * @param {Class<any>} classObject a class such as Object, String, Number but
  * typically one of your own creation through the class keyword; `class A {}`,
  * for example.
  */
-function defineToStringTag(classObject) {
+function applyToStringTag(classObject) {
   if (typeof Symbol === 'function' && Symbol.toStringTag) {
     Object.defineProperty(classObject.prototype, Symbol.toStringTag, {
       get: function get() {
@@ -16288,7 +16477,6 @@ function defineToStringTag(classObject) {
     });
   }
 }
-
 
 /***/ }),
 
@@ -16302,21 +16490,21 @@ function defineToStringTag(classObject) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return inspect; });
-/* harmony import */ var _nodejsCustomInspectSymbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./nodejsCustomInspectSymbol */ "./node_modules/graphql/jsutils/nodejsCustomInspectSymbol.mjs");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
 
-var MAX_ARRAY_LENGTH = 10;
-var MAX_RECURSIVE_DEPTH = 2;
 /**
  * Used to print values in error messages.
  */
-
 function inspect(value) {
-  return formatValue(value, []);
-}
-
-function formatValue(value, seenValues) {
   switch (_typeof(value)) {
     case 'string':
       return JSON.stringify(value);
@@ -16325,109 +16513,25 @@ function formatValue(value, seenValues) {
       return value.name ? "[function ".concat(value.name, "]") : '[function]';
 
     case 'object':
-      if (value === null) {
-        return 'null';
+      if (value) {
+        if (typeof value.inspect === 'function') {
+          return value.inspect();
+        } else if (Array.isArray(value)) {
+          return '[' + value.map(inspect).join(', ') + ']';
+        }
+
+        var properties = Object.keys(value).map(function (k) {
+          return "".concat(k, ": ").concat(inspect(value[k]));
+        }).join(', ');
+        return properties ? '{ ' + properties + ' }' : '{}';
       }
 
-      return formatObjectValue(value, seenValues);
+      return String(value);
 
     default:
       return String(value);
   }
 }
-
-function formatObjectValue(value, previouslySeenValues) {
-  if (previouslySeenValues.indexOf(value) !== -1) {
-    return '[Circular]';
-  }
-
-  var seenValues = [].concat(previouslySeenValues, [value]);
-  var customInspectFn = getCustomFn(value);
-
-  if (customInspectFn !== undefined) {
-    // $FlowFixMe(>=0.90.0)
-    var customValue = customInspectFn.call(value); // check for infinite recursion
-
-    if (customValue !== value) {
-      return typeof customValue === 'string' ? customValue : formatValue(customValue, seenValues);
-    }
-  } else if (Array.isArray(value)) {
-    return formatArray(value, seenValues);
-  }
-
-  return formatObject(value, seenValues);
-}
-
-function formatObject(object, seenValues) {
-  var keys = Object.keys(object);
-
-  if (keys.length === 0) {
-    return '{}';
-  }
-
-  if (seenValues.length > MAX_RECURSIVE_DEPTH) {
-    return '[' + getObjectTag(object) + ']';
-  }
-
-  var properties = keys.map(function (key) {
-    var value = formatValue(object[key], seenValues);
-    return key + ': ' + value;
-  });
-  return '{ ' + properties.join(', ') + ' }';
-}
-
-function formatArray(array, seenValues) {
-  if (array.length === 0) {
-    return '[]';
-  }
-
-  if (seenValues.length > MAX_RECURSIVE_DEPTH) {
-    return '[Array]';
-  }
-
-  var len = Math.min(MAX_ARRAY_LENGTH, array.length);
-  var remaining = array.length - len;
-  var items = [];
-
-  for (var i = 0; i < len; ++i) {
-    items.push(formatValue(array[i], seenValues));
-  }
-
-  if (remaining === 1) {
-    items.push('... 1 more item');
-  } else if (remaining > 1) {
-    items.push("... ".concat(remaining, " more items"));
-  }
-
-  return '[' + items.join(', ') + ']';
-}
-
-function getCustomFn(object) {
-  var customInspectFn = object[String(_nodejsCustomInspectSymbol__WEBPACK_IMPORTED_MODULE_0__["default"])];
-
-  if (typeof customInspectFn === 'function') {
-    return customInspectFn;
-  }
-
-  if (typeof object.inspect === 'function') {
-    return object.inspect;
-  }
-}
-
-function getObjectTag(object) {
-  var tag = Object.prototype.toString.call(object).replace(/^\[object /, '').replace(/]$/, '');
-
-  if (tag === 'Object' && typeof object.constructor === 'function') {
-    var name = object.constructor.name;
-
-    if (typeof name === 'string') {
-      return name;
-    }
-  }
-
-  return tag;
-}
-
 
 /***/ }),
 
@@ -16441,83 +16545,70 @@ function getObjectTag(object) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return invariant; });
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
 function invariant(condition, message) {
-  var booleanCondition = Boolean(condition);
   /* istanbul ignore else */
-
-  if (!booleanCondition) {
+  if (!condition) {
     throw new Error(message);
   }
 }
 
-
 /***/ }),
 
-/***/ "./node_modules/graphql/jsutils/isObjectLike.mjs":
-/*!*******************************************************!*\
-  !*** ./node_modules/graphql/jsutils/isObjectLike.mjs ***!
-  \*******************************************************/
+/***/ "./node_modules/graphql/language/blockStringValue.mjs":
+/*!************************************************************!*\
+  !*** ./node_modules/graphql/language/blockStringValue.mjs ***!
+  \************************************************************/
 /*! exports provided: default */
 /***/ (function(__webpack_module__, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return isObjectLike; });
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return blockStringValue; });
 /**
- * Return true if `value` is object-like. A value is object-like if it's not
- * `null` and has a `typeof` result of "object".
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
  */
-function isObjectLike(value) {
-  return _typeof(value) == 'object' && value !== null;
-}
 
-
-/***/ }),
-
-/***/ "./node_modules/graphql/jsutils/nodejsCustomInspectSymbol.mjs":
-/*!********************************************************************!*\
-  !*** ./node_modules/graphql/jsutils/nodejsCustomInspectSymbol.mjs ***!
-  \********************************************************************/
-/*! exports provided: default */
-/***/ (function(__webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var nodejsCustomInspectSymbol = typeof Symbol === 'function' && typeof Symbol.for === 'function' ? Symbol.for('nodejs.util.inspect.custom') : undefined;
-/* harmony default export */ __webpack_exports__["default"] = (nodejsCustomInspectSymbol);
-
-
-/***/ }),
-
-/***/ "./node_modules/graphql/language/blockString.mjs":
-/*!*******************************************************!*\
-  !*** ./node_modules/graphql/language/blockString.mjs ***!
-  \*******************************************************/
-/*! exports provided: dedentBlockStringValue, getBlockStringIndentation, printBlockString */
-/***/ (function(__webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dedentBlockStringValue", function() { return dedentBlockStringValue; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlockStringIndentation", function() { return getBlockStringIndentation; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "printBlockString", function() { return printBlockString; });
 /**
  * Produces the value of a block string from its parsed raw value, similar to
  * CoffeeScript's block string, Python's docstring trim or Ruby's strip_heredoc.
  *
  * This implements the GraphQL spec's BlockStringValue() static algorithm.
  */
-function dedentBlockStringValue(rawString) {
+function blockStringValue(rawString) {
   // Expand a block string's raw value into independent lines.
   var lines = rawString.split(/\r\n|[\n\r]/g); // Remove common indentation from all lines but first.
 
-  var commonIndent = getBlockStringIndentation(lines);
+  var commonIndent = null;
 
-  if (commonIndent !== 0) {
-    for (var i = 1; i < lines.length; i++) {
-      lines[i] = lines[i].slice(commonIndent);
+  for (var i = 1; i < lines.length; i++) {
+    var line = lines[i];
+    var indent = leadingWhitespace(line);
+
+    if (indent < line.length && (commonIndent === null || indent < commonIndent)) {
+      commonIndent = indent;
+
+      if (commonIndent === 0) {
+        break;
+      }
+    }
+  }
+
+  if (commonIndent) {
+    for (var _i = 1; _i < lines.length; _i++) {
+      lines[_i] = lines[_i].slice(commonIndent);
     }
   } // Remove leading and trailing blank lines.
 
@@ -16532,29 +16623,6 @@ function dedentBlockStringValue(rawString) {
 
 
   return lines.join('\n');
-} // @internal
-
-function getBlockStringIndentation(lines) {
-  var commonIndent = null;
-
-  for (var i = 1; i < lines.length; i++) {
-    var line = lines[i];
-    var indent = leadingWhitespace(line);
-
-    if (indent === line.length) {
-      continue; // skip empty lines
-    }
-
-    if (commonIndent === null || indent < commonIndent) {
-      commonIndent = indent;
-
-      if (commonIndent === 0) {
-        break;
-      }
-    }
-  }
-
-  return commonIndent === null ? 0 : commonIndent;
 }
 
 function leadingWhitespace(str) {
@@ -16570,35 +16638,6 @@ function leadingWhitespace(str) {
 function isBlank(str) {
   return leadingWhitespace(str) === str.length;
 }
-/**
- * Print a block string in the indented block form by adding a leading and
- * trailing blank line. However, if a block string starts with whitespace and is
- * a single-line, adding a leading blank line would strip that whitespace.
- */
-
-
-function printBlockString(value) {
-  var indentation = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-  var preferMultipleLines = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-  var isSingleLine = value.indexOf('\n') === -1;
-  var hasLeadingSpace = value[0] === ' ' || value[0] === '\t';
-  var hasTrailingQuote = value[value.length - 1] === '"';
-  var printAsMultipleLines = !isSingleLine || hasTrailingQuote || preferMultipleLines;
-  var result = ''; // Format a multi-line block quote to account for leading space.
-
-  if (printAsMultipleLines && !(isSingleLine && hasLeadingSpace)) {
-    result += '\n' + indentation;
-  }
-
-  result += indentation ? value.replace(/\n/g, '\n' + indentation) : value;
-
-  if (printAsMultipleLines) {
-    result += '\n';
-  }
-
-  return '"""' + result.replace(/"""/g, '\\"""') + '"""';
-}
-
 
 /***/ }),
 
@@ -16612,6 +16651,15 @@ function printBlockString(value) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DirectiveLocation", function() { return DirectiveLocation; });
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
+
 /**
  * The set of allowed directive location values.
  */
@@ -16642,7 +16690,6 @@ var DirectiveLocation = Object.freeze({
  * The enum type representing the directive location values.
  */
 
-
 /***/ }),
 
 /***/ "./node_modules/graphql/language/kinds.mjs":
@@ -16655,6 +16702,15 @@ var DirectiveLocation = Object.freeze({
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Kind", function() { return Kind; });
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
+
 /**
  * The set of allowed kind values for AST nodes.
  */
@@ -16718,27 +16774,30 @@ var Kind = Object.freeze({
  * The enum type representing the possible kind values of AST nodes.
  */
 
-
 /***/ }),
 
 /***/ "./node_modules/graphql/language/lexer.mjs":
 /*!*************************************************!*\
   !*** ./node_modules/graphql/language/lexer.mjs ***!
   \*************************************************/
-/*! exports provided: createLexer, isPunctuatorToken, getTokenDesc */
+/*! exports provided: createLexer, TokenKind, getTokenDesc */
 /***/ (function(__webpack_module__, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createLexer", function() { return createLexer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isPunctuatorToken", function() { return isPunctuatorToken; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TokenKind", function() { return TokenKind; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTokenDesc", function() { return getTokenDesc; });
-/* harmony import */ var _jsutils_defineToJSON__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../jsutils/defineToJSON */ "./node_modules/graphql/jsutils/defineToJSON.mjs");
-/* harmony import */ var _tokenKind__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tokenKind */ "./node_modules/graphql/language/tokenKind.mjs");
-/* harmony import */ var _error_syntaxError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../error/syntaxError */ "./node_modules/graphql/error/syntaxError.mjs");
-/* harmony import */ var _blockString__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./blockString */ "./node_modules/graphql/language/blockString.mjs");
-
-
+/* harmony import */ var _error__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../error */ "./node_modules/graphql/error/index.mjs");
+/* harmony import */ var _blockStringValue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./blockStringValue */ "./node_modules/graphql/language/blockStringValue.mjs");
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
 
 
 /**
@@ -16751,7 +16810,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 function createLexer(source, options) {
-  var startOfFileToken = new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].SOF, 0, 0, 0, 0, null);
+  var startOfFileToken = new Tok(TokenKind.SOF, 0, 0, 0, 0, null);
   var lexer = {
     source: source,
     options: options,
@@ -16774,11 +16833,11 @@ function advanceLexer() {
 function lookahead() {
   var token = this.token;
 
-  if (token.kind !== _tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].EOF) {
+  if (token.kind !== TokenKind.EOF) {
     do {
       // Note: next is only mutable during parsing, so we cast to allow this.
       token = token.next || (token.next = readToken(this, token));
-    } while (token.kind === _tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].COMMENT);
+    } while (token.kind === TokenKind.COMMENT);
   }
 
   return token;
@@ -16788,19 +16847,47 @@ function lookahead() {
  */
 
 
-// @internal
-function isPunctuatorToken(token) {
-  var kind = token.kind;
-  return kind === _tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].BANG || kind === _tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].DOLLAR || kind === _tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].AMP || kind === _tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].PAREN_L || kind === _tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].PAREN_R || kind === _tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].SPREAD || kind === _tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].COLON || kind === _tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].EQUALS || kind === _tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].AT || kind === _tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].BRACKET_L || kind === _tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].BRACKET_R || kind === _tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].BRACE_L || kind === _tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].PIPE || kind === _tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].BRACE_R;
-}
+/**
+ * An exported enum describing the different kinds of tokens that the
+ * lexer emits.
+ */
+var TokenKind = Object.freeze({
+  SOF: '<SOF>',
+  EOF: '<EOF>',
+  BANG: '!',
+  DOLLAR: '$',
+  AMP: '&',
+  PAREN_L: '(',
+  PAREN_R: ')',
+  SPREAD: '...',
+  COLON: ':',
+  EQUALS: '=',
+  AT: '@',
+  BRACKET_L: '[',
+  BRACKET_R: ']',
+  BRACE_L: '{',
+  PIPE: '|',
+  BRACE_R: '}',
+  NAME: 'Name',
+  INT: 'Int',
+  FLOAT: 'Float',
+  STRING: 'String',
+  BLOCK_STRING: 'BlockString',
+  COMMENT: 'Comment'
+});
+/**
+ * The enum type representing the token kinds values.
+ */
+
 /**
  * A helper function to describe a token as a string for debugging
  */
-
 function getTokenDesc(token) {
   var value = token.value;
   return value ? "".concat(token.kind, " \"").concat(value, "\"") : token.kind;
 }
+var charCodeAt = String.prototype.charCodeAt;
+var slice = String.prototype.slice;
 /**
  * Helper function for constructing the Token object.
  */
@@ -16817,18 +16904,18 @@ function Tok(kind, start, end, line, column, prev, value) {
 } // Print a simplified form when appearing in JSON/util.inspect.
 
 
-Object(_jsutils_defineToJSON__WEBPACK_IMPORTED_MODULE_0__["default"])(Tok, function () {
+Tok.prototype.toJSON = Tok.prototype.inspect = function toJSON() {
   return {
     kind: this.kind,
     value: this.value,
     line: this.line,
     column: this.column
   };
-});
+};
 
 function printCharCode(code) {
   return (// NaN/undefined represents access beyond the end of the file.
-    isNaN(code) ? _tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].EOF : // Trust JSON for ASCII.
+    isNaN(code) ? TokenKind.EOF : // Trust JSON for ASCII.
     code < 0x007f ? JSON.stringify(String.fromCharCode(code)) : // Otherwise print the escaped form.
     "\"\\u".concat(('00' + code.toString(16).toUpperCase()).slice(-4), "\"")
   );
@@ -16836,9 +16923,9 @@ function printCharCode(code) {
 /**
  * Gets the next token from the source starting at the given position.
  *
- * This skips over whitespace until it finds the next lexable token, then lexes
- * punctuators immediately or calls the appropriate helper function for more
- * complicated tokens.
+ * This skips over whitespace and comments until it finds the next lexable
+ * token, then lexes punctuators immediately or calls the appropriate helper
+ * function for more complicated tokens.
  */
 
 
@@ -16851,15 +16938,15 @@ function readToken(lexer, prev) {
   var col = 1 + pos - lexer.lineStart;
 
   if (pos >= bodyLength) {
-    return new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].EOF, bodyLength, bodyLength, line, col, prev);
+    return new Tok(TokenKind.EOF, bodyLength, bodyLength, line, col, prev);
   }
 
-  var code = body.charCodeAt(pos); // SourceCharacter
+  var code = charCodeAt.call(body, pos); // SourceCharacter
 
   switch (code) {
     // !
     case 33:
-      return new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].BANG, pos, pos + 1, line, col, prev);
+      return new Tok(TokenKind.BANG, pos, pos + 1, line, col, prev);
     // #
 
     case 35:
@@ -16867,59 +16954,59 @@ function readToken(lexer, prev) {
     // $
 
     case 36:
-      return new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].DOLLAR, pos, pos + 1, line, col, prev);
+      return new Tok(TokenKind.DOLLAR, pos, pos + 1, line, col, prev);
     // &
 
     case 38:
-      return new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].AMP, pos, pos + 1, line, col, prev);
+      return new Tok(TokenKind.AMP, pos, pos + 1, line, col, prev);
     // (
 
     case 40:
-      return new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].PAREN_L, pos, pos + 1, line, col, prev);
+      return new Tok(TokenKind.PAREN_L, pos, pos + 1, line, col, prev);
     // )
 
     case 41:
-      return new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].PAREN_R, pos, pos + 1, line, col, prev);
+      return new Tok(TokenKind.PAREN_R, pos, pos + 1, line, col, prev);
     // .
 
     case 46:
-      if (body.charCodeAt(pos + 1) === 46 && body.charCodeAt(pos + 2) === 46) {
-        return new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].SPREAD, pos, pos + 3, line, col, prev);
+      if (charCodeAt.call(body, pos + 1) === 46 && charCodeAt.call(body, pos + 2) === 46) {
+        return new Tok(TokenKind.SPREAD, pos, pos + 3, line, col, prev);
       }
 
       break;
     // :
 
     case 58:
-      return new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].COLON, pos, pos + 1, line, col, prev);
+      return new Tok(TokenKind.COLON, pos, pos + 1, line, col, prev);
     // =
 
     case 61:
-      return new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].EQUALS, pos, pos + 1, line, col, prev);
+      return new Tok(TokenKind.EQUALS, pos, pos + 1, line, col, prev);
     // @
 
     case 64:
-      return new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].AT, pos, pos + 1, line, col, prev);
+      return new Tok(TokenKind.AT, pos, pos + 1, line, col, prev);
     // [
 
     case 91:
-      return new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].BRACKET_L, pos, pos + 1, line, col, prev);
+      return new Tok(TokenKind.BRACKET_L, pos, pos + 1, line, col, prev);
     // ]
 
     case 93:
-      return new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].BRACKET_R, pos, pos + 1, line, col, prev);
+      return new Tok(TokenKind.BRACKET_R, pos, pos + 1, line, col, prev);
     // {
 
     case 123:
-      return new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].BRACE_L, pos, pos + 1, line, col, prev);
+      return new Tok(TokenKind.BRACE_L, pos, pos + 1, line, col, prev);
     // |
 
     case 124:
-      return new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].PIPE, pos, pos + 1, line, col, prev);
+      return new Tok(TokenKind.PIPE, pos, pos + 1, line, col, prev);
     // }
 
     case 125:
-      return new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].BRACE_R, pos, pos + 1, line, col, prev);
+      return new Tok(TokenKind.BRACE_R, pos, pos + 1, line, col, prev);
     // A-Z _ a-z
 
     case 65:
@@ -16993,14 +17080,14 @@ function readToken(lexer, prev) {
     // "
 
     case 34:
-      if (body.charCodeAt(pos + 1) === 34 && body.charCodeAt(pos + 2) === 34) {
-        return readBlockString(source, pos, line, col, prev, lexer);
+      if (charCodeAt.call(body, pos + 1) === 34 && charCodeAt.call(body, pos + 2) === 34) {
+        return readBlockString(source, pos, line, col, prev);
       }
 
       return readString(source, pos, line, col, prev);
   }
 
-  throw Object(_error_syntaxError__WEBPACK_IMPORTED_MODULE_2__["syntaxError"])(source, pos, unexpectedCharacterMessage(code));
+  throw Object(_error__WEBPACK_IMPORTED_MODULE_0__["syntaxError"])(source, pos, unexpectedCharacterMessage(code));
 }
 /**
  * Report a message that an unexpected character was encountered.
@@ -17014,14 +17101,15 @@ function unexpectedCharacterMessage(code) {
 
   if (code === 39) {
     // '
-    return 'Unexpected single quote character (\'), did you mean to use a double quote (")?';
+    return "Unexpected single quote character ('), did you mean to use " + 'a double quote (")?';
   }
 
   return "Cannot parse the unexpected character ".concat(printCharCode(code), ".");
 }
 /**
  * Reads from body starting at startPosition until it finds a non-whitespace
- * character, then returns the position of that character for lexing.
+ * or commented character, then returns the position of that character for
+ * lexing.
  */
 
 
@@ -17030,7 +17118,7 @@ function positionAfterWhitespace(body, startPosition, lexer) {
   var position = startPosition;
 
   while (position < bodyLength) {
-    var code = body.charCodeAt(position); // tab | space | comma | BOM
+    var code = charCodeAt.call(body, position); // tab | space | comma | BOM
 
     if (code === 9 || code === 32 || code === 44 || code === 0xfeff) {
       ++position;
@@ -17041,7 +17129,7 @@ function positionAfterWhitespace(body, startPosition, lexer) {
       lexer.lineStart = position;
     } else if (code === 13) {
       // carriage return
-      if (body.charCodeAt(position + 1) === 10) {
+      if (charCodeAt.call(body, position + 1) === 10) {
         position += 2;
       } else {
         ++position;
@@ -17069,11 +17157,11 @@ function readComment(source, start, line, col, prev) {
   var position = start;
 
   do {
-    code = body.charCodeAt(++position);
-  } while (!isNaN(code) && ( // SourceCharacter but not LineTerminator
+    code = charCodeAt.call(body, ++position);
+  } while (code !== null && ( // SourceCharacter but not LineTerminator
   code > 0x001f || code === 0x0009));
 
-  return new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].COMMENT, start, position, line, col, prev, body.slice(start + 1, position));
+  return new Tok(TokenKind.COMMENT, start, position, line, col, prev, slice.call(body, start + 1, position));
 }
 /**
  * Reads a number token from the source file, either a float
@@ -17092,43 +17180,43 @@ function readNumber(source, start, firstCode, line, col, prev) {
 
   if (code === 45) {
     // -
-    code = body.charCodeAt(++position);
+    code = charCodeAt.call(body, ++position);
   }
 
   if (code === 48) {
     // 0
-    code = body.charCodeAt(++position);
+    code = charCodeAt.call(body, ++position);
 
     if (code >= 48 && code <= 57) {
-      throw Object(_error_syntaxError__WEBPACK_IMPORTED_MODULE_2__["syntaxError"])(source, position, "Invalid number, unexpected digit after 0: ".concat(printCharCode(code), "."));
+      throw Object(_error__WEBPACK_IMPORTED_MODULE_0__["syntaxError"])(source, position, "Invalid number, unexpected digit after 0: ".concat(printCharCode(code), "."));
     }
   } else {
     position = readDigits(source, position, code);
-    code = body.charCodeAt(position);
+    code = charCodeAt.call(body, position);
   }
 
   if (code === 46) {
     // .
     isFloat = true;
-    code = body.charCodeAt(++position);
+    code = charCodeAt.call(body, ++position);
     position = readDigits(source, position, code);
-    code = body.charCodeAt(position);
+    code = charCodeAt.call(body, position);
   }
 
   if (code === 69 || code === 101) {
     // E e
     isFloat = true;
-    code = body.charCodeAt(++position);
+    code = charCodeAt.call(body, ++position);
 
     if (code === 43 || code === 45) {
       // + -
-      code = body.charCodeAt(++position);
+      code = charCodeAt.call(body, ++position);
     }
 
     position = readDigits(source, position, code);
   }
 
-  return new Tok(isFloat ? _tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].FLOAT : _tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].INT, start, position, line, col, prev, body.slice(start, position));
+  return new Tok(isFloat ? TokenKind.FLOAT : TokenKind.INT, start, position, line, col, prev, slice.call(body, start, position));
 }
 /**
  * Returns the new position in the source after reading digits.
@@ -17143,14 +17231,14 @@ function readDigits(source, start, firstCode) {
   if (code >= 48 && code <= 57) {
     // 0 - 9
     do {
-      code = body.charCodeAt(++position);
+      code = charCodeAt.call(body, ++position);
     } while (code >= 48 && code <= 57); // 0 - 9
 
 
     return position;
   }
 
-  throw Object(_error_syntaxError__WEBPACK_IMPORTED_MODULE_2__["syntaxError"])(source, position, "Invalid number, expected digit but got: ".concat(printCharCode(code), "."));
+  throw Object(_error__WEBPACK_IMPORTED_MODULE_0__["syntaxError"])(source, position, "Invalid number, expected digit but got: ".concat(printCharCode(code), "."));
 }
 /**
  * Reads a string token from the source file.
@@ -17166,25 +17254,25 @@ function readString(source, start, line, col, prev) {
   var code = 0;
   var value = '';
 
-  while (position < body.length && !isNaN(code = body.charCodeAt(position)) && // not LineTerminator
+  while (position < body.length && (code = charCodeAt.call(body, position)) !== null && // not LineTerminator
   code !== 0x000a && code !== 0x000d) {
     // Closing Quote (")
     if (code === 34) {
-      value += body.slice(chunkStart, position);
-      return new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].STRING, start, position + 1, line, col, prev, value);
+      value += slice.call(body, chunkStart, position);
+      return new Tok(TokenKind.STRING, start, position + 1, line, col, prev, value);
     } // SourceCharacter
 
 
     if (code < 0x0020 && code !== 0x0009) {
-      throw Object(_error_syntaxError__WEBPACK_IMPORTED_MODULE_2__["syntaxError"])(source, position, "Invalid character within String: ".concat(printCharCode(code), "."));
+      throw Object(_error__WEBPACK_IMPORTED_MODULE_0__["syntaxError"])(source, position, "Invalid character within String: ".concat(printCharCode(code), "."));
     }
 
     ++position;
 
     if (code === 92) {
       // \
-      value += body.slice(chunkStart, position - 1);
-      code = body.charCodeAt(position);
+      value += slice.call(body, chunkStart, position - 1);
+      code = charCodeAt.call(body, position);
 
       switch (code) {
         case 34:
@@ -17220,22 +17308,19 @@ function readString(source, start, line, col, prev) {
           break;
 
         case 117:
-          {
-            // uXXXX
-            var charCode = uniCharCode(body.charCodeAt(position + 1), body.charCodeAt(position + 2), body.charCodeAt(position + 3), body.charCodeAt(position + 4));
+          // u
+          var charCode = uniCharCode(charCodeAt.call(body, position + 1), charCodeAt.call(body, position + 2), charCodeAt.call(body, position + 3), charCodeAt.call(body, position + 4));
 
-            if (charCode < 0) {
-              var invalidSequence = body.slice(position + 1, position + 5);
-              throw Object(_error_syntaxError__WEBPACK_IMPORTED_MODULE_2__["syntaxError"])(source, position, "Invalid character escape sequence: \\u".concat(invalidSequence, "."));
-            }
-
-            value += String.fromCharCode(charCode);
-            position += 4;
-            break;
+          if (charCode < 0) {
+            throw Object(_error__WEBPACK_IMPORTED_MODULE_0__["syntaxError"])(source, position, 'Invalid character escape sequence: ' + "\\u".concat(body.slice(position + 1, position + 5), "."));
           }
 
+          value += String.fromCharCode(charCode);
+          position += 4;
+          break;
+
         default:
-          throw Object(_error_syntaxError__WEBPACK_IMPORTED_MODULE_2__["syntaxError"])(source, position, "Invalid character escape sequence: \\".concat(String.fromCharCode(code), "."));
+          throw Object(_error__WEBPACK_IMPORTED_MODULE_0__["syntaxError"])(source, position, "Invalid character escape sequence: \\".concat(String.fromCharCode(code), "."));
       }
 
       ++position;
@@ -17243,7 +17328,7 @@ function readString(source, start, line, col, prev) {
     }
   }
 
-  throw Object(_error_syntaxError__WEBPACK_IMPORTED_MODULE_2__["syntaxError"])(source, position, 'Unterminated string.');
+  throw Object(_error__WEBPACK_IMPORTED_MODULE_0__["syntaxError"])(source, position, 'Unterminated string.');
 }
 /**
  * Reads a block string token from the source file.
@@ -17252,43 +17337,28 @@ function readString(source, start, line, col, prev) {
  */
 
 
-function readBlockString(source, start, line, col, prev, lexer) {
+function readBlockString(source, start, line, col, prev) {
   var body = source.body;
   var position = start + 3;
   var chunkStart = position;
   var code = 0;
   var rawValue = '';
 
-  while (position < body.length && !isNaN(code = body.charCodeAt(position))) {
+  while (position < body.length && (code = charCodeAt.call(body, position)) !== null) {
     // Closing Triple-Quote (""")
-    if (code === 34 && body.charCodeAt(position + 1) === 34 && body.charCodeAt(position + 2) === 34) {
-      rawValue += body.slice(chunkStart, position);
-      return new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].BLOCK_STRING, start, position + 3, line, col, prev, Object(_blockString__WEBPACK_IMPORTED_MODULE_3__["dedentBlockStringValue"])(rawValue));
+    if (code === 34 && charCodeAt.call(body, position + 1) === 34 && charCodeAt.call(body, position + 2) === 34) {
+      rawValue += slice.call(body, chunkStart, position);
+      return new Tok(TokenKind.BLOCK_STRING, start, position + 3, line, col, prev, Object(_blockStringValue__WEBPACK_IMPORTED_MODULE_1__["default"])(rawValue));
     } // SourceCharacter
 
 
     if (code < 0x0020 && code !== 0x0009 && code !== 0x000a && code !== 0x000d) {
-      throw Object(_error_syntaxError__WEBPACK_IMPORTED_MODULE_2__["syntaxError"])(source, position, "Invalid character within String: ".concat(printCharCode(code), "."));
-    }
+      throw Object(_error__WEBPACK_IMPORTED_MODULE_0__["syntaxError"])(source, position, "Invalid character within String: ".concat(printCharCode(code), "."));
+    } // Escape Triple-Quote (\""")
 
-    if (code === 10) {
-      // new line
-      ++position;
-      ++lexer.line;
-      lexer.lineStart = position;
-    } else if (code === 13) {
-      // carriage return
-      if (body.charCodeAt(position + 1) === 10) {
-        position += 2;
-      } else {
-        ++position;
-      }
 
-      ++lexer.line;
-      lexer.lineStart = position;
-    } else if ( // Escape Triple-Quote (\""")
-    code === 92 && body.charCodeAt(position + 1) === 34 && body.charCodeAt(position + 2) === 34 && body.charCodeAt(position + 3) === 34) {
-      rawValue += body.slice(chunkStart, position) + '"""';
+    if (code === 92 && charCodeAt.call(body, position + 1) === 34 && charCodeAt.call(body, position + 2) === 34 && charCodeAt.call(body, position + 3) === 34) {
+      rawValue += slice.call(body, chunkStart, position) + '"""';
       position += 4;
       chunkStart = position;
     } else {
@@ -17296,7 +17366,7 @@ function readBlockString(source, start, line, col, prev, lexer) {
     }
   }
 
-  throw Object(_error_syntaxError__WEBPACK_IMPORTED_MODULE_2__["syntaxError"])(source, position, 'Unterminated string.');
+  throw Object(_error__WEBPACK_IMPORTED_MODULE_0__["syntaxError"])(source, position, 'Unterminated string.');
 }
 /**
  * Converts four hexadecimal chars to the integer that the
@@ -17342,7 +17412,7 @@ function readName(source, start, line, col, prev) {
   var position = start + 1;
   var code = 0;
 
-  while (position !== bodyLength && !isNaN(code = body.charCodeAt(position)) && (code === 95 || // _
+  while (position !== bodyLength && (code = charCodeAt.call(body, position)) !== null && (code === 95 || // _
   code >= 48 && code <= 57 || // 0-9
   code >= 65 && code <= 90 || // A-Z
   code >= 97 && code <= 122) // a-z
@@ -17350,9 +17420,8 @@ function readName(source, start, line, col, prev) {
     ++position;
   }
 
-  return new Tok(_tokenKind__WEBPACK_IMPORTED_MODULE_1__["TokenKind"].NAME, start, position, line, col, prev, body.slice(start, position));
+  return new Tok(TokenKind.NAME, start, position, line, col, prev, slice.call(body, start, position));
 }
-
 
 /***/ }),
 
@@ -17366,6 +17435,15 @@ function readName(source, start, line, col, prev) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLocation", function() { return getLocation; });
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
+
 /**
  * Represents a location in a Source.
  */
@@ -17391,7 +17469,6 @@ function getLocation(source, position) {
   };
 }
 
-
 /***/ }),
 
 /***/ "./node_modules/graphql/language/parser.mjs":
@@ -17410,15 +17487,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseTypeReference", function() { return parseTypeReference; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseNamedType", function() { return parseNamedType; });
 /* harmony import */ var _jsutils_inspect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../jsutils/inspect */ "./node_modules/graphql/jsutils/inspect.mjs");
-/* harmony import */ var _jsutils_defineToJSON__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../jsutils/defineToJSON */ "./node_modules/graphql/jsutils/defineToJSON.mjs");
-/* harmony import */ var _source__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./source */ "./node_modules/graphql/language/source.mjs");
-/* harmony import */ var _error_syntaxError__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../error/syntaxError */ "./node_modules/graphql/error/syntaxError.mjs");
-/* harmony import */ var _tokenKind__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tokenKind */ "./node_modules/graphql/language/tokenKind.mjs");
-/* harmony import */ var _lexer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lexer */ "./node_modules/graphql/language/lexer.mjs");
-/* harmony import */ var _kinds__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./kinds */ "./node_modules/graphql/language/kinds.mjs");
-/* harmony import */ var _directiveLocation__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./directiveLocation */ "./node_modules/graphql/language/directiveLocation.mjs");
-
-
+/* harmony import */ var _source__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./source */ "./node_modules/graphql/language/source.mjs");
+/* harmony import */ var _error__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../error */ "./node_modules/graphql/error/index.mjs");
+/* harmony import */ var _lexer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lexer */ "./node_modules/graphql/language/lexer.mjs");
+/* harmony import */ var _kinds__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./kinds */ "./node_modules/graphql/language/kinds.mjs");
+/* harmony import */ var _directiveLocation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./directiveLocation */ "./node_modules/graphql/language/directiveLocation.mjs");
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
 
 
 
@@ -17434,13 +17515,13 @@ __webpack_require__.r(__webpack_exports__);
  * Throws GraphQLError if a syntax error is encountered.
  */
 function parse(source, options) {
-  var sourceObj = typeof source === 'string' ? new _source__WEBPACK_IMPORTED_MODULE_2__["Source"](source) : source;
+  var sourceObj = typeof source === 'string' ? new _source__WEBPACK_IMPORTED_MODULE_1__["Source"](source) : source;
 
-  if (!(sourceObj instanceof _source__WEBPACK_IMPORTED_MODULE_2__["Source"])) {
+  if (!(sourceObj instanceof _source__WEBPACK_IMPORTED_MODULE_1__["Source"])) {
     throw new TypeError("Must provide Source. Received: ".concat(Object(_jsutils_inspect__WEBPACK_IMPORTED_MODULE_0__["default"])(sourceObj)));
   }
 
-  var lexer = Object(_lexer__WEBPACK_IMPORTED_MODULE_5__["createLexer"])(sourceObj, options || {});
+  var lexer = Object(_lexer__WEBPACK_IMPORTED_MODULE_3__["createLexer"])(sourceObj, options || {});
   return parseDocument(lexer);
 }
 /**
@@ -17455,11 +17536,11 @@ function parse(source, options) {
  */
 
 function parseValue(source, options) {
-  var sourceObj = typeof source === 'string' ? new _source__WEBPACK_IMPORTED_MODULE_2__["Source"](source) : source;
-  var lexer = Object(_lexer__WEBPACK_IMPORTED_MODULE_5__["createLexer"])(sourceObj, options || {});
-  expectToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].SOF);
+  var sourceObj = typeof source === 'string' ? new _source__WEBPACK_IMPORTED_MODULE_1__["Source"](source) : source;
+  var lexer = Object(_lexer__WEBPACK_IMPORTED_MODULE_3__["createLexer"])(sourceObj, options || {});
+  expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].SOF);
   var value = parseValueLiteral(lexer, false);
-  expectToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].EOF);
+  expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].EOF);
   return value;
 }
 /**
@@ -17474,11 +17555,11 @@ function parseValue(source, options) {
  */
 
 function parseType(source, options) {
-  var sourceObj = typeof source === 'string' ? new _source__WEBPACK_IMPORTED_MODULE_2__["Source"](source) : source;
-  var lexer = Object(_lexer__WEBPACK_IMPORTED_MODULE_5__["createLexer"])(sourceObj, options || {});
-  expectToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].SOF);
+  var sourceObj = typeof source === 'string' ? new _source__WEBPACK_IMPORTED_MODULE_1__["Source"](source) : source;
+  var lexer = Object(_lexer__WEBPACK_IMPORTED_MODULE_3__["createLexer"])(sourceObj, options || {});
+  expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].SOF);
   var type = parseTypeReference(lexer);
-  expectToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].EOF);
+  expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].EOF);
   return type;
 }
 /**
@@ -17486,9 +17567,9 @@ function parseType(source, options) {
  */
 
 function parseName(lexer) {
-  var token = expectToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].NAME);
+  var token = expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].NAME);
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].NAME,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].NAME,
     value: token.value,
     loc: loc(lexer, token)
   };
@@ -17502,8 +17583,8 @@ function parseName(lexer) {
 function parseDocument(lexer) {
   var start = lexer.token;
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].DOCUMENT,
-    definitions: many(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].SOF, parseDefinition, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].EOF),
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].DOCUMENT,
+    definitions: many(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].SOF, parseDefinition, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].EOF),
     loc: loc(lexer, start)
   };
 }
@@ -17516,7 +17597,7 @@ function parseDocument(lexer) {
 
 
 function parseDefinition(lexer) {
-  if (peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].NAME)) {
+  if (peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].NAME)) {
     switch (lexer.token.value) {
       case 'query':
       case 'mutation':
@@ -17537,7 +17618,7 @@ function parseDefinition(lexer) {
       case 'extend':
         return parseTypeSystemExtension(lexer);
     }
-  } else if (peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_L)) {
+  } else if (peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_L)) {
     return parseExecutableDefinition(lexer);
   } else if (peekDescription(lexer)) {
     return parseTypeSystemDefinition(lexer);
@@ -17553,7 +17634,7 @@ function parseDefinition(lexer) {
 
 
 function parseExecutableDefinition(lexer) {
-  if (peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].NAME)) {
+  if (peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].NAME)) {
     switch (lexer.token.value) {
       case 'query':
       case 'mutation':
@@ -17563,7 +17644,7 @@ function parseExecutableDefinition(lexer) {
       case 'fragment':
         return parseFragmentDefinition(lexer);
     }
-  } else if (peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_L)) {
+  } else if (peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_L)) {
     return parseOperationDefinition(lexer);
   }
 
@@ -17580,9 +17661,9 @@ function parseExecutableDefinition(lexer) {
 function parseOperationDefinition(lexer) {
   var start = lexer.token;
 
-  if (peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_L)) {
+  if (peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_L)) {
     return {
-      kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].OPERATION_DEFINITION,
+      kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].OPERATION_DEFINITION,
       operation: 'query',
       name: undefined,
       variableDefinitions: [],
@@ -17595,12 +17676,12 @@ function parseOperationDefinition(lexer) {
   var operation = parseOperationType(lexer);
   var name;
 
-  if (peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].NAME)) {
+  if (peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].NAME)) {
     name = parseName(lexer);
   }
 
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].OPERATION_DEFINITION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].OPERATION_DEFINITION,
     operation: operation,
     name: name,
     variableDefinitions: parseVariableDefinitions(lexer),
@@ -17615,7 +17696,7 @@ function parseOperationDefinition(lexer) {
 
 
 function parseOperationType(lexer) {
-  var operationToken = expectToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].NAME);
+  var operationToken = expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].NAME);
 
   switch (operationToken.value) {
     case 'query':
@@ -17636,7 +17717,7 @@ function parseOperationType(lexer) {
 
 
 function parseVariableDefinitions(lexer) {
-  return peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].PAREN_L) ? many(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].PAREN_L, parseVariableDefinition, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].PAREN_R) : [];
+  return peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].PAREN_L) ? many(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].PAREN_L, parseVariableDefinition, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].PAREN_R) : [];
 }
 /**
  * VariableDefinition : Variable : Type DefaultValue? Directives[Const]?
@@ -17645,12 +17726,23 @@ function parseVariableDefinitions(lexer) {
 
 function parseVariableDefinition(lexer) {
   var start = lexer.token;
+
+  if (lexer.options.experimentalVariableDefinitionDirectives) {
+    return {
+      kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].VARIABLE_DEFINITION,
+      variable: parseVariable(lexer),
+      type: (expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].COLON), parseTypeReference(lexer)),
+      defaultValue: skip(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].EQUALS) ? parseValueLiteral(lexer, true) : undefined,
+      directives: parseDirectives(lexer, true),
+      loc: loc(lexer, start)
+    };
+  }
+
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].VARIABLE_DEFINITION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].VARIABLE_DEFINITION,
     variable: parseVariable(lexer),
-    type: (expectToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].COLON), parseTypeReference(lexer)),
-    defaultValue: expectOptionalToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].EQUALS) ? parseValueLiteral(lexer, true) : undefined,
-    directives: parseDirectives(lexer, true),
+    type: (expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].COLON), parseTypeReference(lexer)),
+    defaultValue: skip(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].EQUALS) ? parseValueLiteral(lexer, true) : undefined,
     loc: loc(lexer, start)
   };
 }
@@ -17661,9 +17753,9 @@ function parseVariableDefinition(lexer) {
 
 function parseVariable(lexer) {
   var start = lexer.token;
-  expectToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].DOLLAR);
+  expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].DOLLAR);
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].VARIABLE,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].VARIABLE,
     name: parseName(lexer),
     loc: loc(lexer, start)
   };
@@ -17676,8 +17768,8 @@ function parseVariable(lexer) {
 function parseSelectionSet(lexer) {
   var start = lexer.token;
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].SELECTION_SET,
-    selections: many(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_L, parseSelection, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_R),
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].SELECTION_SET,
+    selections: many(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_L, parseSelection, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_R),
     loc: loc(lexer, start)
   };
 }
@@ -17690,7 +17782,7 @@ function parseSelectionSet(lexer) {
 
 
 function parseSelection(lexer) {
-  return peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].SPREAD) ? parseFragment(lexer) : parseField(lexer);
+  return peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].SPREAD) ? parseFragment(lexer) : parseField(lexer);
 }
 /**
  * Field : Alias? Name Arguments? Directives? SelectionSet?
@@ -17705,7 +17797,7 @@ function parseField(lexer) {
   var alias;
   var name;
 
-  if (expectOptionalToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].COLON)) {
+  if (skip(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].COLON)) {
     alias = nameOrAlias;
     name = parseName(lexer);
   } else {
@@ -17713,12 +17805,12 @@ function parseField(lexer) {
   }
 
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].FIELD,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].FIELD,
     alias: alias,
     name: name,
     arguments: parseArguments(lexer, false),
     directives: parseDirectives(lexer, false),
-    selectionSet: peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_L) ? parseSelectionSet(lexer) : undefined,
+    selectionSet: peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_L) ? parseSelectionSet(lexer) : undefined,
     loc: loc(lexer, start)
   };
 }
@@ -17729,7 +17821,7 @@ function parseField(lexer) {
 
 function parseArguments(lexer, isConst) {
   var item = isConst ? parseConstArgument : parseArgument;
-  return peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].PAREN_L) ? many(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].PAREN_L, item, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].PAREN_R) : [];
+  return peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].PAREN_L) ? many(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].PAREN_L, item, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].PAREN_R) : [];
 }
 /**
  * Argument[Const] : Name : Value[?Const]
@@ -17738,12 +17830,10 @@ function parseArguments(lexer, isConst) {
 
 function parseArgument(lexer) {
   var start = lexer.token;
-  var name = parseName(lexer);
-  expectToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].COLON);
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].ARGUMENT,
-    name: name,
-    value: parseValueLiteral(lexer, false),
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].ARGUMENT,
+    name: parseName(lexer),
+    value: (expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].COLON), parseValueLiteral(lexer, false)),
     loc: loc(lexer, start)
   };
 }
@@ -17751,9 +17841,9 @@ function parseArgument(lexer) {
 function parseConstArgument(lexer) {
   var start = lexer.token;
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].ARGUMENT,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].ARGUMENT,
     name: parseName(lexer),
-    value: (expectToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].COLON), parseConstValue(lexer)),
+    value: (expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].COLON), parseConstValue(lexer)),
     loc: loc(lexer, start)
   };
 } // Implements the parsing rules in the Fragments section.
@@ -17769,21 +17859,27 @@ function parseConstArgument(lexer) {
 
 function parseFragment(lexer) {
   var start = lexer.token;
-  expectToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].SPREAD);
-  var hasTypeCondition = expectOptionalKeyword(lexer, 'on');
+  expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].SPREAD);
 
-  if (!hasTypeCondition && peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].NAME)) {
+  if (peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].NAME) && lexer.token.value !== 'on') {
     return {
-      kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].FRAGMENT_SPREAD,
+      kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].FRAGMENT_SPREAD,
       name: parseFragmentName(lexer),
       directives: parseDirectives(lexer, false),
       loc: loc(lexer, start)
     };
   }
 
+  var typeCondition;
+
+  if (lexer.token.value === 'on') {
+    lexer.advance();
+    typeCondition = parseNamedType(lexer);
+  }
+
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].INLINE_FRAGMENT,
-    typeCondition: hasTypeCondition ? parseNamedType(lexer) : undefined,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].INLINE_FRAGMENT,
+    typeCondition: typeCondition,
     directives: parseDirectives(lexer, false),
     selectionSet: parseSelectionSet(lexer),
     loc: loc(lexer, start)
@@ -17805,7 +17901,7 @@ function parseFragmentDefinition(lexer) {
 
   if (lexer.options.experimentalFragmentVariables) {
     return {
-      kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].FRAGMENT_DEFINITION,
+      kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].FRAGMENT_DEFINITION,
       name: parseFragmentName(lexer),
       variableDefinitions: parseVariableDefinitions(lexer),
       typeCondition: (expectKeyword(lexer, 'on'), parseNamedType(lexer)),
@@ -17816,7 +17912,7 @@ function parseFragmentDefinition(lexer) {
   }
 
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].FRAGMENT_DEFINITION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].FRAGMENT_DEFINITION,
     name: parseFragmentName(lexer),
     typeCondition: (expectKeyword(lexer, 'on'), parseNamedType(lexer)),
     directives: parseDirectives(lexer, false),
@@ -17861,56 +17957,56 @@ function parseValueLiteral(lexer, isConst) {
   var token = lexer.token;
 
   switch (token.kind) {
-    case _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACKET_L:
+    case _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACKET_L:
       return parseList(lexer, isConst);
 
-    case _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_L:
+    case _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_L:
       return parseObject(lexer, isConst);
 
-    case _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].INT:
+    case _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].INT:
       lexer.advance();
       return {
-        kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].INT,
+        kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].INT,
         value: token.value,
         loc: loc(lexer, token)
       };
 
-    case _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].FLOAT:
+    case _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].FLOAT:
       lexer.advance();
       return {
-        kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].FLOAT,
+        kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].FLOAT,
         value: token.value,
         loc: loc(lexer, token)
       };
 
-    case _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].STRING:
-    case _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BLOCK_STRING:
+    case _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].STRING:
+    case _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BLOCK_STRING:
       return parseStringLiteral(lexer);
 
-    case _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].NAME:
+    case _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].NAME:
       if (token.value === 'true' || token.value === 'false') {
         lexer.advance();
         return {
-          kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].BOOLEAN,
+          kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].BOOLEAN,
           value: token.value === 'true',
           loc: loc(lexer, token)
         };
       } else if (token.value === 'null') {
         lexer.advance();
         return {
-          kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].NULL,
+          kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].NULL,
           loc: loc(lexer, token)
         };
       }
 
       lexer.advance();
       return {
-        kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].ENUM,
+        kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].ENUM,
         value: token.value,
         loc: loc(lexer, token)
       };
 
-    case _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].DOLLAR:
+    case _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].DOLLAR:
       if (!isConst) {
         return parseVariable(lexer);
       }
@@ -17925,9 +18021,9 @@ function parseStringLiteral(lexer) {
   var token = lexer.token;
   lexer.advance();
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].STRING,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].STRING,
     value: token.value,
-    block: token.kind === _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BLOCK_STRING,
+    block: token.kind === _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BLOCK_STRING,
     loc: loc(lexer, token)
   };
 }
@@ -17950,8 +18046,8 @@ function parseList(lexer, isConst) {
   var start = lexer.token;
   var item = isConst ? parseConstValue : parseValueValue;
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].LIST,
-    values: any(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACKET_L, item, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACKET_R),
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].LIST,
+    values: any(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACKET_L, item, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACKET_R),
     loc: loc(lexer, start)
   };
 }
@@ -17964,14 +18060,16 @@ function parseList(lexer, isConst) {
 
 function parseObject(lexer, isConst) {
   var start = lexer.token;
+  expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_L);
+  var fields = [];
 
-  var item = function item() {
-    return parseObjectField(lexer, isConst);
-  };
+  while (!skip(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_R)) {
+    fields.push(parseObjectField(lexer, isConst));
+  }
 
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].OBJECT,
-    fields: any(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_L, item, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_R),
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].OBJECT,
+    fields: fields,
     loc: loc(lexer, start)
   };
 }
@@ -17982,12 +18080,10 @@ function parseObject(lexer, isConst) {
 
 function parseObjectField(lexer, isConst) {
   var start = lexer.token;
-  var name = parseName(lexer);
-  expectToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].COLON);
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].OBJECT_FIELD,
-    name: name,
-    value: parseValueLiteral(lexer, isConst),
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].OBJECT_FIELD,
+    name: parseName(lexer),
+    value: (expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].COLON), parseValueLiteral(lexer, isConst)),
     loc: loc(lexer, start)
   };
 } // Implements the parsing rules in the Directives section.
@@ -18000,7 +18096,7 @@ function parseObjectField(lexer, isConst) {
 function parseDirectives(lexer, isConst) {
   var directives = [];
 
-  while (peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].AT)) {
+  while (peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].AT)) {
     directives.push(parseDirective(lexer, isConst));
   }
 
@@ -18013,9 +18109,9 @@ function parseDirectives(lexer, isConst) {
 
 function parseDirective(lexer, isConst) {
   var start = lexer.token;
-  expectToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].AT);
+  expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].AT);
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].DIRECTIVE,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].DIRECTIVE,
     name: parseName(lexer),
     arguments: parseArguments(lexer, isConst),
     loc: loc(lexer, start)
@@ -18034,11 +18130,11 @@ function parseTypeReference(lexer) {
   var start = lexer.token;
   var type;
 
-  if (expectOptionalToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACKET_L)) {
+  if (skip(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACKET_L)) {
     type = parseTypeReference(lexer);
-    expectToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACKET_R);
+    expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACKET_R);
     type = {
-      kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].LIST_TYPE,
+      kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].LIST_TYPE,
       type: type,
       loc: loc(lexer, start)
     };
@@ -18046,9 +18142,9 @@ function parseTypeReference(lexer) {
     type = parseNamedType(lexer);
   }
 
-  if (expectOptionalToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BANG)) {
+  if (skip(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BANG)) {
     return {
-      kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].NON_NULL_TYPE,
+      kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].NON_NULL_TYPE,
       type: type,
       loc: loc(lexer, start)
     };
@@ -18063,7 +18159,7 @@ function parseTypeReference(lexer) {
 function parseNamedType(lexer) {
   var start = lexer.token;
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].NAMED_TYPE,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].NAMED_TYPE,
     name: parseName(lexer),
     loc: loc(lexer, start)
   };
@@ -18088,7 +18184,7 @@ function parseTypeSystemDefinition(lexer) {
   // Many definitions begin with a description and require a lookahead.
   var keywordToken = peekDescription(lexer) ? lexer.lookahead() : lexer.token;
 
-  if (keywordToken.kind === _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].NAME) {
+  if (keywordToken.kind === _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].NAME) {
     switch (keywordToken.value) {
       case 'schema':
         return parseSchemaDefinition(lexer);
@@ -18120,7 +18216,7 @@ function parseTypeSystemDefinition(lexer) {
 }
 
 function peekDescription(lexer) {
-  return peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].STRING) || peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BLOCK_STRING);
+  return peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].STRING) || peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BLOCK_STRING);
 }
 /**
  * Description : StringValue
@@ -18141,9 +18237,9 @@ function parseSchemaDefinition(lexer) {
   var start = lexer.token;
   expectKeyword(lexer, 'schema');
   var directives = parseDirectives(lexer, true);
-  var operationTypes = many(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_L, parseOperationTypeDefinition, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_R);
+  var operationTypes = many(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_L, parseOperationTypeDefinition, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_R);
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].SCHEMA_DEFINITION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].SCHEMA_DEFINITION,
     directives: directives,
     operationTypes: operationTypes,
     loc: loc(lexer, start)
@@ -18157,10 +18253,10 @@ function parseSchemaDefinition(lexer) {
 function parseOperationTypeDefinition(lexer) {
   var start = lexer.token;
   var operation = parseOperationType(lexer);
-  expectToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].COLON);
+  expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].COLON);
   var type = parseNamedType(lexer);
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].OPERATION_TYPE_DEFINITION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].OPERATION_TYPE_DEFINITION,
     operation: operation,
     type: type,
     loc: loc(lexer, start)
@@ -18178,7 +18274,7 @@ function parseScalarTypeDefinition(lexer) {
   var name = parseName(lexer);
   var directives = parseDirectives(lexer, true);
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].SCALAR_TYPE_DEFINITION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].SCALAR_TYPE_DEFINITION,
     description: description,
     name: name,
     directives: directives,
@@ -18201,7 +18297,7 @@ function parseObjectTypeDefinition(lexer) {
   var directives = parseDirectives(lexer, true);
   var fields = parseFieldsDefinition(lexer);
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].OBJECT_TYPE_DEFINITION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].OBJECT_TYPE_DEFINITION,
     description: description,
     name: name,
     interfaces: interfaces,
@@ -18220,14 +18316,15 @@ function parseObjectTypeDefinition(lexer) {
 function parseImplementsInterfaces(lexer) {
   var types = [];
 
-  if (expectOptionalKeyword(lexer, 'implements')) {
-    // Optional leading ampersand
-    expectOptionalToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].AMP);
+  if (lexer.token.value === 'implements') {
+    lexer.advance(); // Optional leading ampersand
+
+    skip(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].AMP);
 
     do {
       types.push(parseNamedType(lexer));
-    } while (expectOptionalToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].AMP) || // Legacy support for the SDL?
-    lexer.options.allowLegacySDLImplementsInterfaces && peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].NAME));
+    } while (skip(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].AMP) || // Legacy support for the SDL?
+    lexer.options.allowLegacySDLImplementsInterfaces && peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].NAME));
   }
 
   return types;
@@ -18239,13 +18336,13 @@ function parseImplementsInterfaces(lexer) {
 
 function parseFieldsDefinition(lexer) {
   // Legacy support for the SDL?
-  if (lexer.options.allowLegacySDLEmptyFields && peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_L) && lexer.lookahead().kind === _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_R) {
+  if (lexer.options.allowLegacySDLEmptyFields && peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_L) && lexer.lookahead().kind === _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_R) {
     lexer.advance();
     lexer.advance();
     return [];
   }
 
-  return peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_L) ? many(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_L, parseFieldDefinition, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_R) : [];
+  return peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_L) ? many(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_L, parseFieldDefinition, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_R) : [];
 }
 /**
  * FieldDefinition :
@@ -18258,11 +18355,11 @@ function parseFieldDefinition(lexer) {
   var description = parseDescription(lexer);
   var name = parseName(lexer);
   var args = parseArgumentDefs(lexer);
-  expectToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].COLON);
+  expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].COLON);
   var type = parseTypeReference(lexer);
   var directives = parseDirectives(lexer, true);
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].FIELD_DEFINITION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].FIELD_DEFINITION,
     description: description,
     name: name,
     arguments: args,
@@ -18277,11 +18374,11 @@ function parseFieldDefinition(lexer) {
 
 
 function parseArgumentDefs(lexer) {
-  if (!peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].PAREN_L)) {
+  if (!peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].PAREN_L)) {
     return [];
   }
 
-  return many(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].PAREN_L, parseInputValueDef, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].PAREN_R);
+  return many(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].PAREN_L, parseInputValueDef, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].PAREN_R);
 }
 /**
  * InputValueDefinition :
@@ -18293,17 +18390,17 @@ function parseInputValueDef(lexer) {
   var start = lexer.token;
   var description = parseDescription(lexer);
   var name = parseName(lexer);
-  expectToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].COLON);
+  expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].COLON);
   var type = parseTypeReference(lexer);
   var defaultValue;
 
-  if (expectOptionalToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].EQUALS)) {
+  if (skip(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].EQUALS)) {
     defaultValue = parseConstValue(lexer);
   }
 
   var directives = parseDirectives(lexer, true);
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].INPUT_VALUE_DEFINITION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].INPUT_VALUE_DEFINITION,
     description: description,
     name: name,
     type: type,
@@ -18326,7 +18423,7 @@ function parseInterfaceTypeDefinition(lexer) {
   var directives = parseDirectives(lexer, true);
   var fields = parseFieldsDefinition(lexer);
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].INTERFACE_TYPE_DEFINITION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].INTERFACE_TYPE_DEFINITION,
     description: description,
     name: name,
     directives: directives,
@@ -18348,7 +18445,7 @@ function parseUnionTypeDefinition(lexer) {
   var directives = parseDirectives(lexer, true);
   var types = parseUnionMemberTypes(lexer);
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].UNION_TYPE_DEFINITION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].UNION_TYPE_DEFINITION,
     description: description,
     name: name,
     directives: directives,
@@ -18366,13 +18463,13 @@ function parseUnionTypeDefinition(lexer) {
 function parseUnionMemberTypes(lexer) {
   var types = [];
 
-  if (expectOptionalToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].EQUALS)) {
+  if (skip(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].EQUALS)) {
     // Optional leading pipe
-    expectOptionalToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].PIPE);
+    skip(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].PIPE);
 
     do {
       types.push(parseNamedType(lexer));
-    } while (expectOptionalToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].PIPE));
+    } while (skip(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].PIPE));
   }
 
   return types;
@@ -18391,7 +18488,7 @@ function parseEnumTypeDefinition(lexer) {
   var directives = parseDirectives(lexer, true);
   var values = parseEnumValuesDefinition(lexer);
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].ENUM_TYPE_DEFINITION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].ENUM_TYPE_DEFINITION,
     description: description,
     name: name,
     directives: directives,
@@ -18405,7 +18502,7 @@ function parseEnumTypeDefinition(lexer) {
 
 
 function parseEnumValuesDefinition(lexer) {
-  return peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_L) ? many(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_L, parseEnumValueDefinition, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_R) : [];
+  return peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_L) ? many(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_L, parseEnumValueDefinition, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_R) : [];
 }
 /**
  * EnumValueDefinition : Description? EnumValue Directives[Const]?
@@ -18420,7 +18517,7 @@ function parseEnumValueDefinition(lexer) {
   var name = parseName(lexer);
   var directives = parseDirectives(lexer, true);
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].ENUM_VALUE_DEFINITION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].ENUM_VALUE_DEFINITION,
     description: description,
     name: name,
     directives: directives,
@@ -18441,7 +18538,7 @@ function parseInputObjectTypeDefinition(lexer) {
   var directives = parseDirectives(lexer, true);
   var fields = parseInputFieldsDefinition(lexer);
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].INPUT_OBJECT_TYPE_DEFINITION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].INPUT_OBJECT_TYPE_DEFINITION,
     description: description,
     name: name,
     directives: directives,
@@ -18455,7 +18552,7 @@ function parseInputObjectTypeDefinition(lexer) {
 
 
 function parseInputFieldsDefinition(lexer) {
-  return peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_L) ? many(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_L, parseInputValueDef, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_R) : [];
+  return peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_L) ? many(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_L, parseInputValueDef, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_R) : [];
 }
 /**
  * TypeSystemExtension :
@@ -18475,7 +18572,7 @@ function parseInputFieldsDefinition(lexer) {
 function parseTypeSystemExtension(lexer) {
   var keywordToken = lexer.lookahead();
 
-  if (keywordToken.kind === _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].NAME) {
+  if (keywordToken.kind === _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].NAME) {
     switch (keywordToken.value) {
       case 'schema':
         return parseSchemaExtension(lexer);
@@ -18514,14 +18611,14 @@ function parseSchemaExtension(lexer) {
   expectKeyword(lexer, 'extend');
   expectKeyword(lexer, 'schema');
   var directives = parseDirectives(lexer, true);
-  var operationTypes = peek(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_L) ? many(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_L, parseOperationTypeDefinition, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].BRACE_R) : [];
+  var operationTypes = peek(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_L) ? many(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_L, parseOperationTypeDefinition, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].BRACE_R) : [];
 
   if (directives.length === 0 && operationTypes.length === 0) {
     throw unexpected(lexer);
   }
 
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].SCHEMA_EXTENSION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].SCHEMA_EXTENSION,
     directives: directives,
     operationTypes: operationTypes,
     loc: loc(lexer, start)
@@ -18545,7 +18642,7 @@ function parseScalarTypeExtension(lexer) {
   }
 
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].SCALAR_TYPE_EXTENSION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].SCALAR_TYPE_EXTENSION,
     name: name,
     directives: directives,
     loc: loc(lexer, start)
@@ -18573,7 +18670,7 @@ function parseObjectTypeExtension(lexer) {
   }
 
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].OBJECT_TYPE_EXTENSION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].OBJECT_TYPE_EXTENSION,
     name: name,
     interfaces: interfaces,
     directives: directives,
@@ -18601,7 +18698,7 @@ function parseInterfaceTypeExtension(lexer) {
   }
 
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].INTERFACE_TYPE_EXTENSION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].INTERFACE_TYPE_EXTENSION,
     name: name,
     directives: directives,
     fields: fields,
@@ -18628,7 +18725,7 @@ function parseUnionTypeExtension(lexer) {
   }
 
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].UNION_TYPE_EXTENSION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].UNION_TYPE_EXTENSION,
     name: name,
     directives: directives,
     types: types,
@@ -18655,7 +18752,7 @@ function parseEnumTypeExtension(lexer) {
   }
 
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].ENUM_TYPE_EXTENSION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].ENUM_TYPE_EXTENSION,
     name: name,
     directives: directives,
     values: values,
@@ -18682,7 +18779,7 @@ function parseInputObjectTypeExtension(lexer) {
   }
 
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].INPUT_OBJECT_TYPE_EXTENSION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].INPUT_OBJECT_TYPE_EXTENSION,
     name: name,
     directives: directives,
     fields: fields,
@@ -18691,7 +18788,7 @@ function parseInputObjectTypeExtension(lexer) {
 }
 /**
  * DirectiveDefinition :
- *   - Description? directive @ Name ArgumentsDefinition? `repeatable`? on DirectiveLocations
+ *   - Description? directive @ Name ArgumentsDefinition? on DirectiveLocations
  */
 
 
@@ -18699,18 +18796,16 @@ function parseDirectiveDefinition(lexer) {
   var start = lexer.token;
   var description = parseDescription(lexer);
   expectKeyword(lexer, 'directive');
-  expectToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].AT);
+  expect(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].AT);
   var name = parseName(lexer);
   var args = parseArgumentDefs(lexer);
-  var repeatable = expectOptionalKeyword(lexer, 'repeatable');
   expectKeyword(lexer, 'on');
   var locations = parseDirectiveLocations(lexer);
   return {
-    kind: _kinds__WEBPACK_IMPORTED_MODULE_6__["Kind"].DIRECTIVE_DEFINITION,
+    kind: _kinds__WEBPACK_IMPORTED_MODULE_4__["Kind"].DIRECTIVE_DEFINITION,
     description: description,
     name: name,
     arguments: args,
-    repeatable: repeatable,
     locations: locations,
     loc: loc(lexer, start)
   };
@@ -18724,12 +18819,12 @@ function parseDirectiveDefinition(lexer) {
 
 function parseDirectiveLocations(lexer) {
   // Optional leading pipe
-  expectOptionalToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].PIPE);
+  skip(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].PIPE);
   var locations = [];
 
   do {
     locations.push(parseDirectiveLocation(lexer));
-  } while (expectOptionalToken(lexer, _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].PIPE));
+  } while (skip(lexer, _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].PIPE));
 
   return locations;
 }
@@ -18766,7 +18861,7 @@ function parseDirectiveLocation(lexer) {
   var start = lexer.token;
   var name = parseName(lexer);
 
-  if (_directiveLocation__WEBPACK_IMPORTED_MODULE_7__["DirectiveLocation"][name.value] !== undefined) {
+  if (_directiveLocation__WEBPACK_IMPORTED_MODULE_5__["DirectiveLocation"].hasOwnProperty(name.value)) {
     return name;
   }
 
@@ -18794,18 +18889,34 @@ function Loc(startToken, endToken, source) {
 } // Print a simplified form when appearing in JSON/util.inspect.
 
 
-Object(_jsutils_defineToJSON__WEBPACK_IMPORTED_MODULE_1__["default"])(Loc, function () {
+Loc.prototype.toJSON = Loc.prototype.inspect = function toJSON() {
   return {
     start: this.start,
     end: this.end
   };
-});
+};
 /**
  * Determines if the next token is of a given kind
  */
 
+
 function peek(lexer, kind) {
   return lexer.token.kind === kind;
+}
+/**
+ * If the next token is of the given kind, return true after advancing
+ * the lexer. Otherwise, do not change the parser state and return false.
+ */
+
+
+function skip(lexer, kind) {
+  var match = lexer.token.kind === kind;
+
+  if (match) {
+    lexer.advance();
+  }
+
+  return match;
 }
 /**
  * If the next token is of the given kind, return that token after advancing
@@ -18813,7 +18924,7 @@ function peek(lexer, kind) {
  */
 
 
-function expectToken(lexer, kind) {
+function expect(lexer, kind) {
   var token = lexer.token;
 
   if (token.kind === kind) {
@@ -18821,54 +18932,24 @@ function expectToken(lexer, kind) {
     return token;
   }
 
-  throw Object(_error_syntaxError__WEBPACK_IMPORTED_MODULE_3__["syntaxError"])(lexer.source, token.start, "Expected ".concat(kind, ", found ").concat(Object(_lexer__WEBPACK_IMPORTED_MODULE_5__["getTokenDesc"])(token)));
+  throw Object(_error__WEBPACK_IMPORTED_MODULE_2__["syntaxError"])(lexer.source, token.start, "Expected ".concat(kind, ", found ").concat(Object(_lexer__WEBPACK_IMPORTED_MODULE_3__["getTokenDesc"])(token)));
 }
 /**
- * If the next token is of the given kind, return that token after advancing
- * the lexer. Otherwise, do not change the parser state and return undefined.
- */
-
-
-function expectOptionalToken(lexer, kind) {
-  var token = lexer.token;
-
-  if (token.kind === kind) {
-    lexer.advance();
-    return token;
-  }
-
-  return undefined;
-}
-/**
- * If the next token is a given keyword, advance the lexer.
- * Otherwise, do not change the parser state and throw an error.
+ * If the next token is a keyword with the given value, return that token after
+ * advancing the lexer. Otherwise, do not change the parser state and return
+ * false.
  */
 
 
 function expectKeyword(lexer, value) {
   var token = lexer.token;
 
-  if (token.kind === _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].NAME && token.value === value) {
+  if (token.kind === _lexer__WEBPACK_IMPORTED_MODULE_3__["TokenKind"].NAME && token.value === value) {
     lexer.advance();
-  } else {
-    throw Object(_error_syntaxError__WEBPACK_IMPORTED_MODULE_3__["syntaxError"])(lexer.source, token.start, "Expected \"".concat(value, "\", found ").concat(Object(_lexer__WEBPACK_IMPORTED_MODULE_5__["getTokenDesc"])(token)));
-  }
-}
-/**
- * If the next token is a given keyword, return "true" after advancing
- * the lexer. Otherwise, do not change the parser state and return "false".
- */
-
-
-function expectOptionalKeyword(lexer, value) {
-  var token = lexer.token;
-
-  if (token.kind === _tokenKind__WEBPACK_IMPORTED_MODULE_4__["TokenKind"].NAME && token.value === value) {
-    lexer.advance();
-    return true;
+    return token;
   }
 
-  return false;
+  throw Object(_error__WEBPACK_IMPORTED_MODULE_2__["syntaxError"])(lexer.source, token.start, "Expected \"".concat(value, "\", found ").concat(Object(_lexer__WEBPACK_IMPORTED_MODULE_3__["getTokenDesc"])(token)));
 }
 /**
  * Helper function for creating an error when an unexpected lexed token
@@ -18878,7 +18959,7 @@ function expectOptionalKeyword(lexer, value) {
 
 function unexpected(lexer, atToken) {
   var token = atToken || lexer.token;
-  return Object(_error_syntaxError__WEBPACK_IMPORTED_MODULE_3__["syntaxError"])(lexer.source, token.start, "Unexpected ".concat(Object(_lexer__WEBPACK_IMPORTED_MODULE_5__["getTokenDesc"])(token)));
+  return Object(_error__WEBPACK_IMPORTED_MODULE_2__["syntaxError"])(lexer.source, token.start, "Unexpected ".concat(Object(_lexer__WEBPACK_IMPORTED_MODULE_3__["getTokenDesc"])(token)));
 }
 /**
  * Returns a possibly empty list of parse nodes, determined by
@@ -18889,10 +18970,10 @@ function unexpected(lexer, atToken) {
 
 
 function any(lexer, openKind, parseFn, closeKind) {
-  expectToken(lexer, openKind);
+  expect(lexer, openKind);
   var nodes = [];
 
-  while (!expectOptionalToken(lexer, closeKind)) {
+  while (!skip(lexer, closeKind)) {
     nodes.push(parseFn(lexer));
   }
 
@@ -18907,98 +18988,15 @@ function any(lexer, openKind, parseFn, closeKind) {
 
 
 function many(lexer, openKind, parseFn, closeKind) {
-  expectToken(lexer, openKind);
+  expect(lexer, openKind);
   var nodes = [parseFn(lexer)];
 
-  while (!expectOptionalToken(lexer, closeKind)) {
+  while (!skip(lexer, closeKind)) {
     nodes.push(parseFn(lexer));
   }
 
   return nodes;
 }
-
-
-/***/ }),
-
-/***/ "./node_modules/graphql/language/printLocation.mjs":
-/*!*********************************************************!*\
-  !*** ./node_modules/graphql/language/printLocation.mjs ***!
-  \*********************************************************/
-/*! exports provided: printLocation, printSourceLocation */
-/***/ (function(__webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "printLocation", function() { return printLocation; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "printSourceLocation", function() { return printSourceLocation; });
-/* harmony import */ var _language_location__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../language/location */ "./node_modules/graphql/language/location.mjs");
-
-/**
- * Render a helpful description of the location in the GraphQL Source document.
- */
-
-function printLocation(location) {
-  return printSourceLocation(location.source, Object(_language_location__WEBPACK_IMPORTED_MODULE_0__["getLocation"])(location.source, location.start));
-}
-/**
- * Render a helpful description of the location in the GraphQL Source document.
- */
-
-function printSourceLocation(source, sourceLocation) {
-  var firstLineColumnOffset = source.locationOffset.column - 1;
-  var body = whitespace(firstLineColumnOffset) + source.body;
-  var lineIndex = sourceLocation.line - 1;
-  var lineOffset = source.locationOffset.line - 1;
-  var lineNum = sourceLocation.line + lineOffset;
-  var columnOffset = sourceLocation.line === 1 ? firstLineColumnOffset : 0;
-  var columnNum = sourceLocation.column + columnOffset;
-  var locationStr = "".concat(source.name, ":").concat(lineNum, ":").concat(columnNum, "\n");
-  var lines = body.split(/\r\n|[\n\r]/g);
-  var locationLine = lines[lineIndex]; // Special case for minified documents
-
-  if (locationLine.length > 120) {
-    var sublineIndex = Math.floor(columnNum / 80);
-    var sublineColumnNum = columnNum % 80;
-    var sublines = [];
-
-    for (var i = 0; i < locationLine.length; i += 80) {
-      sublines.push(locationLine.slice(i, i + 80));
-    }
-
-    return locationStr + printPrefixedLines([["".concat(lineNum), sublines[0]]].concat(sublines.slice(1, sublineIndex + 1).map(function (subline) {
-      return ['', subline];
-    }), [[' ', whitespace(sublineColumnNum - 1) + '^'], ['', sublines[sublineIndex + 1]]]));
-  }
-
-  return locationStr + printPrefixedLines([// Lines specified like this: ["prefix", "string"],
-  ["".concat(lineNum - 1), lines[lineIndex - 1]], ["".concat(lineNum), locationLine], ['', whitespace(columnNum - 1) + '^'], ["".concat(lineNum + 1), lines[lineIndex + 1]]]);
-}
-
-function printPrefixedLines(lines) {
-  var existingLines = lines.filter(function (_ref) {
-    var _ = _ref[0],
-        line = _ref[1];
-    return line !== undefined;
-  });
-  var padLen = Math.max.apply(Math, existingLines.map(function (_ref2) {
-    var prefix = _ref2[0];
-    return prefix.length;
-  }));
-  return existingLines.map(function (_ref3) {
-    var prefix = _ref3[0],
-        line = _ref3[1];
-    return lpad(padLen, prefix) + ' | ' + line;
-  }).join('\n');
-}
-
-function whitespace(len) {
-  return Array(len + 1).join(' ');
-}
-
-function lpad(len, str) {
-  return whitespace(len - str.length) + str;
-}
-
 
 /***/ }),
 
@@ -19013,8 +19011,12 @@ function lpad(len, str) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "print", function() { return print; });
 /* harmony import */ var _visitor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./visitor */ "./node_modules/graphql/language/visitor.mjs");
-/* harmony import */ var _blockString__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./blockString */ "./node_modules/graphql/language/blockString.mjs");
-
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 /**
  * Converts an AST into a string, using one set of reasonable
@@ -19025,8 +19027,7 @@ function print(ast) {
   return Object(_visitor__WEBPACK_IMPORTED_MODULE_0__["visit"])(ast, {
     leave: printDocASTReducer
   });
-} // TODO: provide better type coverage in future
-
+}
 var printDocASTReducer = {
   Name: function Name(node) {
     return node.value;
@@ -19107,7 +19108,7 @@ var printDocASTReducer = {
   StringValue: function StringValue(_ref10, key) {
     var value = _ref10.value,
         isBlockString = _ref10.block;
-    return isBlockString ? Object(_blockString__WEBPACK_IMPORTED_MODULE_1__["printBlockString"])(value, key === 'description' ? '' : '  ') : JSON.stringify(value);
+    return isBlockString ? printBlockString(value, key === 'description') : JSON.stringify(value);
   },
   BooleanValue: function BooleanValue(_ref11) {
     var value = _ref11.value;
@@ -19180,7 +19181,9 @@ var printDocASTReducer = {
         args = _ref24.arguments,
         type = _ref24.type,
         directives = _ref24.directives;
-    return name + (hasMultilineItems(args) ? wrap('(\n', indent(join(args, '\n')), '\n)') : wrap('(', join(args, ', '), ')')) + ': ' + type + wrap(' ', join(directives, ' '));
+    return name + (args.every(function (arg) {
+      return arg.indexOf('\n') === -1;
+    }) ? wrap('(', join(args, ', '), ')') : wrap('(\n', indent(join(args, '\n')), '\n)')) + ': ' + type + wrap(' ', join(directives, ' '));
   }),
   InputValueDefinition: addDescription(function (_ref25) {
     var name = _ref25.name,
@@ -19221,9 +19224,10 @@ var printDocASTReducer = {
   DirectiveDefinition: addDescription(function (_ref31) {
     var name = _ref31.name,
         args = _ref31.arguments,
-        repeatable = _ref31.repeatable,
         locations = _ref31.locations;
-    return 'directive @' + name + (hasMultilineItems(args) ? wrap('(\n', indent(join(args, '\n')), '\n)') : wrap('(', join(args, ', '), ')')) + (repeatable ? ' repeatable' : '') + ' on ' + join(locations, ' | ');
+    return 'directive @' + name + (args.every(function (arg) {
+      return arg.indexOf('\n') === -1;
+    }) ? wrap('(', join(args, ', '), ')') : wrap('(\n', indent(join(args, '\n')), '\n)')) + ' on ' + join(locations, ' | ');
   }),
   SchemaExtension: function SchemaExtension(_ref32) {
     var directives = _ref32.directives,
@@ -19306,15 +19310,17 @@ function wrap(start, maybeString, end) {
 function indent(maybeString) {
   return maybeString && '  ' + maybeString.replace(/\n/g, '\n  ');
 }
+/**
+ * Print a block string in the indented block form by adding a leading and
+ * trailing blank line. However, if a block string starts with whitespace and is
+ * a single-line, adding a leading blank line would strip that whitespace.
+ */
 
-function isMultiline(string) {
-  return string.indexOf('\n') !== -1;
+
+function printBlockString(value, isDescription) {
+  var escaped = value.replace(/"""/g, '\\"""');
+  return (value[0] === ' ' || value[0] === '\t') && value.indexOf('\n') === -1 ? "\"\"\"".concat(escaped.replace(/"$/, '"\n'), "\"\"\"") : "\"\"\"\n".concat(isDescription ? escaped : indent(escaped), "\n\"\"\"");
 }
-
-function hasMultilineItems(maybeArray) {
-  return maybeArray && maybeArray.some(isMultiline);
-}
-
 
 /***/ }),
 
@@ -19330,6 +19336,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Source", function() { return Source; });
 /* harmony import */ var _jsutils_invariant__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../jsutils/invariant */ "./node_modules/graphql/jsutils/invariant.mjs");
 /* harmony import */ var _jsutils_defineToStringTag__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../jsutils/defineToStringTag */ "./node_modules/graphql/jsutils/defineToStringTag.mjs");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
 
 
 
@@ -19342,6 +19358,12 @@ __webpack_require__.r(__webpack_exports__);
  * line and column in locationOffset are 1-indexed
  */
 var Source = function Source(body, name, locationOffset) {
+  _defineProperty(this, "body", void 0);
+
+  _defineProperty(this, "name", void 0);
+
+  _defineProperty(this, "locationOffset", void 0);
+
   this.body = body;
   this.name = name || 'GraphQL request';
   this.locationOffset = locationOffset || {
@@ -19353,52 +19375,6 @@ var Source = function Source(body, name, locationOffset) {
 }; // Conditionally apply `[Symbol.toStringTag]` if `Symbol`s are supported
 
 Object(_jsutils_defineToStringTag__WEBPACK_IMPORTED_MODULE_1__["default"])(Source);
-
-
-/***/ }),
-
-/***/ "./node_modules/graphql/language/tokenKind.mjs":
-/*!*****************************************************!*\
-  !*** ./node_modules/graphql/language/tokenKind.mjs ***!
-  \*****************************************************/
-/*! exports provided: TokenKind */
-/***/ (function(__webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TokenKind", function() { return TokenKind; });
-/**
- * An exported enum describing the different kinds of tokens that the
- * lexer emits.
- */
-var TokenKind = Object.freeze({
-  SOF: '<SOF>',
-  EOF: '<EOF>',
-  BANG: '!',
-  DOLLAR: '$',
-  AMP: '&',
-  PAREN_L: '(',
-  PAREN_R: ')',
-  SPREAD: '...',
-  COLON: ':',
-  EQUALS: '=',
-  AT: '@',
-  BRACKET_L: '[',
-  BRACKET_R: ']',
-  BRACE_L: '{',
-  PIPE: '|',
-  BRACE_R: '}',
-  NAME: 'Name',
-  INT: 'Int',
-  FLOAT: 'Float',
-  STRING: 'String',
-  BLOCK_STRING: 'BlockString',
-  COMMENT: 'Comment'
-});
-/**
- * The enum type representing the token kinds values.
- */
-
 
 /***/ }),
 
@@ -19418,6 +19394,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "visitWithTypeInfo", function() { return visitWithTypeInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getVisitFn", function() { return getVisitFn; });
 /* harmony import */ var _jsutils_inspect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../jsutils/inspect */ "./node_modules/graphql/jsutils/inspect.mjs");
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
 
 var QueryDocumentKeys = {
   Name: [],
@@ -19466,7 +19450,7 @@ var QueryDocumentKeys = {
   EnumTypeExtension: ['name', 'directives', 'values'],
   InputObjectTypeExtension: ['name', 'directives', 'fields']
 };
-var BREAK = Object.freeze({});
+var BREAK = {};
 /**
  * visit() will walk through an AST using a depth first traversal, calling
  * the visitor's enter function at each node in the traversal, and calling the
@@ -19587,9 +19571,10 @@ function visit(root, visitor) {
         } else {
           var clone = {};
 
-          for (var _i = 0, _Object$keys = Object.keys(node); _i < _Object$keys.length; _i++) {
-            var k = _Object$keys[_i];
-            clone[k] = node[k];
+          for (var k in node) {
+            if (node.hasOwnProperty(k)) {
+              clone[k] = node[k];
+            }
           }
 
           node = clone;
@@ -19840,7 +19825,6 @@ function getVisitFn(visitor, kind, isLeaving) {
     }
   }
 }
-
 
 /***/ }),
 
@@ -26619,7 +26603,7 @@ exports.encode = exports.stringify = __webpack_require__(/*! ./encode */ "./node
 /*!***********************************************************!*\
   !*** ./node_modules/react-apollo/lib/react-apollo.esm.js ***!
   \***********************************************************/
-/*! exports provided: ApolloConsumer, ApolloProvider, getApolloContext, resetApolloContext, Mutation, Query, Subscription, graphql, withApollo, withMutation, withQuery, withSubscription, useApolloClient, useMutation, useQuery, useSubscription, getDataFromTree, getMarkupFromTree, renderToStringWithData */
+/*! exports provided: ApolloConsumer, ApolloProvider, getApolloContext, resetApolloContext, Mutation, Query, Subscription, graphql, withApollo, withMutation, withQuery, withSubscription, useApolloClient, useLazyQuery, useMutation, useQuery, useSubscription, getDataFromTree, getMarkupFromTree, renderToStringWithData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26653,6 +26637,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @apollo/react-hooks */ "./node_modules/@apollo/react-hooks/lib/react-hooks.esm.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useApolloClient", function() { return _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_3__["useApolloClient"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useLazyQuery", function() { return _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_3__["useLazyQuery"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useMutation", function() { return _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_3__["useMutation"]; });
 
