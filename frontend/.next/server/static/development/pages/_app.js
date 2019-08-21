@@ -215,25 +215,31 @@ const Cart = () => {
         lineNumber: 64
       },
       __self: undefined
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    }, user.data && user.data.me.cart.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 65
+        lineNumber: 66
       },
       __self: undefined
-    }, Object(_lib_formatMoney__WEBPACK_IMPORTED_MODULE_13__["default"])(Object(_lib_calcTotalPrice__WEBPACK_IMPORTED_MODULE_12__["default"])(user.data && user.data.me.cart))), user.data && user.data.me.cart.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TakeMyMoney__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       __source: {
         fileName: _jsxFileName,
         lineNumber: 67
       },
       __self: undefined
+    }, Object(_lib_formatMoney__WEBPACK_IMPORTED_MODULE_13__["default"])(Object(_lib_calcTotalPrice__WEBPACK_IMPORTED_MODULE_12__["default"])(user.data.me.cart))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TakeMyMoney__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 69
+      },
+      __self: undefined
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles_SickButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 68
+        lineNumber: 70
       },
       __self: undefined
-    }, "Checkout")))));
+    }, "Checkout"))))));
   }
 };
 
@@ -1710,9 +1716,6 @@ const CURRENT_USER_QUERY = apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
       email
       name
       permissions
-      orders {
-        id
-      }
       cart {
         id
         quantity

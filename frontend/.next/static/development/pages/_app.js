@@ -141,25 +141,31 @@ var Cart = function Cart() {
         lineNumber: 64
       },
       __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", {
+    }, user.data && user.data.me.cart.length && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 65
+        lineNumber: 66
       },
       __self: this
-    }, Object(_lib_formatMoney__WEBPACK_IMPORTED_MODULE_15__["default"])(Object(_lib_calcTotalPrice__WEBPACK_IMPORTED_MODULE_14__["default"])(user.data && user.data.me.cart))), user.data && user.data.me.cart.length && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_TakeMyMoney__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", {
       __source: {
         fileName: _jsxFileName,
         lineNumber: 67
       },
       __self: this
+    }, Object(_lib_formatMoney__WEBPACK_IMPORTED_MODULE_15__["default"])(Object(_lib_calcTotalPrice__WEBPACK_IMPORTED_MODULE_14__["default"])(user.data.me.cart))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_TakeMyMoney__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 69
+      },
+      __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_styles_SickButton__WEBPACK_IMPORTED_MODULE_10__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 68
+        lineNumber: 70
       },
       __self: this
-    }, "Checkout")))));
+    }, "Checkout"))))));
   }
 };
 
@@ -1770,7 +1776,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  query {\n    me {\n      id\n      email\n      name\n      permissions\n      orders {\n        id\n      }\n      cart {\n        id\n        quantity\n        item {\n          id\n          price\n          image\n          title\n          description \n        }\n      }\n    }\n  }\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  query {\n    me {\n      id\n      email\n      name\n      permissions\n      cart {\n        id\n        quantity\n        item {\n          id\n          price\n          image\n          title\n          description \n        }\n      }\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;

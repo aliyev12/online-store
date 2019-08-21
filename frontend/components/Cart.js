@@ -62,11 +62,14 @@ const Cart = () => {
                 ))}
             </ul>
             <footer>
-              <p>{formatMoney(calcTotalPrice(user.data && user.data.me.cart))}</p>
               {user.data && user.data.me.cart.length && (
-                <TakeMyMoney>
-                  <SickButton>Checkout</SickButton>
-                </TakeMyMoney>
+                <div>
+                  <p>{formatMoney(calcTotalPrice(user.data.me.cart))}</p>
+
+                  <TakeMyMoney>
+                    <SickButton>Checkout</SickButton>
+                  </TakeMyMoney>
+                </div>
               )}
             </footer>
           </>
