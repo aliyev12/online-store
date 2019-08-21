@@ -3,26 +3,26 @@ import { useMutation } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
-import { CURRENT_USER_QUERY } from './User';
+import { CURRENT_USER_QUERY } from '../lib/queries';
 
-const SIGNUP_MUTATION = gql`
+export const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
-    $email: String!
     $name: String!
+    $email: String!
     $password: String!
   ) {
-    signup(email: $email, name: $name, password: $password) {
-      id
+    signup(name: $name, email: $email, password: $password) {
       email
       name
+      id
     }
   }
 `;
 
 const Signup = () => {
   const [inputs, setInputs] = useState({
-    email: '',
     name: '',
+    email: '',
     password: ''
   });
   const [signup, { error, loading }] = useMutation(SIGNUP_MUTATION, {
@@ -45,8 +45,8 @@ const Signup = () => {
         console.log(res);
         setInputs({
           ...inputs,
-          email: '',
           name: '',
+          email: '',
           password: ''
         });
       }}

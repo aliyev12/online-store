@@ -1768,6 +1768,9 @@ const CURRENT_USER_QUERY = apollo_boost__WEBPACK_IMPORTED_MODULE_0__["gql"]`
       email
       name
       permissions
+      orders {
+        id
+      }
       cart {
         id
         quantity

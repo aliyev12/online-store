@@ -56,6 +56,7 @@ const CreateItem = () => {
 
   return (
     <Form
+    data-test="form"
       onSubmit={async e => {
         // Stop the form from submitting
         e.preventDefault();
