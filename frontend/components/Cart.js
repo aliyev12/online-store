@@ -30,11 +30,9 @@ export const TOGGLE_CART_MUTATION = gql`
 const Cart = () => {
   const { loading, error, data } = useQuery(LOCAL_STATE_QUERY);
   const [toggleCart] = useMutation(TOGGLE_CART_MUTATION);
-  const {
-    data: { me }
-  } = useUser();
+  const user = useUser();
 
-  if (!me) {
+  if (user.data && !user.data.me) {
     return null;
   } else {
     return (
@@ -58,13 +56,14 @@ const Cart = () => {
               </p> */}
             </header>
             <ul>
-              {me.cart.map(cartItem => (
-                <CartItem key={cartItem.id} cartItem={cartItem} />
-              ))}
+              {user.data &&
+                user.data.me.cart.map(cartItem => (
+                  <CartItem key={cartItem.id} cartItem={cartItem} />
+                ))}
             </ul>
             <footer>
-              <p>{formatMoney(calcTotalPrice(me.cart))}</p>
-              {me.cart.length && (
+              <p>{formatMoney(calcTotalPrice(user.data && user.data.me.cart))}</p>
+              {user.data && user.data.me.cart.length && (
                 <TakeMyMoney>
                   <SickButton>Checkout</SickButton>
                 </TakeMyMoney>
@@ -78,61 +77,3 @@ const Cart = () => {
 };
 
 export default Cart;
-
-// import React from 'react';
-// import { Query, Mutation } from 'react-apollo';
-// import gql from 'graphql-tag';
-// import CartStyles from './styles/CartStyles';
-// import Supreme from './styles/Supreme';
-// import CloseButton from './styles/CloseButton';
-// import SickButton from './styles/SickButton';
-// import User from './User';
-
-// export const LOCAL_STATE_QUERY = gql`
-//   query {
-//     cartOpen @client
-//   }
-// `;
-
-// export const TOGGLE_CART_MUTATION = gql`
-//   mutation {
-//     toggleCart @client
-//   }
-// `;
-
-// const Cart = () => {
-//   return (
-//     <Mutation mutation={TOGGLE_CART_MUTATION}>
-//       {toggleCart => (
-//         <Query query={LOCAL_STATE_QUERY}>
-//           {({ data }) =>
-//             console.log('data = ', data) || (
-//               <CartStyles open={data.cartOpen}>
-//                 <header>
-//                   <CloseButton onClick={toggleCart} title="close">&times;</CloseButton>
-//                   <Supreme>
-//                     {/* Your Cart */}
-//                     11111
-//                     </Supreme>
-//                   <p>
-//                     22222
-//                     {/* You have __ items in your cart. */}
-//                     </p>
-//                   <footer>
-//                     <p>
-//                       $
-//                       {/* $10.10 */}
-//                       </p>
-//                     <SickButton />
-//                   </footer>
-//                 </header>
-//               </CartStyles>
-//             )
-//           }
-//         </Query>
-//       )}
-//     </Mutation>
-//   );
-// };
-
-// export default Cart;

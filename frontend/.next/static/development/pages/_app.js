@@ -81,29 +81,28 @@ var Cart = function Cart() {
       _useMutation2 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useMutation, 1),
       toggleCart = _useMutation2[0];
 
-  var _useUser = Object(_hooks_useUser__WEBPACK_IMPORTED_MODULE_12__["default"])(),
-      me = _useUser.data.me;
+  var user = Object(_hooks_useUser__WEBPACK_IMPORTED_MODULE_12__["default"])();
 
-  if (!me) {
+  if (user.data && !user.data.me) {
     return null;
   } else {
     return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_styles_CartStyles__WEBPACK_IMPORTED_MODULE_7__["default"], {
       open: data.cartOpen,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 41
+        lineNumber: 39
       },
       __self: this
     }, loading && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 42
+        lineNumber: 40
       },
       __self: this
     }, "Loading..."), error && Object(_lib_handleError__WEBPACK_IMPORTED_MODULE_6__["default"])(error), !loading && !error && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("header", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 46
+        lineNumber: 44
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_styles_CloseButton__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -111,112 +110,60 @@ var Cart = function Cart() {
       title: "close",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 47
+        lineNumber: 45
       },
       __self: this
     }, "\xD7"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_styles_Supreme__WEBPACK_IMPORTED_MODULE_8__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 50
+        lineNumber: 48
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("ul", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 60
+        lineNumber: 58
       },
       __self: this
-    }, me.cart.map(function (cartItem) {
+    }, user.data && user.data.me.cart.map(function (cartItem) {
       return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_CartItem__WEBPACK_IMPORTED_MODULE_13__["default"], {
         key: cartItem.id,
         cartItem: cartItem,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 62
+          lineNumber: 61
         },
         __self: this
       });
     })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("footer", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 65
+        lineNumber: 64
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 66
+        lineNumber: 65
       },
       __self: this
-    }, Object(_lib_formatMoney__WEBPACK_IMPORTED_MODULE_15__["default"])(Object(_lib_calcTotalPrice__WEBPACK_IMPORTED_MODULE_14__["default"])(me.cart))), me.cart.length && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_TakeMyMoney__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    }, Object(_lib_formatMoney__WEBPACK_IMPORTED_MODULE_15__["default"])(Object(_lib_calcTotalPrice__WEBPACK_IMPORTED_MODULE_14__["default"])(user.data && user.data.me.cart))), user.data && user.data.me.cart.length && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_TakeMyMoney__WEBPACK_IMPORTED_MODULE_16__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 68
+        lineNumber: 67
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_styles_SickButton__WEBPACK_IMPORTED_MODULE_10__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 69
+        lineNumber: 68
       },
       __self: this
     }, "Checkout")))));
   }
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Cart); // import React from 'react';
-// import { Query, Mutation } from 'react-apollo';
-// import gql from 'graphql-tag';
-// import CartStyles from './styles/CartStyles';
-// import Supreme from './styles/Supreme';
-// import CloseButton from './styles/CloseButton';
-// import SickButton from './styles/SickButton';
-// import User from './User';
-// export const LOCAL_STATE_QUERY = gql`
-//   query {
-//     cartOpen @client
-//   }
-// `;
-// export const TOGGLE_CART_MUTATION = gql`
-//   mutation {
-//     toggleCart @client
-//   }
-// `;
-// const Cart = () => {
-//   return (
-//     <Mutation mutation={TOGGLE_CART_MUTATION}>
-//       {toggleCart => (
-//         <Query query={LOCAL_STATE_QUERY}>
-//           {({ data }) =>
-//             console.log('data = ', data) || (
-//               <CartStyles open={data.cartOpen}>
-//                 <header>
-//                   <CloseButton onClick={toggleCart} title="close">&times;</CloseButton>
-//                   <Supreme>
-//                     {/* Your Cart */}
-//                     11111
-//                     </Supreme>
-//                   <p>
-//                     22222
-//                     {/* You have __ items in your cart. */}
-//                     </p>
-//                   <footer>
-//                     <p>
-//                       $
-//                       {/* $10.10 */}
-//                       </p>
-//                     <SickButton />
-//                   </footer>
-//                 </header>
-//               </CartStyles>
-//             )
-//           }
-//         </Query>
-//       )}
-//     </Mutation>
-//   );
-// };
-// export default Cart;
+/* harmony default export */ __webpack_exports__["default"] = (Cart);
 
 /***/ }),
 
@@ -705,107 +652,107 @@ var _jsxFileName = "/Users/abdulaliyev/tut/nextjs-graphql/online-store/frontend/
       toggleCart = _useMutation2[0];
 
   var _useUser = Object(_hooks_useUser__WEBPACK_IMPORTED_MODULE_8__["default"])(),
-      me = _useUser.data.me;
+      data = _useUser.data;
 
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles_NavStyles__WEBPACK_IMPORTED_MODULE_4__["default"], {
     "data-test": "nav",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 16
+      lineNumber: 14
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/items",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 17
+      lineNumber: 15
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 18
+      lineNumber: 16
     },
     __self: this
-  }, "Shop")), me && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  }, "Shop")), data && data.me && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/sell",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 21
+      lineNumber: 19
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 22
+      lineNumber: 20
     },
     __self: this
-  }, "Sell")), me && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  }, "Sell")), data && data.me && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/orders",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 26
+      lineNumber: 24
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27
+      lineNumber: 25
     },
     __self: this
-  }, "Orders")), me && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  }, "Orders")), data && data.me && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/me",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 29
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 30
     },
     __self: this
-  }, "Account")), me && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  }, "Account")), data && data.me && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/signout",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 34
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Signout__WEBPACK_IMPORTED_MODULE_5__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37
+      lineNumber: 35
     },
     __self: this
-  })), me && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+  })), data && data.me && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     onClick: toggleCart,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: this
+  }, "My Cart", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_CartCount__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    count: data.me.cart.reduce(function (acc, cartItem) {
+      return acc + cartItem.quantity;
+    }, 0),
     __source: {
       fileName: _jsxFileName,
       lineNumber: 41
     },
     __self: this
-  }, "My Cart", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_CartCount__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    count: me.cart.reduce(function (acc, cartItem) {
-      return acc + cartItem.quantity;
-    }, 0),
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 43
-    },
-    __self: this
-  })), !me && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  })), data && !data.me && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/signup",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 50
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 51
     },
     __self: this
   }, "Sign In")));
