@@ -1,4 +1,4 @@
-import PleaseSignIn from '../components/PleaseSignIn';
+import PleaseSignIn from '../components/PleaseSignin';
 import Order from '../components/Order';
 
 export default ({ query }) => (
