@@ -1,0 +1,1 @@
+{"ast":null,"code":"import _parseFloat from \"@babel/runtime-corejs2/core-js/parse-float\";\nimport React from \"react\";\nimport Items from '../components/Items';\nexport default (({\n  query\n}) => React.createElement(React.Fragment, null, React.createElement(Items, {\n  page: _parseFloat(query.page) || 1\n})));","map":null,"metadata":{},"sourceType":"module"}
