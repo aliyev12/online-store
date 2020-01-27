@@ -1,1 +1,0 @@
-{"ast":null,"code":"export default (function (error) {\n  console.log(\"Error from handleError.js: \", error); // throw new Error(`Something went wrong. Check console for more details`);\n\n  return \"Error: \".concat(error && error.message ? error.message : 'No error message');\n});","map":null,"metadata":{},"sourceType":"module"}

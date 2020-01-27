@@ -1,1 +1,0 @@
-{"ast":null,"code":"import React from \"react\";\nimport UpdateItem from '../components/UpdateItem';\nexport default (function (_ref) {\n  var query = _ref.query;\n  return React.createElement(React.Fragment, null, React.createElement(UpdateItem, {\n    id: query.id\n  }));\n});","map":null,"metadata":{},"sourceType":"module"}
