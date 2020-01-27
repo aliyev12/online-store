@@ -1,8 +1,8 @@
-const cookieParser = require('cookie-parser');
-const jwt = require('jsonwebtoken');
-require('dotenv').config();
-const createServer = require('./createServer');
-const db = require('./db');
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+const createServer = require("./createServer");
+const db = require("./db");
 
 const yogaServer = createServer();
 
@@ -27,12 +27,13 @@ yogaServer.express.use(async (req, res, next) => {
   if (!req.userId) return next();
   const user = await db.query.user(
     { where: { id: req.userId } },
-    '{ id, permissions, email, name }'
-    );
-    req.user = user;
-    next();
+    "{ id, permissions, email, name }"
+  );
+  req.user = user;
+  next();
 });
 
+// Start server
 yogaServer.start(
   {
     cors: {
