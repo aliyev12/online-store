@@ -1,0 +1,1 @@
+{"ast":null,"code":"import React from \"react\";\nimport CreateItem from '../components/CreateItem';\nimport PleaseSignIn from '../components/PleaseSignin';\nexport default (function () {\n  return React.createElement(React.Fragment, null, React.createElement(PleaseSignIn, null, React.createElement(CreateItem, null)));\n});","map":null,"metadata":{},"sourceType":"module"}

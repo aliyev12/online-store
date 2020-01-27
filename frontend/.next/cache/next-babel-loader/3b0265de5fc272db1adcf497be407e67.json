@@ -1,0 +1,1 @@
+{"ast":null,"code":"import React from \"react\";\nimport PleaseSignIn from '../components/PleaseSignIn';\nimport OrderList from '../components/OrderList';\nexport default (({\n  query\n}) => React.createElement(\"div\", null, React.createElement(PleaseSignIn, null, React.createElement(OrderList, null))));","map":null,"metadata":{},"sourceType":"module"}
