@@ -688,7 +688,7 @@ var _jsxFileName = "/Users/abdulaliyev/web-projects/wes-bos/online-store/fronten
     lineNumber: 9
   },
   __self: undefined
-}, "site_title")));
+}, "Tent Store")));
 
 /***/ }),
 
@@ -712,6 +712,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CartCount__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./CartCount */ "./components/CartCount.js");
 /* harmony import */ var _Cart__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Cart */ "./components/Cart.js");
 /* harmony import */ var _hooks_useUser__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../hooks/useUser */ "./hooks/useUser.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../config */ "./config.tsx");
 var _jsxFileName = "/Users/abdulaliyev/web-projects/wes-bos/online-store/frontend/components/Nav.js";
 
 
@@ -721,6 +724,22 @@ var _jsxFileName = "/Users/abdulaliyev/web-projects/wes-bos/online-store/fronten
 
 
 
+
+
+const DummyContentDisclaimer = styled_components__WEBPACK_IMPORTED_MODULE_8___default.a.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 7px !important;
+  font-weight: 300;
+  background-color: #00000075;
+  color: #ffffffd6;
+  padding: 5px 19px;
+  border-bottom-left-radius: 30px;
+  border: 0;
+  z-index: 99;
+  margin-left: 20px;
+`;
 /* harmony default export */ __webpack_exports__["default"] = (() => {
   const [toggleCart] = Object(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_2__["useMutation"])(_Cart__WEBPACK_IMPORTED_MODULE_6__["TOGGLE_CART_MUTATION"]);
   const {
@@ -730,102 +749,115 @@ var _jsxFileName = "/Users/abdulaliyev/web-projects/wes-bos/online-store/fronten
     "data-test": "nav",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 14
+      lineNumber: 31
     },
     __self: undefined
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/items",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15
+      lineNumber: 32
     },
     __self: undefined
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 16
+      lineNumber: 33
     },
     __self: undefined
   }, "Shop")), data && data.me && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/sell",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19
+      lineNumber: 36
     },
     __self: undefined
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 20
+      lineNumber: 37
     },
     __self: undefined
   }, "Sell")), data && data.me && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/orders",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 24
+      lineNumber: 41
     },
     __self: undefined
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25
+      lineNumber: 42
     },
     __self: undefined
   }, "Orders")), data && data.me && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/me",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 29
+      lineNumber: 46
     },
     __self: undefined
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30
+      lineNumber: 47
     },
     __self: undefined
   }, "Account")), data && data.me && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/signout",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 51
     },
     __self: undefined
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Signout__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35
+      lineNumber: 52
     },
     __self: undefined
   })), data && data.me && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: toggleCart,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 56
     },
     __self: undefined
   }, "My Cart", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CartCount__WEBPACK_IMPORTED_MODULE_5__["default"], {
     count: data.me.cart.reduce((acc, cartItem) => acc + cartItem.quantity, 0),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 58
     },
     __self: undefined
   })), data && !data.me && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/signup",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 67
     },
     __self: undefined
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 68
     },
     __self: undefined
-  }, "Sign In")));
+  }, "Sign In")), _config__WEBPACK_IMPORTED_MODULE_9__["displayDummyNav"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(DummyContentDisclaimer, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 72
+    },
+    __self: undefined
+  }, "In order to add/update/remove items, please reach out to site developer for special permission - aaliyev.com", " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    role: "image",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 75
+    },
+    __self: undefined
+  }, "\uD83D\uDE0A")));
 }); // import Link from "next/link";
 // import { useMutation } from "@apollo/react-hooks";
 // import NavStyles from "./styles/NavStyles";
@@ -1422,7 +1454,7 @@ const TakeMyMoney = ({
       alert(err.message);
     });
     next_router__WEBPACK_IMPORTED_MODULE_3___default.a.push({
-      pathname: '/order',
+      pathname: "/order",
       query: {
         id: order.data.createOrder.id
       }
@@ -1431,9 +1463,9 @@ const TakeMyMoney = ({
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_stripe_checkout__WEBPACK_IMPORTED_MODULE_1___default.a, {
     amount: Object(_lib_calcTotalPrice__WEBPACK_IMPORTED_MODULE_6__["default"])(me.cart),
-    name: "Great Fits",
-    description: `Order of ${totalItems(me.cart)} item${totalItems(me.cart) === 1 ? '' : 's'}`,
-    image: Object(_lib_helpers__WEBPACK_IMPORTED_MODULE_10__["idx"])(['cart', '0', 'item', 'image'], me) // image={me.cart && me.cart.length && me.cart[0].item && me.cart[0].item.image ? me.cart[0].item.image : ''}
+    name: "Tent Store",
+    description: `Order of ${totalItems(me.cart)} item${totalItems(me.cart) === 1 ? "" : "s"}`,
+    image: Object(_lib_helpers__WEBPACK_IMPORTED_MODULE_10__["idx"])(["cart", "0", "item", "image"], me) // image={me.cart && me.cart.length && me.cart[0].item && me.cart[0].item.image ? me.cart[0].item.image : ''}
     ,
     stripeKey: "pk_test_hhz29HQbQz30mWS5QF59kLKN00Nv74hEX0",
     currency: "USD",

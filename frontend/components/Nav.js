@@ -5,6 +5,23 @@ import Signout from "./Signout";
 import CartCount from "./CartCount";
 import { TOGGLE_CART_MUTATION } from "./Cart";
 import useUser from "../hooks/useUser";
+import styled from "styled-components";
+import { displayDummyNav } from "../config";
+
+const DummyContentDisclaimer = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 7px !important;
+  font-weight: 300;
+  background-color: #00000075;
+  color: #ffffffd6;
+  padding: 5px 19px;
+  border-bottom-left-radius: 30px;
+  border: 0;
+  z-index: 99;
+  margin-left: 20px;
+`;
 
 export default () => {
   const [toggleCart] = useMutation(TOGGLE_CART_MUTATION);
@@ -50,6 +67,13 @@ export default () => {
         <Link href="/signup">
           <a>Sign In</a>
         </Link>
+      )}
+      {displayDummyNav && (
+        <DummyContentDisclaimer>
+          In order to add/update/remove items, please reach out to site
+          developer for special permission - aaliyev.com{" "}
+          <span role="image">😊</span>
+        </DummyContentDisclaimer>
       )}
     </NavStyles>
   );

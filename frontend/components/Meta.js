@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Head from "next/head";
 
 export default () => (
   <Head>
@@ -6,6 +6,6 @@ export default () => (
     <meta charSet="utf-8" />
     <link rel="shortcut icon" href="/static/favicon.png" />
     <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
-    <title>site_title</title>
+    <title>Tent Store</title>
   </Head>
 );

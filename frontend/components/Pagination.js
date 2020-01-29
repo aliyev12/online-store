@@ -28,7 +28,7 @@ const Pagination = ({ page }) => {
     <PaginationStyles data-test="pagination">
       <Head>
         <title>
-          Great Fits! Page {page} of {pages}
+          Tent Store ~ Page {page} of {pages}
         </title>
       </Head>
       <Link

@@ -764,7 +764,7 @@ const Pagination = ({
       lineNumber: 30
     },
     __self: undefined
-  }, "Great Fits! Page ", page, " of ", pages)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  }, "Tent Store ~ Page ", page, " of ", pages)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     prefetch: true,
     href: {
       pathname: "items",
