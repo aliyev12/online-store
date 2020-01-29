@@ -21,6 +21,11 @@ const DummyContentDisclaimer = styled.div`
   border: 0;
   z-index: 99;
   margin-left: 20px;
+
+  a {
+    text-decoration: underline;
+    color: lightblue;
+  }
 `;
 
 export default () => {
@@ -71,7 +76,15 @@ export default () => {
       {displayDummyNav && (
         <DummyContentDisclaimer>
           In order to add/update/remove items, please reach out to site
-          developer for special permission - aaliyev.com{" "}
+          developer for special permission -{" "}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://aaliyev.com"
+            className="message-link"
+          >
+            aaliyev.com
+          </a>{" "}
           <span role="image">😊</span>
         </DummyContentDisclaimer>
       )}

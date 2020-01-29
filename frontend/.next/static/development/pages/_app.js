@@ -658,7 +658,7 @@ var _jsxFileName = "/Users/abdulaliyev/web-projects/wes-bos/online-store/fronten
 
 
 function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n  position: absolute;\n  top: 0;\n  right: 0;\n  font-size: 7px !important;\n  font-weight: 300;\n  background-color: #00000075;\n  color: #ffffffd6;\n  padding: 5px 19px;\n  border-bottom-left-radius: 30px;\n  border: 0;\n  z-index: 99;\n  margin-left: 20px;\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n  position: absolute;\n  top: 0;\n  right: 0;\n  font-size: 7px !important;\n  font-weight: 300;\n  background-color: #00000075;\n  color: #ffffffd6;\n  padding: 5px 19px;\n  border-bottom-left-radius: 30px;\n  border: 0;\n  z-index: 99;\n  margin-left: 20px;\n\n  a {\n    text-decoration: underline;\n    color: lightblue;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -689,37 +689,24 @@ var DummyContentDisclaimer = styled_components__WEBPACK_IMPORTED_MODULE_10__["de
     "data-test": "nav",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 36
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
     href: "/items",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 37
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 38
     },
     __self: this
   }, "Shop")), data && data.me && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
     href: "/sell",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 36
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 37
-    },
-    __self: this
-  }, "Sell")), data && data.me && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    href: "/orders",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 41
@@ -731,8 +718,8 @@ var DummyContentDisclaimer = styled_components__WEBPACK_IMPORTED_MODULE_10__["de
       lineNumber: 42
     },
     __self: this
-  }, "Orders")), data && data.me && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    href: "/me",
+  }, "Sell")), data && data.me && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    href: "/orders",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 46
@@ -744,24 +731,37 @@ var DummyContentDisclaimer = styled_components__WEBPACK_IMPORTED_MODULE_10__["de
       lineNumber: 47
     },
     __self: this
-  }, "Account")), data && data.me && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    href: "/signout",
+  }, "Orders")), data && data.me && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    href: "/me",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 51
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Signout__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 52
+    },
+    __self: this
+  }, "Account")), data && data.me && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    href: "/signout",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 56
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Signout__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 57
     },
     __self: this
   })), data && data.me && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("button", {
     onClick: toggleCart,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 61
     },
     __self: this
   }, "My Cart", react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_CartCount__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -770,33 +770,43 @@ var DummyContentDisclaimer = styled_components__WEBPACK_IMPORTED_MODULE_10__["de
     }, 0),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 63
     },
     __self: this
   })), data && !data.me && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
     href: "/signup",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67
+      lineNumber: 72
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 68
+      lineNumber: 73
     },
     __self: this
   }, "Sign In")), _config__WEBPACK_IMPORTED_MODULE_11__["displayDummyNav"] && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(DummyContentDisclaimer, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 72
+      lineNumber: 77
     },
     __self: this
-  }, "In order to add/update/remove items, please reach out to site developer for special permission - aaliyev.com", " ", react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", {
+  }, "In order to add/update/remove items, please reach out to site developer for special permission -", " ", react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: "https://aaliyev.com",
+    className: "message-link",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 80
+    },
+    __self: this
+  }, "aaliyev.com"), " ", react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", {
     role: "image",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 75
+      lineNumber: 88
     },
     __self: this
   }, "\uD83D\uDE0A")));
@@ -1700,7 +1710,7 @@ __webpack_require__.r(__webpack_exports__);
 var NavStyles = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].ul.withConfig({
   displayName: "NavStyles",
   componentId: "sc-7eahnl-0"
-})(["margin:0;padding:0;display:flex;justify-self:end;font-size:2rem;a,button{padding:1rem 3rem;display:flex;align-items:center;position:relative;text-transform:uppercase;font-weight:900;font-size:1em;background:none;border:0;cursor:pointer;font-weight:800;color:", ";@media (max-width:700px){font-size:10px;padding:0 10px;}&:before{content:'';width:2px;background:", ";height:100%;left:0;position:absolute;transform:skew(-20deg);top:0;bottom:0;}&:after{height:2px;background:red;content:'';width:0;position:absolute;transform:translateX(-50%);transition:width 0.4s;transition-timing-function:cubic-bezier(1,-0.65,0,2.31);left:50%;margin-top:2rem;}&:hover,&:focus{outline:none;&:after{width:calc(100% - 60px);}@media (max-width:700px){width:calc(100% - 10px);}}}@media (max-width:1300px){border-top:1px solid ", ";width:100%;justify-content:center;font-size:1.5rem;}"], function (props) {
+})(["margin:0;padding:0;display:flex;justify-self:end;font-size:2rem;a:not(.message-link),button{padding:1rem 3rem;display:flex;align-items:center;position:relative;text-transform:uppercase;font-weight:900;font-size:1em;background:none;border:0;cursor:pointer;font-weight:800;color:", ";@media (max-width:700px){font-size:10px;padding:0 10px;}&:before{content:\"\";width:2px;background:", ";height:100%;left:0;position:absolute;transform:skew(-20deg);top:0;bottom:0;}&:after{height:2px;background:red;content:\"\";width:0;position:absolute;transform:translateX(-50%);transition:width 0.4s;transition-timing-function:cubic-bezier(1,-0.65,0,2.31);left:50%;margin-top:2rem;}&:hover,&:focus{outline:none;&:after{width:calc(100% - 60px);}@media (max-width:700px){width:calc(100% - 10px);}}}@media (max-width:1300px){border-top:1px solid ", ";width:100%;justify-content:center;font-size:1.5rem;}"], function (props) {
   return props.theme.black;
 }, function (props) {
   return props.theme.lightgrey;
