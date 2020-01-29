@@ -19,7 +19,9 @@ const Mutations = {
       ["ADMIN"].includes(permission)
     );
     if (!hasPermissions) {
-      throw new Error("You are not allowed to delete this item.");
+      throw new Error(
+        "You don't have a permission to add a new item. Please, reach out to site admin to gain special permission - aaliyev.com."
+      );
     }
 
     const item = await ctx.db.mutation.createItem(
@@ -52,7 +54,9 @@ const Mutations = {
       ["ADMIN"].includes(permission)
     );
     if (!hasPermissions) {
-      throw new Error("You are not allowed to delete this item.");
+      throw new Error(
+        "You don't have a permission to update an item. Please, reach out to site admin to gain special permission - aaliyev.com."
+      );
     }
 
     return ctx.db.mutation.updateItem(
@@ -80,7 +84,9 @@ const Mutations = {
     );
 
     if (!ownsItem || !hasPermissions) {
-      throw new Error("You are not allowed to delete this item.");
+      throw new Error(
+        "You are not allowed to delete this item. Please, reach out to site admin to gain special permission - aaliyev.com."
+      );
     }
 
     // 2. Delete it
