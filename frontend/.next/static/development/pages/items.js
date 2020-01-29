@@ -238,7 +238,7 @@ var _jsxFileName = "/Users/abdulaliyev/web-projects/wes-bos/online-store/fronten
 
 var ErrorStyles = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div.withConfig({
   displayName: "ErrorMessage__ErrorStyles",
-  componentId: "sc-11u5fgj-0"
+  componentId: "sc-1aodrg6-0"
 })(["padding:2rem;background:white;margin:2rem 0;border:1px solid rgba(0,0,0,0.05);border-left:5px solid red;p{margin:0;font-weight:100;}strong{margin-right:1rem;}"]);
 
 var DisplayError = function DisplayError(_ref) {
@@ -480,11 +480,11 @@ function _templateObject() {
 var ALL_ITEMS_QUERY = Object(apollo_boost__WEBPACK_IMPORTED_MODULE_3__["gql"])(_templateObject(), _config__WEBPACK_IMPORTED_MODULE_8__["perPage"]);
 var Center = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].div.withConfig({
   displayName: "Items__Center",
-  componentId: "tikday-0"
+  componentId: "m9ubh0-0"
 })(["text-align:center;"]);
 var ItemsList = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].div.withConfig({
   displayName: "Items__ItemsList",
-  componentId: "tikday-1"
+  componentId: "m9ubh0-1"
 })(["display:grid;grid-template-columns:1fr 1fr;grid-gap:60px;max-width:", ";margin:0 auto;"], function (props) {
   return props.theme.maxWidth;
 });
@@ -508,29 +508,23 @@ var Items = function Items(_ref) {
       lineNumber: 44
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Pagination__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    page: page,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 45
     },
     __self: this
-  }, "Items!"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Pagination__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    page: page,
+  }), loading && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 46
     },
     __self: this
-  }), loading && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 47
-    },
-    __self: this
   }, "Loading..."), error && Object(_lib_handleError__WEBPACK_IMPORTED_MODULE_4__["default"])(error), !loading && !error && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(ItemsList, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 49
     },
     __self: this
   }, data.items.map(function (item) {
@@ -539,7 +533,7 @@ var Items = function Items(_ref) {
       item: item,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 52
+        lineNumber: 51
       },
       __self: this
     });
@@ -547,7 +541,7 @@ var Items = function Items(_ref) {
     page: page,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 55
     },
     __self: this
   }));
@@ -707,7 +701,7 @@ var Pagination = function Pagination(_ref) {
   }, "Great Fits! Page ", page, " of ", pages)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
     prefetch: true,
     href: {
-      pathname: 'items',
+      pathname: "items",
       query: {
         page: page - 1
       }
@@ -731,30 +725,30 @@ var Pagination = function Pagination(_ref) {
       lineNumber: 45
     },
     __self: this
-  }, "Page ", page, " of", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+  }, "Page ", page, " of ", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
     className: "totalPages",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 47
+      lineNumber: 46
     },
     __self: this
   }, pages)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 48
     },
     __self: this
   }, count, " Items Total"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
     prefetch: true,
     href: {
-      pathname: 'items',
+      pathname: "items",
       query: {
         page: page + 1
       }
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 49
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
@@ -762,7 +756,7 @@ var Pagination = function Pagination(_ref) {
     "aria-disabled": page >= pages,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 56
     },
     __self: this
   }, "Next \u2192")));
@@ -843,7 +837,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var Item = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div.withConfig({
   displayName: "ItemStyles__Item",
-  componentId: "sc-16pk14u-0"
+  componentId: "ey69gl-0"
 })(["background:white;border:1px solid ", ";box-shadow:", ";position:relative;display:flex;flex-direction:column;img{width:100%;height:400px;object-fit:cover;}p{font-size:12px;line-height:2;font-weight:300;flex-grow:1;padding:0 3rem;font-size:1.5rem;}.buttonList{display:grid;width:100%;border-top:1px solid ", ";grid-template-columns:repeat(auto-fit,minmax(100px,1fr));grid-gap:1px;background:", ";& > *{background:white;border:0;font-size:1rem;padding:1rem;}}"], function (props) {
   return props.theme.offWhite;
 }, function (props) {
@@ -870,7 +864,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var PaginationStyles = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div.withConfig({
   displayName: "PaginationStyles",
-  componentId: "aduuar-0"
+  componentId: "gv7izb-0"
 })(["text-align:center;display:inline-grid;grid-template-columns:repeat(4,auto);align-items:stretch;justify-content:center;align-content:center;margin:2rem 0;border:1px solid ", ";border-radius:10px;& > *{margin:0;padding:15px 30px;border-right:1px solid ", ";&:last-child{border-right:0;}}a[aria-disabled='true']{color:grey;pointer-events:none;}"], function (props) {
   return props.theme.lightgrey;
 }, function (props) {
@@ -893,7 +887,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var PriceTag = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].span.withConfig({
   displayName: "PriceTag",
-  componentId: "nwbk6t-0"
+  componentId: "sc-1ca37od-0"
 })(["background:", ";transform:rotate(3deg);color:white;font-weight:600;padding:5px;line-height:1;font-size:3rem;display:inline-block;position:absolute;top:-3px;right:-3px;"], function (props) {
   return props.theme.red;
 });
@@ -914,7 +908,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var Title = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].h3.withConfig({
   displayName: "Title",
-  componentId: "sc-16nq74k-0"
+  componentId: "sc-1qn78oz-0"
 })(["margin:0 1rem;text-align:center;transform:skew(-5deg) rotate(-1deg);margin-top:-3rem;text-shadow:2px 2px 0 rgba(0,0,0,0.1);a{background:", ";display:inline;line-height:1.3;font-size:4rem;text-align:center;color:white;padding:0 1rem;}"], function (props) {
   return props.theme.red;
 });
@@ -926,16 +920,21 @@ var Title = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].h3.withCon
 /*!********************!*\
   !*** ./config.tsx ***!
   \********************/
-/*! exports provided: endpoint, perPage */
+/*! exports provided: endpoint, prodEndpoint, displayDummyNav, perPage */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "endpoint", function() { return endpoint; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "prodEndpoint", function() { return prodEndpoint; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayDummyNav", function() { return displayDummyNav; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "perPage", function() { return perPage; });
 // This is client side config only - don't put anything in here that shouldn't be public!
-var endpoint = "http://localhost:4444";
-var perPage = 4;
+var endpoint = "https://online-store-yoga-prod.herokuapp.com/"; // export const endpoint = `http://localhost:4444`;
+
+var prodEndpoint = "https://online-store-yoga-prod.herokuapp.com/";
+var displayDummyNav = true;
+var perPage = 4; // https://frontend-l1ao60yi2.now.sh
 
 /***/ }),
 

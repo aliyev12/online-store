@@ -3,8 +3,8 @@ import styled from "styled-components";
 import Nav from "./Nav";
 import Router from "next/router";
 import NProgress from "nprogress";
-import Cart from './Cart';
-import Search from './Search';
+import Cart from "./Cart";
+import Search from "./Search";
 
 Router.events.on("routeChangeStart", () => {
   NProgress.start();
@@ -62,13 +62,15 @@ export default () => (
     <div className="bar">
       <Logo>
         <Link href="/">
-          <a>site_name</a>
+          <a>
+            <span role="image">⛺️</span> Tent Store
+          </a>
         </Link>
       </Logo>
       <Nav />
     </div>
     <div className="sub-bar">
-      <Search/>
+      <Search />
     </div>
     <Cart />
   </StyledHeader>

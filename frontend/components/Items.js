@@ -1,11 +1,11 @@
-import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
-import handleError from '../lib/handleError';
-import styled from 'styled-components';
-import Item from './Item';
-import Pagination from './Pagination';
-import { perPage } from '../config';
+import React from "react";
+import { useQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
+import handleError from "../lib/handleError";
+import styled from "styled-components";
+import Item from "./Item";
+import Pagination from "./Pagination";
+import { perPage } from "../config";
 
 export const ALL_ITEMS_QUERY = gql`
   query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = ${perPage}) {
@@ -42,7 +42,6 @@ const Items = ({ page }) => {
 
   return (
     <Center>
-      <p>Items!</p>
       <Pagination page={page} />
       {loading && <p>Loading...</p>}
       {error && handleError(error)}
