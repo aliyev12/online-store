@@ -6,20 +6,17 @@ type SuccessMessage {
 
 type Mutation {
   #=== CREATE ===#
-  # createItem(
-  #   title: String
-  #   description: String
-  #   image: String
-  #   largeImage: String
-  #   price: Int
-  # ): Item!
-
+  createItem(
+    title: String
+    description: String
+    image: String
+    largeImage: String
+    price: Int
+  ): Item!
   #=== UPDATE ===#
-  # updateItem(id: ID!, title: String, description: String, price: Int): Item!
-
+  updateItem(id: ID!, title: String, description: String, price: Int): Item!
   #=== DELETE ===#
-  # deleteItem(id: ID!): Item
-
+  deleteItem(id: ID!): Item
   #=== SIGN UP ===#
   signup(email: String!, password: String!, name: String!): User!
   #=== SIGN IN ===#
@@ -35,8 +32,7 @@ type Mutation {
     confirmPassword: String!
   ): User!
   #=== UPDATE PERMISSIONS ===#
-  # updatePermissions(permissions: [Permission], userId: ID!): User
-
+  updatePermissions(permissions: [Permission], userId: ID!): User
   #=== ADD TO CART ===#
   addToCart(id: ID!): CartItem
   #=== REMOVE FROM CART ===#

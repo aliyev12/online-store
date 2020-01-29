@@ -10,67 +10,82 @@ const Mutations = {
   /*===================*/
   /*=== CREATE ITEM ===*/
   /*===================*/
-  // async createItem(parent, args, ctx, info) {
-  //   // Check if they are logged in
-  //   if (!ctx.request.userId)
-  //     throw new Error('You must be logged in to do that!');
+  async createItem(parent, args, ctx, info) {
+    // Check if they are logged in
+    if (!ctx.request.userId)
+      throw new Error("You must be logged in to do that!");
 
-  //   const item = await ctx.db.mutation.createItem(
-  //     {
-  //       data: {
-  //         // This is how we create a relationship between the item and the user
-  //         user: {
-  //           connect: {
-  //             id: ctx.request.userId
-  //           }
-  //         },
-  //         ...args
-  //       }
-  //     },
-  //     info
-  //   );
-  //   return item;
-  // },
+    const hasPermissions = ctx.request.user.permissions.some(permission =>
+      ["ADMIN"].includes(permission)
+    );
+    if (!hasPermissions) {
+      throw new Error("You are not allowed to delete this item.");
+    }
+
+    const item = await ctx.db.mutation.createItem(
+      {
+        data: {
+          // This is how we create a relationship between the item and the user
+          user: {
+            connect: {
+              id: ctx.request.userId
+            }
+          },
+          ...args
+        }
+      },
+      info
+    );
+    return item;
+  },
 
   /*===================*/
   /*=== UPDATE ITEM ===*/
   /*===================*/
-  // updateItem(parent, args, ctx, info) {
-  //   // First take a copy of the updates
-  //   const updates = { ...args };
-  //   // Remove the ID from the updates
-  //   delete updates.id;
-  //   return ctx.db.mutation.updateItem(
-  //     {
-  //       data: updates,
-  //       where: {
-  //         id: args.id
-  //       }
-  //     },
-  //     info
-  //   );
-  // },
+  updateItem(parent, args, ctx, info) {
+    // First take a copy of the updates
+    const updates = { ...args };
+    // Remove the ID from the updates
+    delete updates.id;
+
+    const hasPermissions = ctx.request.user.permissions.some(permission =>
+      ["ADMIN"].includes(permission)
+    );
+    if (!hasPermissions) {
+      throw new Error("You are not allowed to delete this item.");
+    }
+
+    return ctx.db.mutation.updateItem(
+      {
+        data: updates,
+        where: {
+          id: args.id
+        }
+      },
+      info
+    );
+  },
 
   /*===================*/
   /*=== DELETE ITEM ===*/
   /*===================*/
-  // async deleteItem(parent, args, ctx, info) {
-  //   const where = { id: args.id };
-  //   const item = await ctx.db.query.item({ where }, `{ id title user { id }}`);
-  //   // 1. Find the item
-  //   // 2. Check if they own that item or have permissions
-  //   const ownsItem = item.user.id === ctx.request.userId;
-  //   const hasPermissions = ctx.request.user.permissions.some(permission =>
-  //     ['ADMIN', 'ITEMDELETE'].includes(permission)
-  //   );
+  async deleteItem(parent, args, ctx, info) {
+    const where = { id: args.id };
+    const item = await ctx.db.query.item({ where }, `{ id title user { id }}`);
+    // 1. Find the item
+    // 2. Check if they own that item or have permissions
+    const ownsItem = item.user.id === ctx.request.userId;
+    const hasPermissions = ctx.request.user.permissions.some(permission =>
+      ["ADMIN", "ITEMDELETE"].includes(permission)
+    );
 
-  //   if (!ownsItem || !hasPermissions) {
-  //     throw new Error('You are not allowed to delete this item.');
-  //   }
+    if (!ownsItem || !hasPermissions) {
+      throw new Error("You are not allowed to delete this item.");
+    }
 
-  //   // 2. Delete it
-  //   return ctx.db.mutation.deleteItem({ where }, info);
-  // },
+    // 2. Delete it
+    return ctx.db.mutation.deleteItem({ where }, info);
+  },
 
   /*===============*/
   /*=== SIGN UP ===*/
@@ -225,7 +240,7 @@ const Mutations = {
     );
 
     // 3. Check if they have permissions to do that
-    hasPermission(currentUser, ["ADMIN", "PERMISSIONUPDATE"]);
+    hasPermission(currentUser, ["ADMIN"]);
 
     // 4. Update the permissions
     return ctx.db.mutation.updateUser(
